@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
         <activity
+            android:name=".CollectionView"
+            android:exported="false" />
+        <activity
             android:name=".CreateCollections"
             android:exported="false" />
         <activity

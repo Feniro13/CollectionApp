@@ -5,12 +5,9 @@
     <string name="Start_TextView_Welcome"> Добро пожаловать </string>
     <string name="Rule_TextView_Welcome"> Управление коллекциями </string>
     <string name="Create_TextView_Welcome"> Создание коллекции </string>
-    <string name="Create_PlainText_Column1"> Столбик №1 </string>
-    <string name="Create_PlainText_Column2"> Столбик №2 </string>
-    <string name="Create_PlainText_Column3"> Столбик №3 </string>
-    <string name="Create_PlainText_Column4"> Столбик №4 </string>
-    <string name="Create_Button_NewColumn" > Добавить столбик </string>
-    <string name="Create_Button_OutColumn" > Убрать столбик </string>
+    <string name="Create_PlainText_Column"> Столбик № </string>
+    <string name="Create_Button_NewColumn"> Добавить столбик </string>
+    <string name="Create_Button_OutColumn"> Убрать столбик </string>
     <string name="Item_Column_EditText">Название</string>
     <string name="Create_EditText_Name">Придумайте название коллекции</string>
     <string name="Create_Button_Create">CОЗДАТЬ КОЛЛЕКЦИЮ</string>
