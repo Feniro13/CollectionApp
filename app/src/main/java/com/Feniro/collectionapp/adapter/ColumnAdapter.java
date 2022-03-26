@@ -1,10 +1,9 @@
 package com.Feniro.collectionapp.adapter;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,10 +17,13 @@ public class ColumnAdapter extends RecyclerView.Adapter<ColumnAdapter.ColumnView
 
     Context context;
     List<ColumnModel> list;
+    List<String> names;
 
-    public ColumnAdapter(Context context, List<ColumnModel> list) {
-        this.context = context;
+
+    public ColumnAdapter(Context context, List<ColumnModel> list, List<String> names) {
         this.list = list;
+        this.context = context;
+        this.names = names;
     }
 
     @NonNull
@@ -33,7 +35,14 @@ public class ColumnAdapter extends RecyclerView.Adapter<ColumnAdapter.ColumnView
 
     @Override
     public void onBindViewHolder(@NonNull ColumnAdapter.ColumnViewHolder holder, int position) {
-        holder.editText.getText();
+        holder.editTextNameColumn.setHint(list.get(position).getName());
+        holder.editTextNameColumn.setText(names.get(position));
+        String gotText = holder.editTextNameColumn.getText().toString();
+        if(gotText.equals("")) {
+            return;
+        }
+        names.set(position, gotText);
+
 
     }
 
@@ -44,13 +53,13 @@ public class ColumnAdapter extends RecyclerView.Adapter<ColumnAdapter.ColumnView
 
 
 
-    public static final class ColumnViewHolder extends RecyclerView.ViewHolder{
+    public static final class ColumnViewHolder extends RecyclerView.ViewHolder {
 
-        EditText editText;
+        TextView editTextNameColumn;
 
         public ColumnViewHolder(@NonNull View itemView) {
             super(itemView);
-            editText = itemView.findViewById(R.id.item_column_edittext);
+            editTextNameColumn = itemView.findViewById(R.id.item_column_edittext);
         }
     }
 }

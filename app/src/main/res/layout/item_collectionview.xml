@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/Item_CollectionView_TextView10"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:text="Some"
+        app:layout_constraintStart_toEndOf="@+id/Item_CollectionView_TextView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Item_CollectionView_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:text="Some"
+        app:layout_constraintStart_toEndOf="@+id/Item_CollectionView_TextView8"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Item_CollectionView_TextView11"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:text="Some"
+        app:layout_constraintStart_toEndOf="@+id/Item_CollectionView_TextView10"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Item_CollectionView_TextView12"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_marginStart="36dp"
+        android:text="Some"
+        app:layout_constraintStart_toEndOf="@+id/Item_CollectionView_TextView10"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Item_CollectionView_TextView8"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:text="Some"
+        app:layout_constraintStart_toEndOf="@+id/Item_CollectionView_TextView7"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Item_CollectionView_TextView5"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:text="Some"
+        app:layout_constraintStart_toEndOf="@+id/Item_CollectionView_TextView4"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Item_CollectionView_TextView6"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:text="Some"
+        app:layout_constraintStart_toEndOf="@+id/Item_CollectionView_TextView5"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Item_CollectionView_TextView4"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:text="Some"
+        app:layout_constraintStart_toEndOf="@+id/Item_CollectionView_TextView3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Item_CollectionView_TextView7"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:text="Some"
+        app:layout_constraintStart_toEndOf="@+id/Item_CollectionView_TextView6"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Item_CollectionView_TextView1"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:text="Some"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Item_CollectionView_TextView3"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:text="Some"
+        app:layout_constraintStart_toEndOf="@+id/Item_CollectionView_TextView2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Item_CollectionView_TextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:text="Some"
+        app:layout_constraintStart_toEndOf="@+id/Item_CollectionView_TextView1"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
