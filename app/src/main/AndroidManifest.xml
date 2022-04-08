@@ -16,7 +16,7 @@
             android:name=".CreateCollections"
             android:exported="false" />
         <activity
-            android:name=".RuleCollections"
+            android:name=".EditCollections"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

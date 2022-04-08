@@ -9,5 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="main">#D8C7A9</color>
     <color name="buttons">#785552</color>
-    <color name="second"> </color>
+    <color name="danger_red">#E43223</color>
 </resources>

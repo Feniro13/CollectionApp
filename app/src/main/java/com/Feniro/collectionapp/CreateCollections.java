@@ -5,36 +5,38 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.Feniro.collectionapp.adapter.CollectionAdapter;
 import com.Feniro.collectionapp.adapter.ColumnAdapter;
 import com.Feniro.collectionapp.database.Database;
+import com.Feniro.collectionapp.database.GlobalDatabase;
 import com.Feniro.collectionapp.database.entities.CollectionEntity;
-import com.Feniro.collectionapp.model.CollectionModel;
+import com.Feniro.collectionapp.database.entities.DatabaseGlobalEntity;
 import com.Feniro.collectionapp.model.ColumnModel;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class CreateCollections extends AppCompatActivity {
 
-    Button addColumn, delColumn, create;
-    Database database;
-    String name;
+    String name, numberOfCollections, fileToCheck = "NumberOfCollections.txt";
     int kol = 3;
-    TextView warning;
-    EditText columnName;
 
+    Button addColumn, delColumn, create;
+    TextView warning;
+
+    Database database;
+    GlobalDatabase globalDatabase;
     RecyclerView columnRecycler;
     ColumnAdapter columnAdapter;
+
+    EditCollections editCollections = new EditCollections();
 
     List<ColumnModel> list = new ArrayList<>();
     List<String> names = new ArrayList<>();
@@ -43,6 +45,7 @@ public class CreateCollections extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_collections);
+
         list.add(new ColumnModel(0, "Столбец №1"));
         list.add(new ColumnModel(1, "Столбец №2"));
         list.add(new ColumnModel(2, "Столбец №3"));
@@ -55,13 +58,12 @@ public class CreateCollections extends AppCompatActivity {
         addColumn = findViewById(R.id.Create_Button_Add);
         delColumn = findViewById(R.id.Create_Button_Delete);
         create = findViewById(R.id.Create_Button_Create);
-        name = findViewById(R.id.Create_EditText_Name).toString();
+
+        warning = findViewById(R.id.Create_TextView_Warner);
 
 
 
         addColumn.setOnClickListener(view -> {
-
-            warning = findViewById(R.id.Create_TextView_Warner);
             if(kol == 12) {
                 warning.setText("Максимум 12 столбиков");
             }
@@ -75,7 +77,6 @@ public class CreateCollections extends AppCompatActivity {
         });
 
         delColumn.setOnClickListener(view -> {
-            warning = findViewById(R.id.Create_TextView_Warner);
             if(kol == 1) {
                 warning.setText("Минимум                   1 столбик");
             }
@@ -89,49 +90,102 @@ public class CreateCollections extends AppCompatActivity {
         });
 
         create.setOnClickListener(view -> {
+
             database = Room.databaseBuilder(this, Database.class, name)
                     .allowMainThreadQueries()
                     .build();
             CollectionEntity entity = new CollectionEntity();
-            if(kol >= 1) {
-                entity.column1 = names.get(0);
+
+            // Чтение записей EditText
+            {
+                if (kol >= 1) {
+                    entity.column1 = names.get(0);
+                }
+                if (kol >= 2) {
+                    entity.column2 = names.get(1);
+                }
+                if (kol >= 3) {
+                    entity.column3 = names.get(2);
+                }
+                if (kol >= 4) {
+                    entity.column4 = names.get(3);
+                }
+                if (kol >= 5) {
+                    entity.column5 = names.get(4);
+                }
+                if (kol >= 6) {
+                    entity.column6 = names.get(5);
+                }
+                if (kol >= 7) {
+                    entity.column7 = names.get(6);
+                }
+                if (kol >= 8) {
+                    entity.column8 = names.get(7);
+                }
+                if (kol >= 9) {
+                    entity.column9 = names.get(8);
+                }
+                if (kol >= 10) {
+                    entity.column10 = names.get(9);
+                }
+                if (kol >= 11) {
+                    entity.column11 = names.get(10);
+                }
+                if (kol >= 12) {
+                    entity.column12 = names.get(11);
+                }
             }
-            if(kol >= 2) {
-                entity.column2 = names.get(1);
+            name = findViewById(R.id.Create_EditText_Name).toString();
+
+
+            if(editCollections.ifNameTaken(name)){
+                warning.setText("Вы уже создали коллекцию с таким названием");
+                return;
             }
-            if(kol >= 3) {
-                entity.column3 = names.get(2);
-            }
-            if(kol >= 4) {
-                entity.column4 = names.get(3);
-            }
-            if(kol >= 5) {
-                entity.column5 = names.get(4);
-            }
-            if(kol >= 6) {
-                entity.column6 = names.get(5);
-            }
-            if(kol >= 7) {
-                entity.column7 = names.get(6);
-            }
-            if(kol >= 8) {
-                entity.column8 = names.get(7);
-            }
-            if(kol >= 9) {
-                entity.column9 = names.get(8);
-            }
-            if(kol >= 10) {
-                entity.column10 = names.get(9);
-            }
-            if(kol >= 11) {
-                entity.column11 = names.get(10);
-            }
-            if(kol >= 12) {
-                entity.column12 = names.get(11);
-            }
+            editCollections.addName(name);
+
+
+
+
             database.dao().insert(entity);
 
+            //Чтение количества коллекций из файла
+            try {
+                Scanner scanner = new Scanner(new File(fileToCheck));
+                numberOfCollections = scanner.next();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            //Создание базы данных в глобальной базе данных
+            if(numberOfCollections.equals("0")){
+                globalDatabase  = Room.databaseBuilder(this,
+                        GlobalDatabase.class, "databaseOfDatabases").allowMainThreadQueries().build();
+                DatabaseGlobalEntity databaseGlobalEntity =  new DatabaseGlobalEntity();
+                databaseGlobalEntity.numberOfColumns = kol;
+                databaseGlobalEntity.database = database;
+                databaseGlobalEntity.name = name;
+                globalDatabase.dao_global().insert(databaseGlobalEntity);
+            } else {
+                globalDatabase = GlobalDatabaseLoader.getInstance().getDatabase();
+                DatabaseGlobalEntity databaseGlobalEntity = new DatabaseGlobalEntity();
+                databaseGlobalEntity.database = database;
+                databaseGlobalEntity.numberOfColumns = kol;
+                databaseGlobalEntity.name = name;
+                globalDatabase.dao_global().insert(databaseGlobalEntity);
+            }
+            try {
+                FileWriter fileWriter = new FileWriter(fileToCheck);
+                fileWriter.write(numberOfCollections + 1);
+                fileWriter.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+
             Intent intent = new Intent(CreateCollections.this, CollectionView.class);
+            intent.putExtra("Check", name);
             startActivity(intent);
 
         });
@@ -144,8 +198,7 @@ public class CreateCollections extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         Intent intent = new Intent(CreateCollections.this, MainActivity.class);
         startActivity(intent);
     }

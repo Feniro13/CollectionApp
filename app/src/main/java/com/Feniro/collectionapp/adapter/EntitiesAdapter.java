@@ -12,16 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.Feniro.collectionapp.R;
 import com.Feniro.collectionapp.database.entities.CollectionEntity;
 import com.Feniro.collectionapp.model.ColumnModel;
+import com.Feniro.collectionapp.model.EntityModel;
 
 import java.util.List;
 
 public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.EntitiesViewHolder> {
     Context context;
-    List<CollectionEntity> list;
+    List<EntityModel> list;
+    int numberOfColumns;
 
-    public EntitiesAdapter(Context context, List<CollectionEntity> list) {
+    public EntitiesAdapter(Context context, List<EntityModel> list, int numberOfColumns) {
         this.context = context;
         this.list = list;
+        this.numberOfColumns = numberOfColumns;
     }
 
     @NonNull

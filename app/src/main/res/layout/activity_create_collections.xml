@@ -32,17 +32,18 @@
         android:id="@+id/Create_EditText_Name"
         android:layout_width="300dp"
         android:layout_height="0dp"
-        android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
         android:layout_weight="300"
         android:ems="10"
         android:hint="@string/Create_EditText_Name"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TextContrastCheck"
-        android:importantForAutofill="no" />
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/Create_Button_Add"
@@ -58,13 +59,14 @@
         android:id="@+id/Create_RView_Columns"
         android:layout_width="160dp"
         android:layout_height="511dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="100dp"
-        tools:listitem="@layout/item_column"
+        android:layout_marginRight="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        tools:listitem="@layout/item_column" />
 
     <TextView
         android:id="@+id/Create_TextView_Warner"

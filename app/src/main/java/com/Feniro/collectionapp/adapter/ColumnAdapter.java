@@ -36,6 +36,9 @@ public class ColumnAdapter extends RecyclerView.Adapter<ColumnAdapter.ColumnView
     @Override
     public void onBindViewHolder(@NonNull ColumnAdapter.ColumnViewHolder holder, int position) {
         holder.editTextNameColumn.setHint(list.get(position).getName());
+        if(!names.get(position).equals("")) {
+            holder.editTextNameColumn.setText(names.get(position));
+        }
         holder.editTextNameColumn.setText(names.get(position));
         String gotText = holder.editTextNameColumn.getText().toString();
         if(gotText.equals("")) {
