@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         rule.setOnClickListener(view -> {
-                Intent intent = new Intent(MainActivity.this, RuleCollections.class);
+                Intent intent = new Intent(MainActivity.this, EditCollections.class);
                 startActivity(intent);
 
         });

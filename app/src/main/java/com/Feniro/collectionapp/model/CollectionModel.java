@@ -1,16 +1,12 @@
 package com.Feniro.collectionapp.model;
 
-import androidx.room.Database;
-
 public class CollectionModel {
 
     int id;
     String name;
-    Database database;
 
-    public CollectionModel(int id, String name, Database database) {
+    public CollectionModel(String name) {
         this.name = name;
-        this.database = database;
     }
 
     public int getId() {

@@ -1,9 +1,11 @@
 package com.Feniro.collectionapp.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,11 +20,13 @@ import java.util.List;
 public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.CollectionViewHolder> {
 
     Context context;
-    List<CollectionModel> collections;
+    List<String> collections;
+    ViewGroup viewGroup;
 
-    public CollectionAdapter(Context context, List<CollectionModel> collections) {
+    public CollectionAdapter(Context context, List<String> collections, ViewGroup viewGroup) {
         this.context = context;
-        this.collections = collections ;
+        this.collections = collections;
+        this.viewGroup = viewGroup;
     }
 
     @NonNull
@@ -34,7 +38,17 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Co
 
     @Override
     public void onBindViewHolder(@NonNull CollectionAdapter.CollectionViewHolder holder, int position) {
-        holder.textView.setText(collections.get(position).getName());
+        holder.textView.setText(collections.get(position));
+        holder.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_rule_collections_action, viewGroup, false);
+                builder.setView(dialogView);
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
 
     }
 
@@ -46,11 +60,14 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Co
     public static final class CollectionViewHolder extends RecyclerView.ViewHolder {
 
         TextView textView;
+        Button button;
 
         public CollectionViewHolder(@NonNull View itemView) {
             super(itemView);
 
             textView = itemView.findViewById(R.id.TextCollection);
+            button = itemView.findViewById(R.id.Item_Collection_Button);
+
 
         }
     }

@@ -6,4 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".CollectionView">
 
+
+    <TableLayout
+        android:id="@+id/CollectionView_TableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main">
+
+        <TableRow
+            android:id="@+id/CollectionView_TableRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true" />
+
+    </TableLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/CollectionView_Fragment_AddToCollection"
+        android:name="com.Feniro.collectionapp.fragment.Fragment_AddToCollection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

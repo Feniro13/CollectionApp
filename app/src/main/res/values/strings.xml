@@ -11,4 +11,8 @@
     <string name="Item_Column_EditText">Название</string>
     <string name="Create_EditText_Name">Придумайте название коллекции</string>
     <string name="Create_Button_Create">CОЗДАТЬ КОЛЛЕКЦИЮ</string>
+    <string name="Dialog_textView_choose">Выберите действие</string>
+    <string name="dialog_button_rename">Переименовать</string>
+    <string name="dialog_button_edit">Редактировать</string>
+    <string name="dialog_button_delete">Удалить</string>
 </resources>

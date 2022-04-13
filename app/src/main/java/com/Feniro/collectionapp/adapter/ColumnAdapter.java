@@ -17,7 +17,7 @@ public class ColumnAdapter extends RecyclerView.Adapter<ColumnAdapter.ColumnView
 
     Context context;
     List<ColumnModel> list;
-    List<String> names;
+    public List<String> names;
 
 
     public ColumnAdapter(Context context, List<ColumnModel> list, List<String> names) {
@@ -36,7 +36,11 @@ public class ColumnAdapter extends RecyclerView.Adapter<ColumnAdapter.ColumnView
     @Override
     public void onBindViewHolder(@NonNull ColumnAdapter.ColumnViewHolder holder, int position) {
         holder.editTextNameColumn.setHint(list.get(position).getName());
-        holder.editTextNameColumn.setText(names.get(position));
+        if(!names.get(position).equals("")) {
+            holder.editTextNameColumn.setText(names.get(position));
+        } else {
+            holder.editTextNameColumn.setText(names.get(position));
+        }
         String gotText = holder.editTextNameColumn.getText().toString();
         if(gotText.equals("")) {
             return;
