@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.Feniro.collectionapp.R;
-import com.Feniro.collectionapp.model.CollectionModel;
 
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Co
     @NonNull
     @Override
     public CollectionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View Items = LayoutInflater.from(context).inflate(R.layout.item_collection, parent, false);
+        View Items = LayoutInflater.from(context).inflate(R.layout.item_collection_to_edit, parent, false);
         return new CollectionViewHolder(Items);
     }
 
