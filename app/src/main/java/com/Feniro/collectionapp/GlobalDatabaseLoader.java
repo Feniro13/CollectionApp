@@ -1,6 +1,7 @@
 package com.Feniro.collectionapp;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
 
 import androidx.room.Room;
@@ -12,7 +13,7 @@ public class GlobalDatabaseLoader extends Application {
 
     public static GlobalDatabaseLoader instance;
 
-    private GlobalDatabase database;
+    private static GlobalDatabase database;
 
     @Override
     public void onCreate() {

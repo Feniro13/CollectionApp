@@ -10,7 +10,7 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:ems="10"
-        android:hint="@string/Create_PlainText_Column"
+        android:hint="@string/create_PlainText_Column"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"

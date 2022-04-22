@@ -9,17 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
+
+        <activity
+            android:name=".ItemAddToCollection"
+            android:exported="false" />
         <activity
             android:name=".CollectionView"
             android:exported="false" />
         <activity
-            android:name=".CreateCollections"
+            android:name=".CollectionCreate"
             android:exported="false" />
         <activity
-            android:name=".EditCollections"
+            android:name=".CollectionEdit"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ActivityStart"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

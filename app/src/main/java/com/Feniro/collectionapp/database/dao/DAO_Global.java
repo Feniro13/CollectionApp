@@ -19,8 +19,8 @@ public interface DAO_Global {
     @Query("SELECT * FROM DatabaseGlobalEntity WHERE name = :name")
     DatabaseGlobalEntity getById(String name);
 
-    @Query("SELECT * FROM DatabaseGlobalEntity WHERE name = :name")
-    DatabaseGlobalEntity getNumberOfColumnsByName(String name);
+    @Query("SELECT NumberOfColumns FROM DatabaseGlobalEntity WHERE name = :name")
+    int getNumberOfColumnsByName(String name);
 
     @Insert
     void insert (DatabaseGlobalEntity collectionEntity);

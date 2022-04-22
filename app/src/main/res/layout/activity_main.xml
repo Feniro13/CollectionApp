@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main"
-    tools:context=".MainActivity"
+    tools:context=".ActivityStart"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="-77dp">
 
     <Button
-        android:id="@+id/Start_Button_Rule"
+        android:id="@+id/start_Button_Edit"
         android:layout_width="300dp"
         android:layout_height="85dp"
         android:layout_marginTop="416dp"
         android:backgroundTint="@color/buttons"
-        android:text="@string/Start_Button_Rule"
+        android:text="@string/start_Button_Rule"
         android:textColor="@color/main"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -24,13 +24,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/Start_Button_Create"
+        android:id="@+id/start_Button_Create"
         android:layout_width="300dp"
         android:layout_height="85dp"
         android:layout_marginTop="536dp"
         android:backgroundTint="@color/buttons"
         android:fontFamily="casual"
-        android:text="@string/Start_Button_Create"
+        android:text="@string/start_Button_Create"
         android:textColor="@color/main"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -43,7 +43,7 @@
         android:layout_width="400dp"
         android:layout_height="80dp"
         android:layout_marginTop="100sp"
-        android:text="@string/Start_TextView_Welcome"
+        android:text="@string/start_TextView_Welcome"
         android:textAlignment="center"
         android:textColor="@color/buttons"
         android:textSize="40sp"

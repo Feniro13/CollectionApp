@@ -1,5 +1,7 @@
 package com.Feniro.collectionapp.adapter;
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,20 +36,11 @@ public class ColumnAdapter extends RecyclerView.Adapter<ColumnAdapter.ColumnView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ColumnAdapter.ColumnViewHolder holder, int position) {
+    public void onBindViewHolder(ColumnViewHolder holder, int position) {
         holder.editTextNameColumn.setHint(list.get(position).getName());
         if(!names.get(position).equals("")) {
             holder.editTextNameColumn.setText(names.get(position));
-        } else {
-            holder.editTextNameColumn.setText(names.get(position));
         }
-        String gotText = holder.editTextNameColumn.getText().toString();
-        if(gotText.equals("")) {
-            return;
-        }
-        names.set(position, gotText);
-
-
     }
 
     @Override
@@ -57,13 +50,29 @@ public class ColumnAdapter extends RecyclerView.Adapter<ColumnAdapter.ColumnView
 
 
 
-    public static final class ColumnViewHolder extends RecyclerView.ViewHolder {
+    public final class ColumnViewHolder extends RecyclerView.ViewHolder {
 
         TextView editTextNameColumn;
 
         public ColumnViewHolder(@NonNull View itemView) {
             super(itemView);
             editTextNameColumn = itemView.findViewById(R.id.item_column_edittext);
+            editTextNameColumn.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    names.set(getAdapterPosition(), editTextNameColumn.getText().toString());
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
         }
     }
 }

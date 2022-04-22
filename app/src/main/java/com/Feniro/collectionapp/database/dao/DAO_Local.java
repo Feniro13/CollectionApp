@@ -14,7 +14,7 @@ import java.util.List;
 public interface DAO_Local {
 
     @Query("SELECT * FROM DatabaseLocalEntities WHERE DatabaseName Is :name")
-    List<DatabaseLocalEntities> getAll(String name);
+    List<DatabaseLocalEntities> getAllByName(String name);
 
 
     @Insert

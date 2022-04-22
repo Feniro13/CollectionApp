@@ -1,18 +1,31 @@
 <resources>
     <string name="app_name">Collection</string>
-    <string name="Start_Button_Create"> Создать новую коллекцию </string>
-    <string name="Start_Button_Rule"> Управление коллекциями </string>
-    <string name="Start_TextView_Welcome"> Добро пожаловать </string>
-    <string name="Rule_TextView_Welcome"> Управление коллекциями </string>
-    <string name="Create_TextView_Welcome"> Создание коллекции </string>
-    <string name="Create_PlainText_Column"> Столбик № </string>
-    <string name="Create_Button_NewColumn"> Добавить столбик </string>
-    <string name="Create_Button_OutColumn"> Убрать столбик </string>
-    <string name="Item_Column_EditText">Название</string>
-    <string name="Create_EditText_Name">Придумайте название коллекции</string>
-    <string name="Create_Button_Create">CОЗДАТЬ КОЛЛЕКЦИЮ</string>
-    <string name="Dialog_textView_choose">Выберите действие</string>
+
+    <string name="empty"> </string>
+    <string name="maxColumns"> Максимум 12 столбец</string>
+    <string name="minColumns"> Минимум 1 столбец</string>
+
+    <string name="start_Button_Create"> Создать новую коллекцию </string>
+    <string name="start_Button_Rule"> Управление коллекциями </string>
+    <string name="start_TextView_Welcome"> Добро пожаловать </string>
+
+    <string name="edit_TextView_Welcome"> Управление коллекциями </string>
+
+    <string name="create_TextView_Welcome"> Создание коллекции </string>
+    <string name="create_PlainText_Column"> Столбец № </string>
+    <string name="create_Button_NewColumn"> Добавить столбец </string>
+    <string name="create_Button_OutColumn"> Убрать столбец </string>
+    <string name="create_EditText_Name">Придумайте название коллекции</string>
+    <string name="create_Button_Create"> CОЗДАТЬ КОЛЛЕКЦИЮ</string>
+
+    <string name="addItem_textView_name"></string>
+    <string name="example"> example </string>
+
+    <string name="item_Column_EditText">Название</string>
+
+    <string name="dialog_textView_choose">Выберите действие</string>
     <string name="dialog_button_rename">Переименовать</string>
     <string name="dialog_button_edit">Редактировать</string>
     <string name="dialog_button_delete">Удалить</string>
+    <string name="dialog_button_back"> Назад</string>
 </resources>

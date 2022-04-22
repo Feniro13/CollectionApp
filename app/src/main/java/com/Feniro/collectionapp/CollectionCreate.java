@@ -5,9 +5,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.Feniro.collectionapp.adapter.ColumnAdapter;
@@ -17,34 +21,38 @@ import com.Feniro.collectionapp.database.entities.DatabaseLocalEntities;
 import com.Feniro.collectionapp.database.entities.DatabaseGlobalEntity;
 import com.Feniro.collectionapp.model.ColumnModel;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-public class CreateCollections extends AppCompatActivity {
+public class CollectionCreate extends AppCompatActivity {
 
-    String name, numberOfCollections, fileToCheck = "NumberOfCollections.txt";
+    String name;
     int kol = 3;
 
     Button addColumn, delColumn, create;
     TextView warning;
+    EditText editText;
 
     LocalDatabase localDatabase;
     GlobalDatabase globalDatabase;
     RecyclerView columnRecycler;
     ColumnAdapter columnAdapter;
 
-    EditCollections editCollections = new EditCollections();
-
     List<ColumnModel> list = new ArrayList<>();
     List<String> names = new ArrayList<>();
+    List<DatabaseGlobalEntity> databases = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_collections);
+
+        try {
+            editText = findViewById(R.id.Create_EditText_Name);
+            Bundle args = getIntent().getExtras();
+            editText.setText(args.get("check").toString());
+
+        } catch (Exception E){}
 
         list.add(new ColumnModel(0, "Столбец №1"));
         list.add(new ColumnModel(1, "Столбец №2"));
@@ -65,13 +73,13 @@ public class CreateCollections extends AppCompatActivity {
         // Кнопка "добавить столбик"
         addColumn.setOnClickListener(view -> {
             if(kol == 12) {
-                warning.setText("Максимум 12 столбиков");
+                warning.setText(R.string.maxColumns);
             }
             else if(kol >= 1 && kol < 12) {
                 kol++;
                 list.add(new ColumnModel(kol - 1, "Столбец №" + kol));
                 names.add("");
-                warning.setText("");
+                warning.setText(R.string.empty);
             }
             names = columnAdapter.names;
             setColumnRecycler(list, names);
@@ -80,13 +88,13 @@ public class CreateCollections extends AppCompatActivity {
         // Кнопка "убрать столбик"
         delColumn.setOnClickListener(view -> {
             if(kol == 1) {
-                warning.setText("Минимум                   1 столбик");
+                warning.setText(R.string.minColumns);
             }
             if(kol > 1 && kol <= 12) {
                 list.remove(kol - 1);
                 names.remove(kol - 1);
                 kol--;
-                warning.setText("");
+                warning.setText(R.string.empty);
             }
             names = columnAdapter.names;
             setColumnRecycler(list, names);
@@ -94,7 +102,11 @@ public class CreateCollections extends AppCompatActivity {
 
         // Кнопка "создать коллекцию"
         create.setOnClickListener(view -> {
+            warning = findViewById(R.id.Create_TextView_Warner);
 
+            names = columnAdapter.names;
+            editText = findViewById(R.id.Create_EditText_Name);
+            name = editText.getText().toString();
             // Cоздание малой коллекции (строка названий столбиков)
             localDatabase = Room.databaseBuilder(this, LocalDatabase.class, name)
                     .allowMainThreadQueries()
@@ -104,97 +116,128 @@ public class CreateCollections extends AppCompatActivity {
             // Чтение записей EditText
             {
                 if (kol >= 1) {
+                    if(names.get(0).equals("")){
+                        warning.setText("Все столбцы должны иметь название");
+                        return;
+                    }
                     localEntity.column1 = names.get(0);
                 }
                 if (kol >= 2) {
+                    if(names.get(1).equals("")){
+                        warning.setText("Все столбцы должны иметь название");
+                        return;
+                    }
                     localEntity.column2 = names.get(1);
                 }
                 if (kol >= 3) {
+                    if(names.get(2).equals("")){
+                        warning.setText("Все столбцы должны иметь название");
+                        return;
+                    }
                     localEntity.column3 = names.get(2);
                 }
                 if (kol >= 4) {
+                    if(names.get(3).equals("")){
+                        warning.setText("Все столбцы должны иметь название");
+                        return;
+                    }
                     localEntity.column4 = names.get(3);
                 }
                 if (kol >= 5) {
+                    if(names.get(4).equals("")){
+                        warning.setText("Все столбцы должны иметь название");
+                        return;
+                    }
                     localEntity.column5 = names.get(4);
                 }
                 if (kol >= 6) {
+                    if(names.get(5).equals("")){
+                        warning.setText("Все столбцы должны иметь название");
+                        return;
+                }
                     localEntity.column6 = names.get(5);
                 }
                 if (kol >= 7) {
+                    if(names.get(6).equals("")){
+                        warning.setText("Все столбцы должны иметь название");
+                        return;
+                }
                     localEntity.column7 = names.get(6);
                 }
                 if (kol >= 8) {
+                    if(names.get(7).equals("")){
+                        warning.setText("Все столбцы должны иметь название");
+                        return;
+                    }
                     localEntity.column8 = names.get(7);
                 }
                 if (kol >= 9) {
+                    if(names.get(8).equals("")){
+                        warning.setText("Все столбцы должны иметь название");
+                        return;
+                    }
                     localEntity.column9 = names.get(8);
                 }
                 if (kol >= 10) {
+                    if(names.get(9).equals("")){
+                        warning.setText("Все столбцы должны иметь название");
+                        return;
+                    }
                     localEntity.column10 = names.get(9);
                 }
                 if (kol >= 11) {
+                    if(names.get(10).equals("")){
+                        warning.setText("Все столбцы должны иметь название");
+                        return;
+                    }
                     localEntity.column11 = names.get(10);
                 }
                 if (kol >= 12) {
+                    if(names.get(11).equals("")){
+                        warning.setText("Все столбцы должны иметь название");
+                        return;
+                    }
                     localEntity.column12 = names.get(11);
                 }
             }
-
-            // Чтение названия коллекции
-            name = findViewById(R.id.Create_EditText_Name).toString();
-
-            // Проверка на повторение имени коллекции (SharedPreferences)
-            if(editCollections.ifNameTaken(name)){
-                warning.setText("Вы уже создали коллекцию с таким названием");
-                return;
-            }
-            editCollections.addName(name);
-
-            //Чтение количества коллекций из файла          (Найти альтернативу!!!)
-            try {
-                Scanner scanner = new Scanner(new File(fileToCheck));
-                numberOfCollections = scanner.next();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            localEntity.isFirstLine = true;
 
             //Создание базы данных в глобальной базе данных
-            if(numberOfCollections.equals("0")){ // если уже создана глобальная коллекция
+            try { // если это не первая коллекция
+
+                globalDatabase = GlobalDatabaseLoader.getInstance().getDatabase();
+                DatabaseGlobalEntity databaseGlobalEntity = new DatabaseGlobalEntity();
+
+                databases = globalDatabase.dao_global().getAll();
+                for(int i = 0; i < databases.size(); i++) {
+                    if(databases.get(i).name.equals(name)) {
+                        warning.setText("Вы уже создали коллекцию с таким названием");
+                        return;
+                    }
+                }
+
+                databaseGlobalEntity.numberOfColumns = kol;
+                databaseGlobalEntity.name = name;
+
+                globalDatabase.dao_global().insert(databaseGlobalEntity);
+
+                localDatabase.dao().insert(localEntity);
+
+            } catch (Exception E) { // Если это первая коллекция
                 globalDatabase  = Room.databaseBuilder(this,
                         GlobalDatabase.class, "globalDatabase").allowMainThreadQueries().build();
                 DatabaseGlobalEntity databaseGlobalEntity =  new DatabaseGlobalEntity();
                 databaseGlobalEntity.numberOfColumns = kol;
                 databaseGlobalEntity.name = name;
                 globalDatabase.dao_global().insert(databaseGlobalEntity);
+                GlobalDatabaseLoader globalDatabaseLoader = new GlobalDatabaseLoader();
+                globalDatabaseLoader.onCreate();
 
-                localEntity.isFirstLine = true;
-                localDatabase.dao().insert(localEntity);
-            } else {
-                globalDatabase = GlobalDatabaseLoader.getInstance().getDatabase();
-                DatabaseGlobalEntity databaseGlobalEntity = new DatabaseGlobalEntity();
-                databaseGlobalEntity.numberOfColumns = kol;
-                databaseGlobalEntity.name = name;
-
-                globalDatabase.dao_global().insert(databaseGlobalEntity);
-
-                localEntity.isFirstLine = true;
                 localDatabase.dao().insert(localEntity);
             }
 
-            // Обновление количества коллекций
-            try {
-                FileWriter fileWriter = new FileWriter(fileToCheck);
-                fileWriter.write(numberOfCollections + 1);
-                fileWriter.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
-
-            Intent intent = new Intent(CreateCollections.this, CollectionView.class);
-            intent.putExtra("Check", name);
+            Intent intent = new Intent(CollectionCreate.this, CollectionView.class);
+            intent.putExtra("check", name);
             startActivity(intent);
 
         });
@@ -209,7 +252,11 @@ public class CreateCollections extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(CreateCollections.this, MainActivity.class);
+
+        Intent intent = new Intent(CollectionCreate.this, ActivityStart.class);
+        EditText editText = findViewById(R.id.Create_EditText_Name);
+        String arg = editText.getText().toString();
+        intent.putExtra("check", arg);
         startActivity(intent);
     }
 }

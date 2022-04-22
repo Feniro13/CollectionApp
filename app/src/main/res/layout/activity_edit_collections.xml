@@ -5,18 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main"
-    tools:context=".EditCollections">
+    tools:context=".CollectionEdit">
 
 
     <TextView
-        android:id="@+id/Rule_TextView_Welcome"
+        android:id="@+id/Edit_TextView_Welcome"
         android:layout_width="300dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
-        android:text="@string/Rule_TextView_Welcome"
-        android:textSize="40sp"
+        android:text="@string/edit_TextView_Welcome"
         android:textAlignment="center"
         android:textColor="@color/buttons"
+        android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
