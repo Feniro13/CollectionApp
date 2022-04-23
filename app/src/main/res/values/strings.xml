@@ -18,14 +18,22 @@
     <string name="create_EditText_Name">Придумайте название коллекции</string>
     <string name="create_Button_Create"> CОЗДАТЬ КОЛЛЕКЦИЮ</string>
 
+    <string name="view_Button_Add"> Добавить</string>
+    <string name="view_Button_Diff"> Разное</string>
+
     <string name="addItem_textView_name"></string>
     <string name="example"> example </string>
 
     <string name="item_Column_EditText">Название</string>
 
-    <string name="dialog_textView_choose">Выберите действие</string>
-    <string name="dialog_button_rename">Переименовать</string>
-    <string name="dialog_button_edit">Редактировать</string>
-    <string name="dialog_button_delete">Удалить</string>
-    <string name="dialog_button_back"> Назад</string>
+    <string name="dialog_edit_textView_choose">Выберите действие</string>
+    <string name="dialog_edit_button_rename">Переименовать</string>
+    <string name="dialog_edit_button_edit">Редактировать</string>
+    <string name="dialog_edit_button_delete">Удалить</string>
+    <string name="dialog_edit_button_back"> Назад</string>
+
+    <string name="dialog_item_view_textView_choose">Выберите действие</string>
+    <string name="dialog_item_view_button_edit"> Редактировать</string>
+    <string name="dialog_item_view_button_delete"> Удалить </string>
+    <string name="dialog_item_view_button_back"> Назад </string>
 </resources>

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.Feniro.collectionapp.adapter.CollectionAdapter;
 import com.Feniro.collectionapp.database.GlobalDatabase;
-import com.Feniro.collectionapp.database.entities.DatabaseGlobalEntity;
+import com.Feniro.collectionapp.database.entities.DatabaseGlobalEntities;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class CollectionEdit extends AppCompatActivity {
 
     List<String> list;
     GlobalDatabase globalDatabase;
-    List<DatabaseGlobalEntity> listGlobal;
+    List<DatabaseGlobalEntities> listGlobal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -6,28 +6,30 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.Feniro.collectionapp.database.entities.DatabaseGlobalEntity;
-import com.Feniro.collectionapp.database.entities.DatabaseLocalEntities;
+import com.Feniro.collectionapp.database.entities.DatabaseGlobalEntities;
 
 import java.util.List;
 
 @Dao
 public interface DAO_Global {
-    @Query("SELECT * FROM DatabaseGlobalEntity")
-    List<DatabaseGlobalEntity> getAll();
+    @Query("SELECT * FROM DatabaseGlobalEntities")
+    List<DatabaseGlobalEntities> getAll();
 
-    @Query("SELECT * FROM DatabaseGlobalEntity WHERE name = :name")
-    DatabaseGlobalEntity getById(String name);
+    @Query("SELECT * FROM DatabaseGlobalEntities WHERE name = :name")
+    DatabaseGlobalEntities getByName(String name);
 
-    @Query("SELECT NumberOfColumns FROM DatabaseGlobalEntity WHERE name = :name")
+    @Query("SELECT NumberOfColumns FROM DatabaseGlobalEntities WHERE name = :name")
     int getNumberOfColumnsByName(String name);
 
+    @Query("DELETE FROM DatabaseGlobalEntities WHERE name = :name")
+    void deleteCollectionByName(String name);
+
     @Insert
-    void insert (DatabaseGlobalEntity collectionEntity);
+    void insert (DatabaseGlobalEntities collectionEntity);
 
     @Update
-    void update (DatabaseGlobalEntity collectionEntity);
+    void update (DatabaseGlobalEntities collectionEntity);
 
     @Delete
-    void delete (DatabaseGlobalEntity collectionEntity);
+    void delete (DatabaseGlobalEntities collectionEntity);
 }

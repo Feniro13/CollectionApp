@@ -5,11 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
-import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,8 +14,8 @@ import android.widget.TextView;
 import com.Feniro.collectionapp.adapter.ColumnAdapter;
 import com.Feniro.collectionapp.database.LocalDatabase;
 import com.Feniro.collectionapp.database.GlobalDatabase;
+import com.Feniro.collectionapp.database.entities.DatabaseGlobalEntities;
 import com.Feniro.collectionapp.database.entities.DatabaseLocalEntities;
-import com.Feniro.collectionapp.database.entities.DatabaseGlobalEntity;
 import com.Feniro.collectionapp.model.ColumnModel;
 
 import java.util.ArrayList;
@@ -40,7 +37,7 @@ public class CollectionCreate extends AppCompatActivity {
 
     List<ColumnModel> list = new ArrayList<>();
     List<String> names = new ArrayList<>();
-    List<DatabaseGlobalEntity> databases = new ArrayList<>();
+    List<DatabaseGlobalEntities> databases = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,7 +203,7 @@ public class CollectionCreate extends AppCompatActivity {
             try { // если это не первая коллекция
 
                 globalDatabase = GlobalDatabaseLoader.getInstance().getDatabase();
-                DatabaseGlobalEntity databaseGlobalEntity = new DatabaseGlobalEntity();
+                DatabaseGlobalEntities databaseGlobalEntities = new DatabaseGlobalEntities();
 
                 databases = globalDatabase.dao_global().getAll();
                 for(int i = 0; i < databases.size(); i++) {
@@ -216,20 +213,20 @@ public class CollectionCreate extends AppCompatActivity {
                     }
                 }
 
-                databaseGlobalEntity.numberOfColumns = kol;
-                databaseGlobalEntity.name = name;
+                databaseGlobalEntities.numberOfColumns = kol;
+                databaseGlobalEntities.name = name;
 
-                globalDatabase.dao_global().insert(databaseGlobalEntity);
+                globalDatabase.dao_global().insert(databaseGlobalEntities);
 
                 localDatabase.dao().insert(localEntity);
 
             } catch (Exception E) { // Если это первая коллекция
                 globalDatabase  = Room.databaseBuilder(this,
                         GlobalDatabase.class, "globalDatabase").allowMainThreadQueries().build();
-                DatabaseGlobalEntity databaseGlobalEntity =  new DatabaseGlobalEntity();
-                databaseGlobalEntity.numberOfColumns = kol;
-                databaseGlobalEntity.name = name;
-                globalDatabase.dao_global().insert(databaseGlobalEntity);
+                DatabaseGlobalEntities databaseGlobalEntities =  new DatabaseGlobalEntities();
+                databaseGlobalEntities.numberOfColumns = kol;
+                databaseGlobalEntities.name = name;
+                globalDatabase.dao_global().insert(databaseGlobalEntities);
                 GlobalDatabaseLoader globalDatabaseLoader = new GlobalDatabaseLoader();
                 globalDatabaseLoader.onCreate();
 

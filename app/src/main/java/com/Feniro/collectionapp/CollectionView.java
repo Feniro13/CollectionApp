@@ -7,9 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import com.Feniro.collectionapp.adapter.ItemViewAdapter;
 import com.Feniro.collectionapp.database.LocalDatabase;
@@ -28,11 +25,6 @@ public class CollectionView extends AppCompatActivity {
     GlobalDatabase globalDatabase;
 
     List<DatabaseLocalEntities> collectionEntities;
-    List<List<String>> list;
-
-//    TextView textView, firstLine;
-//    TableLayout table = new TableLayout(this);
-//    TableRow tableRow;
 
     RecyclerView recyclerView;
     ItemViewAdapter itemViewAdapter;
@@ -44,22 +36,23 @@ public class CollectionView extends AppCompatActivity {
 
 //        table = findViewById(R.id.CollectionView_TableLayout);
 //        tableRow = findViewById(R.id.CollectionView_TableRow);
-        ;
+        DatabaseLocalEntities databaseLocalEntities;
         name = getIntent().getStringExtra("check");
 
         collectionEntities = localDatabase.dao().getAllByName(name);
+        for(int i = 0; i < collectionEntities.size(); i++) {
+            if(collectionEntities.get(i).isFirstLine) {
+                databaseLocalEntities = collectionEntities.get(0);
+                collectionEntities.set(0, collectionEntities.get(i));
+                collectionEntities.set(i, databaseLocalEntities);
+            }
+        }
+
         numberOfColumns = globalDatabase.dao_global().getNumberOfColumnsByName(name);
 
         ViewGroup viewGroup = findViewById(android.R.id.content);
-        list = converterToList(collectionEntities);
 
-        setItemRecycler(list, numberOfColumns, viewGroup);
-
-
-
-
-
-
+        setItemRecycler(collectionEntities, numberOfColumns, viewGroup);
 //
 //            TableRow firstRow = new TableRow(this);
 //            TableRow.LayoutParams fparams = new TableRow.LayoutParams();
@@ -94,7 +87,7 @@ public class CollectionView extends AppCompatActivity {
 
     }
 
-    public void setItemRecycler(List<List<String>> listOfItems, int numberOfColumns, ViewGroup viewGroup) {
+    public void setItemRecycler(List<DatabaseLocalEntities> listOfItems, int numberOfColumns, ViewGroup viewGroup) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerView = findViewById(R.id.View_RecyclerView);
         recyclerView.setLayoutManager(layoutManager);

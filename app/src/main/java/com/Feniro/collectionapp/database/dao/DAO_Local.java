@@ -16,6 +16,13 @@ public interface DAO_Local {
     @Query("SELECT * FROM DatabaseLocalEntities WHERE DatabaseName Is :name")
     List<DatabaseLocalEntities> getAllByName(String name);
 
+    @Query("DELETE FROM DatabaseLocalEntities WHERE DatabaseName Is :name")
+    void deleteEntitiesByName(String name);
+
+    @Query("DELETE FROM DatabaseLocalEntities WHERE Id Is :id")
+    void deleteEntityById(int id);
+
+
 
     @Insert
     void insert (DatabaseLocalEntities databaseLocalEntities);

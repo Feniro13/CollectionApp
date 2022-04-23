@@ -5,8 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "DatabaseGlobalEntity")
-public class DatabaseGlobalEntity {
+@Entity(tableName = "DatabaseGlobalEntities")
+public class DatabaseGlobalEntities {
 
     @ColumnInfo(name = "numberOfColumns")
     public int numberOfColumns;
