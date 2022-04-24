@@ -17,7 +17,7 @@ public class DatabaseLocalEntities {
         public boolean isFirstLine;
 
         @ColumnInfo(name = "DatabaseName")
-        public int DatabaseName;
+        public String DatabaseName;
 
         public String column1;
 
@@ -25,29 +25,21 @@ public class DatabaseLocalEntities {
 
         public String column3;
 
-        @Ignore
         public String column4;
 
-        @Ignore
         public String column5;
 
-        @Ignore
         public String column6;
 
         public String column7;
 
-        @Ignore
         public String column8;
 
-        @Ignore
         public String column9;
 
-        @Ignore
         public String column10;
 
-        @Ignore
         public String column11;
 
-        @Ignore
         public String column12;
 }

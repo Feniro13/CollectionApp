@@ -19,7 +19,7 @@ public class GlobalDatabaseLoader extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        database = Room.databaseBuilder(this, GlobalDatabase.class, "database").build();
+        database = Room.databaseBuilder(this, GlobalDatabase.class, "database").allowMainThreadQueries().build();
     }
 
     public static GlobalDatabaseLoader getInstance() {

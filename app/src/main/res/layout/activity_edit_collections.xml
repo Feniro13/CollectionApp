@@ -31,5 +31,6 @@
         android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/item_collection_to_edit" />
 </androidx.constraintlayout.widget.ConstraintLayout>

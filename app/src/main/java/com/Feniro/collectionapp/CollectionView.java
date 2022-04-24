@@ -1,18 +1,24 @@
 package com.Feniro.collectionapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.Feniro.collectionapp.adapter.ItemAddAdapter;
 import com.Feniro.collectionapp.adapter.ItemViewAdapter;
 import com.Feniro.collectionapp.database.LocalDatabase;
 import com.Feniro.collectionapp.database.GlobalDatabase;
 import com.Feniro.collectionapp.database.entities.DatabaseLocalEntities;
 
+import java.lang.invoke.LambdaConversionException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,18 +34,22 @@ public class CollectionView extends AppCompatActivity {
 
     RecyclerView recyclerView;
     ItemViewAdapter itemViewAdapter;
+    Button add, diff;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection_view);
 
-//        table = findViewById(R.id.CollectionView_TableLayout);
-//        tableRow = findViewById(R.id.CollectionView_TableRow);
         DatabaseLocalEntities databaseLocalEntities;
         name = getIntent().getStringExtra("check");
 
+        numberOfColumns = globalDatabase.dao_global().getNumberOfColumnsByName(name);
         collectionEntities = localDatabase.dao().getAllByName(name);
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        add = findViewById(R.id.view_button_add);
+        diff = findViewById(R.id.view_button_diff);
+
         for(int i = 0; i < collectionEntities.size(); i++) {
             if(collectionEntities.get(i).isFirstLine) {
                 databaseLocalEntities = collectionEntities.get(0);
@@ -48,42 +58,43 @@ public class CollectionView extends AppCompatActivity {
             }
         }
 
-        numberOfColumns = globalDatabase.dao_global().getNumberOfColumnsByName(name);
-
-        ViewGroup viewGroup = findViewById(android.R.id.content);
-
         setItemRecycler(collectionEntities, numberOfColumns, viewGroup);
-//
-//            TableRow firstRow = new TableRow(this);
-//            TableRow.LayoutParams fparams = new TableRow.LayoutParams();
-//            fparams.span = numberOfColumns;
-//
-//            listOfEntities = converterToList(collectionEntities);
-//
-//            for (int i = 0; i < numberOfColumns; i++) {
-//                firstLine.setText(listOfEntities.get(0).get(i));
-//                firstRow.addView(firstLine);
-//                tableRows.add(firstRow);
-//            }
-//
-//
-//            for (int cols = 0; cols < collectionEntities.size(); cols++) {
-//                TableRow tableRow = new TableRow(this);
-//                TableRow.LayoutParams params = new TableRow.LayoutParams();
-//                params.span = numberOfColumns;
-//                for (int i = 0; i < numberOfColumns; i++) {
-//                    textView.setText(collectionEntities.get(i).column1);
-//                    tableRow.addView(textView);
-//                }
-//                tableRows.add(tableRow);
-//            }
-//            for (int i = 0; i < collectionEntities.size(); i++) {
-//                table.addView(tableRows.get(i));
-//            }
-//
-//            tableRow.setOnClickListener(view -> {
-//
-//            });
+
+        add.setOnClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            View view1 = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_add_to_collection, viewGroup, false);
+
+            builder.setView(view1);
+            final AlertDialog alertDialog = builder.show();
+
+            Button itemAdd = (Button) view1.findViewById(R.id.dialog_add_item_button_add);
+            Button itemBack = (Button) view1.findViewById(R.id.dialog_add_item_button_back);
+            RecyclerView itemRecycler = view1.findViewById(R.id.dialog_add_item_recyclerview);
+
+            DatabaseLocalEntities localEntity = new DatabaseLocalEntities();
+            localEntity.isFirstLine = false;
+            localEntity.DatabaseName = name;
+
+            ItemAddAdapter itemAddAdapter = new ItemAddAdapter(this, localEntity, collectionEntities.get(0), numberOfColumns);
+            itemRecycler.setAdapter(itemAddAdapter);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+            itemRecycler.setLayoutManager(layoutManager);
+
+            itemBack.setOnClickListener(view2 -> {
+                alertDialog.dismiss();
+            });
+
+            itemAdd.setOnClickListener(view22 -> {
+                List<String> names = itemAddAdapter.entityList;
+
+            });
+
+        });
+
+        diff.setOnClickListener(view -> {
+
+        });
+
 
     }
 

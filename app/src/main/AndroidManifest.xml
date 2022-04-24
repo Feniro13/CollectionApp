@@ -11,9 +11,6 @@
         android:theme="@style/Theme.AppCompat.Light">
 
         <activity
-            android:name=".ItemAddToCollection"
-            android:exported="false" />
-        <activity
             android:name=".CollectionView"
             android:exported="false" />
         <activity

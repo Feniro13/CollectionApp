@@ -198,40 +198,25 @@ public class CollectionCreate extends AppCompatActivity {
                 }
             }
             localEntity.isFirstLine = true;
+            localEntity.DatabaseName = name;
 
             //Создание базы данных в глобальной базе данных
-            try { // если это не первая коллекция
+            globalDatabase = GlobalDatabase.getDatabase(this);
+            DatabaseGlobalEntities databaseGlobalEntities = new DatabaseGlobalEntities();
 
-                globalDatabase = GlobalDatabaseLoader.getInstance().getDatabase();
-                DatabaseGlobalEntities databaseGlobalEntities = new DatabaseGlobalEntities();
-
-                databases = globalDatabase.dao_global().getAll();
-                for(int i = 0; i < databases.size(); i++) {
-                    if(databases.get(i).name.equals(name)) {
-                        warning.setText("Вы уже создали коллекцию с таким названием");
-                        return;
-                    }
+            databases = globalDatabase.dao_global().getAll();
+            for(int i = 0; i < databases.size(); i++) {
+                if(databases.get(i).name.equals(name)) {
+                    warning.setText("Вы уже создали коллекцию с таким названием");
+                    return;
                 }
-
-                databaseGlobalEntities.numberOfColumns = kol;
-                databaseGlobalEntities.name = name;
-
-                globalDatabase.dao_global().insert(databaseGlobalEntities);
-
-                localDatabase.dao().insert(localEntity);
-
-            } catch (Exception E) { // Если это первая коллекция
-                globalDatabase  = Room.databaseBuilder(this,
-                        GlobalDatabase.class, "globalDatabase").allowMainThreadQueries().build();
-                DatabaseGlobalEntities databaseGlobalEntities =  new DatabaseGlobalEntities();
-                databaseGlobalEntities.numberOfColumns = kol;
-                databaseGlobalEntities.name = name;
-                globalDatabase.dao_global().insert(databaseGlobalEntities);
-                GlobalDatabaseLoader globalDatabaseLoader = new GlobalDatabaseLoader();
-                globalDatabaseLoader.onCreate();
-
-                localDatabase.dao().insert(localEntity);
             }
+
+            databaseGlobalEntities.numberOfColumns = kol;
+            databaseGlobalEntities.name = name;
+
+            globalDatabase.dao_global().insert(databaseGlobalEntities);
+            localDatabase.dao().insert(localEntity);
 
             Intent intent = new Intent(CollectionCreate.this, CollectionView.class);
             intent.putExtra("check", name);

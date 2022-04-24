@@ -8,12 +8,12 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "DatabaseGlobalEntities")
 public class DatabaseGlobalEntities {
 
-    @ColumnInfo(name = "numberOfColumns")
-    public int numberOfColumns;
-
     @ColumnInfo(name = "name")
     @PrimaryKey
     @NonNull
     public String name;
+
+    @ColumnInfo(name = "numberOfColumns")
+    public int numberOfColumns;
 
 }

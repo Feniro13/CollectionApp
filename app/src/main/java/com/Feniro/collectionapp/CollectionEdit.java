@@ -12,6 +12,7 @@ import com.Feniro.collectionapp.adapter.CollectionAdapter;
 import com.Feniro.collectionapp.database.GlobalDatabase;
 import com.Feniro.collectionapp.database.entities.DatabaseGlobalEntities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CollectionEdit extends AppCompatActivity {
@@ -27,18 +28,14 @@ public class CollectionEdit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_collections);
 
-        try { // если уже создана датабаза
-            globalDatabase = GlobalDatabaseLoader.getInstance().getDatabase(); // Глобальная база данных
-            listGlobal = globalDatabase.dao_global().getAll();          // Записи в виде малых баз данных
-            for(int i = 0; i < listGlobal.size(); i++) {                // получение названий
-                list.add(listGlobal.get(i).name);
-            }
-
-            setCollectionRecycler(list);
-        } catch (Exception E) {  // еще нет датабаз
-            // тут пока ничего нет =(
+        list = new ArrayList<>();
+        globalDatabase = GlobalDatabase.getDatabase(getApplicationContext()); // Глобальная база данных
+        listGlobal = globalDatabase.dao_global().getAll();          // Записи в виде малых баз данных
+        for(int i = 0; i < listGlobal.size(); i++) {                // получение названий
+            list.add(listGlobal.get(i).name);
         }
 
+        setCollectionRecycler(list);
     }
     public void setCollectionRecycler(List<String> list) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);

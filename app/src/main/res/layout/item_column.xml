@@ -12,7 +12,7 @@
         android:ems="10"
         android:hint="@string/create_PlainText_Column"
         android:importantForAutofill="no"
-        android:inputType="textPersonName"
+        android:inputType="textNoSuggestions|textEmailAddress"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck" />

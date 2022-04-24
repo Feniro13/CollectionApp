@@ -114,8 +114,6 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Co
 
             textView = itemView.findViewById(R.id.TextCollection);
             button = itemView.findViewById(R.id.Item_Collection_Button);
-
-
         }
     }
 }

@@ -24,6 +24,7 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
     Context context;
     ViewGroup viewGroup;
     LocalDatabase localDatabase;
+    ItemAddAdapter itemAddAdapter;
 
     public ItemViewAdapter(List<DatabaseLocalEntities> listOfItems, int numberOfColumns, Context context, ViewGroup viewGroup) {
         this.listOfItems = listOfItems;
@@ -66,6 +67,8 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
                 RecyclerView recyclerView = dialogViewEdit.findViewById(R.id.dialog_add_item_recyclerview);
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
                 recyclerView.setLayoutManager(layoutManager);
+
+                itemAddAdapter = new ItemAddAdapter(context,listOfItems.get(0), listOfItems.get(position), numberOfColumns);
 
             });
 
