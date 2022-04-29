@@ -11,14 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.Feniro.collectionapp.adapter.ItemAddAdapter;
+import com.Feniro.collectionapp.adapter.ItemSortAdapter;
 import com.Feniro.collectionapp.adapter.ItemViewAdapter;
 import com.Feniro.collectionapp.database.LocalDatabase;
 import com.Feniro.collectionapp.database.GlobalDatabase;
 import com.Feniro.collectionapp.database.entities.DatabaseLocalEntities;
 
-import java.lang.invoke.LambdaConversionException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,69 +32,164 @@ public class CollectionView extends AppCompatActivity {
     LocalDatabase localDatabase;
     GlobalDatabase globalDatabase;
 
+    File file;
+
+
     List<DatabaseLocalEntities> collectionEntities;
 
-    RecyclerView recyclerView;
+    RecyclerView mainRecycler, itemRecycler, sortRecycler;
     ItemViewAdapter itemViewAdapter;
+    ItemAddAdapter itemAddAdapter;
+    ItemSortAdapter itemSortAdapter;
+
     Button add, diff;
+    TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection_view);
 
-        DatabaseLocalEntities databaseLocalEntities;
+        DatabaseLocalEntities mainEntity;
         name = getIntent().getStringExtra("check");
 
-        numberOfColumns = globalDatabase.dao_global().getNumberOfColumnsByName(name);
-        collectionEntities = localDatabase.dao().getAllByName(name);
-        ViewGroup viewGroup = findViewById(android.R.id.content);
+        title = findViewById(R.id.view_textview_title);
+        title.setText(name);
+
         add = findViewById(R.id.view_button_add);
         diff = findViewById(R.id.view_button_diff);
 
-        for(int i = 0; i < collectionEntities.size(); i++) {
-            if(collectionEntities.get(i).isFirstLine) {
-                databaseLocalEntities = collectionEntities.get(0);
-                collectionEntities.set(0, collectionEntities.get(i));
-                collectionEntities.set(i, databaseLocalEntities);
-            }
-        }
+        globalDatabase = GlobalDatabase.getDatabase(this);
+        localDatabase = LocalDatabase.getDatabase(this);
 
+        numberOfColumns = globalDatabase.dao_global().getNumberOfColumnsByName(name);
+        collectionEntities = localDatabase.dao().getAllByNameByColumn1(name);
+        mainEntity = localDatabase.dao().getNamesOfColumnsByName(name);
+
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+
+        collectionEntities.add(0, mainEntity);
         setItemRecycler(collectionEntities, numberOfColumns, viewGroup);
 
         add.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            View view1 = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_add_to_collection, viewGroup, false);
+            builder.setCancelable(false);
+            View view1 = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_view_add_item, viewGroup, false);
 
             builder.setView(view1);
-            final AlertDialog alertDialog = builder.show();
 
-            Button itemAdd = (Button) view1.findViewById(R.id.dialog_add_item_button_add);
-            Button itemBack = (Button) view1.findViewById(R.id.dialog_add_item_button_back);
-            RecyclerView itemRecycler = view1.findViewById(R.id.dialog_add_item_recyclerview);
+            Button itemAdd = view1.findViewById(R.id.dialog_add_item_button_add);
+            Button itemBack = view1.findViewById(R.id.dialog_add_item_button_back);
+            TextView warning = view1.findViewById(R.id.dialog_add_item_textview_warning);
 
             DatabaseLocalEntities localEntity = new DatabaseLocalEntities();
-            localEntity.isFirstLine = false;
+            localEntity.isFirstLine = 0;
             localEntity.DatabaseName = name;
 
-            ItemAddAdapter itemAddAdapter = new ItemAddAdapter(this, localEntity, collectionEntities.get(0), numberOfColumns);
-            itemRecycler.setAdapter(itemAddAdapter);
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-            itemRecycler.setLayoutManager(layoutManager);
+            setItemDialogRecycler(view1, mainEntity, localEntity);
 
-            itemBack.setOnClickListener(view2 -> {
-                alertDialog.dismiss();
-            });
+
+            final AlertDialog alertDialog = builder.create();
+
+            itemBack.setOnClickListener(view2 -> alertDialog.dismiss());
 
             itemAdd.setOnClickListener(view22 -> {
-                List<String> names = itemAddAdapter.entityList;
-
+                try {
+                    List<String> names = itemAddAdapter.entityList;
+                    int kol = 1;
+                    boolean isKolBigger = false;
+                    localEntity.column1 = names.get(0);
+                    if (kol + 1 > numberOfColumns) {
+                        isKolBigger = true;
+                    }
+                    kol++;
+                    localEntity.column1 = names.get(1);
+                    if (kol + 1 > numberOfColumns && !isKolBigger) {
+                        isKolBigger = true;
+                    }
+                    kol++;
+                    localEntity.column1 = names.get(2);
+                    if (kol + 1 > numberOfColumns && !isKolBigger) {
+                        isKolBigger = true;
+                    }
+                    kol++;
+                    localEntity.column1 = names.get(3);
+                    if (kol + 1 > numberOfColumns && !isKolBigger) {
+                        isKolBigger = true;
+                    }
+                    kol++;
+                    localEntity.column1 = names.get(4);
+                    if (kol + 1 > numberOfColumns && !isKolBigger) {
+                        isKolBigger = true;
+                    }
+                    kol++;
+                    localEntity.column1 = names.get(5);
+                    if (kol + 1 > numberOfColumns && !isKolBigger) {
+                        isKolBigger = true;
+                    }
+                    kol++;
+                    localEntity.column1 = names.get(6);
+                    if (kol + 1 > numberOfColumns && !isKolBigger) {
+                        isKolBigger = true;
+                    }
+                    kol++;
+                    localEntity.column1 = names.get(7);
+                    if (kol + 1 > numberOfColumns && !isKolBigger) {
+                        isKolBigger = true;
+                    }
+                    kol++;
+                    localEntity.column1 = names.get(8);
+                    if (kol + 1 > numberOfColumns && !isKolBigger) {
+                        isKolBigger = true;
+                    }
+                    kol++;
+                    localEntity.column1 = names.get(9);
+                    if (kol + 1 > numberOfColumns && !isKolBigger) {
+                        isKolBigger = true;
+                    }
+                    kol++;
+                    localEntity.column1 = names.get(10);
+                    if (kol + 1 > numberOfColumns && !isKolBigger) {
+                        isKolBigger = true;
+                    }
+                    if (!isKolBigger) {
+                        localEntity.column1 = names.get(11);
+                    }
+                }catch (Exception E){
+                    warning.setText("Все поля должны быть заполнены");
+                }
             });
-
+            alertDialog.show();
         });
 
         diff.setOnClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            View view1 = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_view_diff, viewGroup, false);
 
+            builder.setView(view1);
+            AlertDialog alertDialog = builder.create();
+
+            Button download = view1.findViewById(R.id.view_diff_button_download);
+            Button sort = view1.findViewById(R.id.view_diff_button_sort);
+
+            download.setOnClickListener(view23 -> {
+
+            });
+
+            sort.setOnClickListener(view24 -> {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                View view2 = LayoutInflater.from(view24.getContext()).inflate(R.layout.dialog_view_diff_sort, viewGroup, false);
+
+                builder1.setView(view2);
+                AlertDialog alertDialog1 = builder1.create();
+
+                setItemDialogSortRecycler(view2, ConverterToList(mainEntity, numberOfColumns));
+
+
+                builder1.show();
+            });
+
+            builder.show();
         });
 
 
@@ -100,94 +197,152 @@ public class CollectionView extends AppCompatActivity {
 
     public void setItemRecycler(List<DatabaseLocalEntities> listOfItems, int numberOfColumns, ViewGroup viewGroup) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        recyclerView = findViewById(R.id.View_RecyclerView);
-        recyclerView.setLayoutManager(layoutManager);
+        mainRecycler = findViewById(R.id.View_RecyclerView);
+        mainRecycler.setLayoutManager(layoutManager);
         itemViewAdapter = new ItemViewAdapter(listOfItems, numberOfColumns, this, viewGroup);
-        recyclerView.setAdapter(itemViewAdapter);
+        mainRecycler.setHasFixedSize(true);
+        mainRecycler.setAdapter(itemViewAdapter);
+    }
+
+    public void setItemDialogRecycler(View view, DatabaseLocalEntities mainEntity, DatabaseLocalEntities localEntity) {
+        itemRecycler = view.findViewById(R.id.dialog_add_item_recyclerview);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        itemRecycler.setLayoutManager(layoutManager);
+        ItemAddAdapter itemAddAdapter = new ItemAddAdapter(this, mainEntity, localEntity, numberOfColumns);
+        itemRecycler.setAdapter(itemAddAdapter);
+    }
+
+    public void setItemDialogSortRecycler(View view, List<String> items){
+        sortRecycler = view.findViewById(R.id.dialog_view_diff_sort_rview);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        itemSortAdapter = new ItemSortAdapter(items, this);
+        sortRecycler.setLayoutManager(layoutManager);
+        sortRecycler.setAdapter(itemSortAdapter);
+
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         Intent intent = new Intent(CollectionView.this, ActivityStart.class);
         startActivity(intent);
     }
 
-    public List<List<String>> converterToList(List<DatabaseLocalEntities> list){
-        List<List<String>> listOfStrings = new ArrayList<>();
-        List<String> strings;
-        int k = 1;
-        for(int i = 0 ; i < list.size();i++){
-            strings = new ArrayList<>();
-            strings.add(list.get(i).column1);
-            k++;
-            if(k > numberOfColumns) {
-                listOfStrings.add(strings);
-                continue;
-            }
-            strings.add(list.get(i).column2);
-            k++;
-            if(k > numberOfColumns) {
-                listOfStrings.add(strings);
-                continue;
-            }
-            strings.add(list.get(i).column3);
-            k++;
-            if(k > numberOfColumns) {
-                listOfStrings.add(strings);
-                continue;
-            }
-            strings.add(list.get(i).column4);
-            k++;
-            if(k > numberOfColumns) {
-                listOfStrings.add(strings);
-                continue;
-            }
-            strings.add(list.get(i).column5);
-            k++;
-            if(k > numberOfColumns) {
-                listOfStrings.add(strings);
-                continue;
-            }
-            strings.add(list.get(i).column6);
-            k++;
-            if(k > numberOfColumns) {
-                listOfStrings.add(strings);
-                continue;
-            }
-            strings.add(list.get(i).column7);
-            k++;
-            if(k > numberOfColumns) {
-                listOfStrings.add(strings);
-                continue;
-            }
-            strings.add(list.get(i).column8);
-            k++;
-            if(k > numberOfColumns) {
-                listOfStrings.add(strings);
-                continue;
-            }
-            strings.add(list.get(i).column9);
-            k++;
-            if(k > numberOfColumns) {
-                listOfStrings.add(strings);
-                continue;
-            }
-            strings.add(list.get(i).column10);
-            k++;
-            if(k > numberOfColumns) {
-                listOfStrings.add(strings);
-                continue;
-            }
-            strings.add(list.get(i).column11);
-            k++;
-            if(k > numberOfColumns) {
-                listOfStrings.add(strings);
-                continue;
-            }
-            strings.add(list.get(i).column12);
-            listOfStrings.add(strings);
+    List<String> ConverterToList(DatabaseLocalEntities entity, int numberOfColumns) {
+        List<String> returnList = new ArrayList<>();
+        int kol = 1;
+        if(entity.column1 == null) {
+            returnList.add("");
         }
-        return listOfStrings;
+        else {returnList.add(entity.column1); }
+
+        if(kol + 1 > numberOfColumns) {
+            return  returnList;
+        }
+        kol++;
+
+        if(entity.column2 == null) {
+            returnList.add("");
+        }
+        else {returnList.add(entity.column2); }
+
+        if(kol + 1 > numberOfColumns) {
+            return  returnList;
+        }
+        kol++;
+
+        if(entity.column3 == null) {
+            returnList.add("");
+        }
+        else {returnList.add(entity.column3); }
+
+        if(kol + 1 > numberOfColumns) {
+            return  returnList;
+        }
+        kol++;
+
+        if(entity.column4 == null) {
+            returnList.add("");
+        }
+        else {returnList.add(entity.column4); }
+
+        if(kol + 1 > numberOfColumns) {
+            return  returnList;
+        }
+        kol++;
+
+        if(entity.column5 == null) {
+            returnList.add("");
+        }
+        else {returnList.add(entity.column5); }
+
+        if(kol + 1 > numberOfColumns) {
+            return  returnList;
+        }
+        kol++;
+
+        if(entity.column6 == null) {
+            returnList.add("");
+        }
+        else {returnList.add(entity.column6); }
+
+        if(kol + 1 > numberOfColumns) {
+            return  returnList;
+        }
+        kol++;
+
+        if(entity.column7 == null) {
+            returnList.add("");
+        }
+        else {returnList.add(entity.column7); }
+
+        if(kol + 1 > numberOfColumns) {
+            return  returnList;
+        }
+        kol++;
+
+        if(entity.column8 == null) {
+            returnList.add("");
+        }
+        else {returnList.add(entity.column8); }
+
+        if(kol + 1 > numberOfColumns) {
+            return  returnList;
+        }
+        kol++;
+
+        if(entity.column9 == null) {
+            returnList.add("");
+        }
+        else {returnList.add(entity.column9); }
+
+        if(kol + 1 > numberOfColumns) {
+            return  returnList;
+        }
+        kol++;
+
+        if(entity.column10 == null) {
+            returnList.add("");
+        }
+        else {returnList.add(entity.column10); }
+        if(kol + 1 > numberOfColumns) {
+            return  returnList;
+        }
+        kol++;
+
+        if(entity.column11 == null) {
+            returnList.add("");
+        }
+        else {returnList.add(entity.column11); }
+        if(kol + 1 > numberOfColumns) {
+            return  returnList;
+        }
+        kol++;
+
+        if(entity.column12 == null) {
+            returnList.add("");
+        }
+        else {returnList.add(entity.column12); }
+        return  returnList;
     }
+
 }

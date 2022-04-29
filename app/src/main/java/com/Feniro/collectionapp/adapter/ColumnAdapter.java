@@ -31,7 +31,7 @@ public class ColumnAdapter extends RecyclerView.Adapter<ColumnAdapter.ColumnView
     @NonNull
     @Override
     public ColumnAdapter.ColumnViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View Items = LayoutInflater.from(context).inflate(R.layout.item_column, parent, false);
+        View Items = LayoutInflater.from(context).inflate(R.layout.item_create_column, parent, false);
         return new ColumnViewHolder(Items);
     }
 

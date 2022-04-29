@@ -3,22 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/main">
 
     <Button
         android:id="@+id/dialog_button_back"
         android:layout_width="200dp"
         android:layout_height="48dp"
-        android:layout_marginTop="144dp"
+        android:layout_marginTop="150dp"
         android:background="@color/buttons"
         android:text="@string/dialog_edit_button_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_textView_choose" />
+        app:layout_constraintTop_toBottomOf="@+id/dialog_textView_choose"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/dialog_textView_choose"
         android:layout_width="200dp"
         android:layout_height="40dp"
+        android:background="@color/main"
         android:text="@string/dialog_edit_textView_choose"
         android:textAlignment="center"
         android:textColor="#000000"
@@ -42,7 +45,7 @@
         android:id="@+id/dialog_button_deletecol"
         android:layout_width="200dp"
         android:layout_height="48dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="100dp"
         android:background="@color/buttons"
         android:text="@string/dialog_edit_button_delete"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +55,7 @@
         android:id="@+id/dialog_button_editcol"
         android:layout_width="200dp"
         android:layout_height="48dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="50dp"
         android:background="@color/buttons"
         android:text="@string/dialog_edit_button_edit"
         app:layout_constraintStart_toStartOf="parent"

@@ -40,17 +40,20 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Co
     @NonNull
     @Override
     public CollectionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View Items = LayoutInflater.from(context).inflate(R.layout.item_collection_to_edit, parent, false);
+        View Items = LayoutInflater.from(context).inflate(R.layout.item_edit_collection, parent, false);
         return new CollectionViewHolder(Items);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CollectionAdapter.CollectionViewHolder holder, int position) {
         holder.textView.setText(collections.get(position));
-        holder.button.setOnClickListener(view -> {
+        holder.textView.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-            View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_rule_collections_action, viewGroup, false);
+            globalDatabase = GlobalDatabase.getDatabase(context); // Глобальная база данных
+            localDatabase = LocalDatabase.getDatabase(context);
+
+            View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_edit_collections_action, viewGroup, false);
 
             builder.setView(dialogView);
             final AlertDialog alertDialog = builder.show();
@@ -63,22 +66,25 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Co
             delete.setOnClickListener(view1 -> {
                 String name = collections.get(position);
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-                builder1.setTitle("Вы уверены?");
-                builder1.setPositiveButton("Да", (dialogInterface, i) -> {
+                alertDialog.dismiss();
+                builder1.setTitle("Вы уверены? Это действие необратимо");
+                builder1.setPositiveButton("Да [удалить]", (dialogInterface, i) -> {
                     globalDatabase.dao_global().deleteCollectionByName(name);
                     localDatabase.dao().deleteEntitiesByName(name);
                     collections.remove(position);
-                    alertDialog.dismiss();
+                    notifyItemRemoved(position);
                 });
                 builder1.setNegativeButton("Назад", (dialogInterface, i) -> {
-                }); });
+                    alertDialog.show();
+                });
+            builder1.show();});
 
 
 
                 rename.setOnClickListener(view1 -> {
                     String name = collections.get(position);
                     DatabaseGlobalEntities entity = globalDatabase.dao_global().getByName(name);
-                    List<DatabaseLocalEntities> listLocal = localDatabase.dao().getAllByName(name);
+                    List<DatabaseLocalEntities> listLocal = localDatabase.dao().getAllByNameByColumn1(name);
         //                entity.name = ...
         //                for(int i = 0; i < listLocal.size(); i++) {
         //                    listLocal.get(i).DatabaseName = ...
@@ -104,16 +110,14 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Co
         return collections.size();
     }
 
-    public static final class CollectionViewHolder extends RecyclerView.ViewHolder {
+    public final class CollectionViewHolder extends RecyclerView.ViewHolder {
 
         TextView textView;
-        Button button;
 
         public CollectionViewHolder(@NonNull View itemView) {
             super(itemView);
 
             textView = itemView.findViewById(R.id.TextCollection);
-            button = itemView.findViewById(R.id.Item_Collection_Button);
         }
     }
 }

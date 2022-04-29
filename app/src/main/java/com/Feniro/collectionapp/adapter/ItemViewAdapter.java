@@ -36,7 +36,7 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
     @NonNull
     @Override
     public ItemViewAdapter.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View Items = LayoutInflater.from(context).inflate(R.layout.item_item_view, parent, false);
+        View Items = LayoutInflater.from(context).inflate(R.layout.item_view_item, parent, false);
         return new ItemViewAdapter.ItemViewHolder(Items);
     }
 
@@ -49,7 +49,7 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
         holder.button.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-            View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_item_view_action, viewGroup, false);
+            View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_view_item_action, viewGroup, false);
 
             builder.setView(dialogView);
             final AlertDialog alertDialog = builder.show();
@@ -60,7 +60,7 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
             Button delete = dialogView.findViewById(R.id.dialog_item_view_button_delete);
 
             edit.setOnClickListener(view1 -> {
-                View dialogViewEdit = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_add_to_collection, viewGroup, false);
+                View dialogViewEdit = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_view_add_item, viewGroup, false);
                 builder.setView(dialogViewEdit);
                 builder.show();
 

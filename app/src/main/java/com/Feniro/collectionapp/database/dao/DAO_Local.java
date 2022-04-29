@@ -13,15 +13,53 @@ import java.util.List;
 @Dao
 public interface DAO_Local {
 
-    @Query("SELECT * FROM DatabaseLocalEntities WHERE DatabaseName Is :name")
-    List<DatabaseLocalEntities> getAllByName(String name);
+    // сортировки
+    @Query("SELECT * FROM DatabaseLocalEntities WHERE DatabaseName IS :name and isFirstLine = 0 ORDER BY column1")
+    List<DatabaseLocalEntities> getAllByNameByColumn1(String name);
 
-    @Query("DELETE FROM DatabaseLocalEntities WHERE DatabaseName Is :name")
+    @Query("SELECT * FROM DatabaseLocalEntities WHERE DatabaseName IS :name and isFirstLine = 0 ORDER BY column2")
+    List<DatabaseLocalEntities> getAllByNameByColumn2(String name);
+
+    @Query("SELECT * FROM DatabaseLocalEntities WHERE DatabaseName IS :name and isFirstLine = 0 ORDER BY column3")
+    List<DatabaseLocalEntities> getAllByNameByColumn3(String name);
+
+    @Query("SELECT * FROM DatabaseLocalEntities WHERE DatabaseName IS :name and isFirstLine = 0 ORDER BY column4")
+    List<DatabaseLocalEntities> getAllByNameByColumn4(String name);
+
+    @Query("SELECT * FROM DatabaseLocalEntities WHERE DatabaseName IS :name and isFirstLine = 0 ORDER BY column5")
+    List<DatabaseLocalEntities> getAllByNameByColumn5(String name);
+
+    @Query("SELECT * FROM DatabaseLocalEntities WHERE DatabaseName IS :name and isFirstLine = 0  ORDER BY column6")
+    List<DatabaseLocalEntities> getAllByNameByColumn6(String name);
+
+    @Query("SELECT * FROM DatabaseLocalEntities WHERE DatabaseName IS :name and isFirstLine = 0  ORDER BY column7")
+    List<DatabaseLocalEntities> getAllByNameByColumn7(String name);
+
+    @Query("SELECT * FROM DatabaseLocalEntities WHERE DatabaseName IS :name and isFirstLine = 0  ORDER BY column8")
+    List<DatabaseLocalEntities> getAllByNameByColumn8(String name);
+
+    @Query("SELECT * FROM DatabaseLocalEntities WHERE DatabaseName IS :name and isFirstLine = 0  ORDER BY column9")
+    List<DatabaseLocalEntities> getAllByNameByColumn9(String name);
+
+    @Query("SELECT * FROM DatabaseLocalEntities WHERE DatabaseName IS :name and isFirstLine = 0  ORDER BY column10")
+    List<DatabaseLocalEntities> getAllByNameByColumn10(String name);
+
+    @Query("SELECT * FROM DatabaseLocalEntities WHERE DatabaseName IS :name and isFirstLine = 0  ORDER BY column11")
+    List<DatabaseLocalEntities> getAllByNameByColumn11(String name);
+
+    @Query("SELECT * FROM DatabaseLocalEntities WHERE DatabaseName IS :name and isFirstLine = 0  ORDER BY column12")
+    List<DatabaseLocalEntities> getAllByNameByColumn12(String name);
+
+
+    @Query("SELECT * FROM DatabaseLocalEntities WHERE DatabaseName Is :name and isFirstLine is 1")
+    DatabaseLocalEntities getNamesOfColumnsByName(String name);
+
+    // удаление
+    @Query("DELETE FROM DatabaseLocalEntities WHERE DatabaseName Is :name") // всей датабазы
     void deleteEntitiesByName(String name);
 
-    @Query("DELETE FROM DatabaseLocalEntities WHERE Id Is :id")
+    @Query("DELETE FROM DatabaseLocalEntities WHERE Id Is :id")            // одной entity
     void deleteEntityById(int id);
-
 
 
     @Insert

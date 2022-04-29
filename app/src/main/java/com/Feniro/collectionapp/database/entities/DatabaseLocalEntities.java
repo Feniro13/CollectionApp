@@ -14,7 +14,7 @@ public class DatabaseLocalEntities {
         public int id;
 
         @ColumnInfo(name = "isFirstLine")
-        public boolean isFirstLine;
+        public int isFirstLine;
 
         @ColumnInfo(name = "DatabaseName")
         public String DatabaseName;

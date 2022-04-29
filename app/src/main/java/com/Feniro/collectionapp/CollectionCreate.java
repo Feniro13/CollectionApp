@@ -104,13 +104,10 @@ public class CollectionCreate extends AppCompatActivity {
             names = columnAdapter.names;
             editText = findViewById(R.id.Create_EditText_Name);
             name = editText.getText().toString();
-            // Cоздание малой коллекции (строка названий столбиков)
-            localDatabase = Room.databaseBuilder(this, LocalDatabase.class, name)
-                    .allowMainThreadQueries()
-                    .build();
+
+            localDatabase = LocalDatabase.getDatabase(this);
             DatabaseLocalEntities localEntity = new DatabaseLocalEntities();
 
-            // Чтение записей EditText
             {
                 if (kol >= 1) {
                     if(names.get(0).equals("")){
@@ -197,7 +194,7 @@ public class CollectionCreate extends AppCompatActivity {
                     localEntity.column12 = names.get(11);
                 }
             }
-            localEntity.isFirstLine = true;
+            localEntity.isFirstLine = 1;
             localEntity.DatabaseName = name;
 
             //Создание базы данных в глобальной базе данных
