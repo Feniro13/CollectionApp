@@ -12,16 +12,24 @@
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/activity_edit_collections.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/activity_extra_edit_item.xml" value="0.264" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/activity_start.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/activity_view_collection.xml" value="0.264" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/collection_item.xml" value="0.536" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/createcollection.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_add_to_collection.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_edit_collections_action.xml" value="0.1125" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_edit_collections_action.xml" value="0.6" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_edit_rename.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_item_view_action.xml" value="0.4" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_rule_collections_action.xml" value="0.4" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_action.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_add.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_add_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_add_to_collection.xml" value="0.264" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_diff.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_diff_action.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_diff_download.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_diff_sort.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_diff_stats.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_item_action.xml" value="0.6" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/fragment_add_to_collection.xml" value="0.264" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/fragment_rule_collections.xml" value="0.24547101449275363" />
@@ -30,8 +38,12 @@
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/item_collection_to_edit.xml" value="0.4" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/item_collectionview.xml" value="0.264" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/item_column.xml" value="0.2" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/item_create_column.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/item_edit_collection.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/item_item_view.xml" value="0.5136842105263157" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/item_view_add_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/item_view_diff_sort.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/item_view_item.xml" value="0.49693251533742333" />
       </map>
     </option>
   </component>

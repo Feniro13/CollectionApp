@@ -18,8 +18,12 @@ import com.Feniro.collectionapp.database.entities.DatabaseGlobalEntities;
 import com.Feniro.collectionapp.database.entities.DatabaseLocalEntities;
 import com.Feniro.collectionapp.model.ColumnModel;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class CollectionCreate extends AppCompatActivity {
 
@@ -209,6 +213,12 @@ public class CollectionCreate extends AppCompatActivity {
                 }
             }
 
+            Date currentDate = new Date();
+            DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+            String dateText = dateFormat.format(currentDate);
+
+            databaseGlobalEntities.dataCreated = dateText;
+            databaseGlobalEntities.dataChanged = dateText;
             databaseGlobalEntities.numberOfColumns = kol;
             databaseGlobalEntities.name = name;
 

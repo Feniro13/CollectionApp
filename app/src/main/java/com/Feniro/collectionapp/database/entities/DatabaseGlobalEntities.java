@@ -16,4 +16,9 @@ public class DatabaseGlobalEntities {
     @ColumnInfo(name = "numberOfColumns")
     public int numberOfColumns;
 
+    @ColumnInfo(name = "dataCreated")
+    public String dataCreated;
+
+    @ColumnInfo(name = "dataChanged")
+    public String dataChanged;
 }

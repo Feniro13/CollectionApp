@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.RenameTable;
 import androidx.room.Update;
 
 import com.Feniro.collectionapp.database.entities.DatabaseGlobalEntities;
@@ -20,6 +21,14 @@ public interface DAO_Global {
 
     @Query("SELECT NumberOfColumns FROM DatabaseGlobalEntities WHERE name = :name")
     int getNumberOfColumnsByName(String name);
+
+    @Query("SELECT dataCreated FROM DatabaseGlobalEntities WHERE name = :name")
+    String getDataCreatedByName(String name);
+
+    @Query("SELECT dataChanged FROM DatabaseGlobalEntities WHERE name = :name")
+    String getDataChangedByName(String name);
+
+
 
     @Query("DELETE FROM DatabaseGlobalEntities WHERE name = :name")
     void deleteCollectionByName(String name);

@@ -24,9 +24,9 @@
         android:layout_width="144dp"
         android:layout_height="52dp"
         android:layout_marginTop="8dp"
-        android:text="@string/dialog_item_view_button_edit"
+        android:text="@string/edit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -35,20 +35,20 @@
         android:layout_width="144dp"
         android:layout_height="52dp"
         android:layout_marginTop="128dp"
-        android:text="@string/dialog_item_view_button_delete"
+        android:text="@string/delete"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
-        android:id="@+id/dialog_item_view_button_delete2"
+        android:id="@+id/dialog_item_view_search"
         android:layout_width="144dp"
         android:layout_height="52dp"
         android:layout_marginTop="68dp"
         android:text="@string/dialog_item_view_button_search"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -57,9 +57,9 @@
         android:layout_width="144dp"
         android:layout_height="52dp"
         android:layout_marginTop="188dp"
-        android:text="@string/dialog_item_view_button_back"
+        android:text="@string/back"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 

@@ -48,7 +48,7 @@ public class CollectionView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_collection_view);
+        setContentView(R.layout.activity_view_collection);
 
         DatabaseLocalEntities mainEntity;
         name = getIntent().getStringExtra("check");
@@ -69,97 +69,37 @@ public class CollectionView extends AppCompatActivity {
         ViewGroup viewGroup = findViewById(android.R.id.content);
 
         collectionEntities.add(0, mainEntity);
-        setItemRecycler(collectionEntities, numberOfColumns, viewGroup);
+        setItemRecycler(collectionEntities, numberOfColumns, viewGroup, mainEntity);
 
         add.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setCancelable(false);
-            View view1 = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_view_add_item, viewGroup, false);
-
+            View view1 = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_view_add, viewGroup, false);
             builder.setView(view1);
 
             Button itemAdd = view1.findViewById(R.id.dialog_add_item_button_add);
             Button itemBack = view1.findViewById(R.id.dialog_add_item_button_back);
             TextView warning = view1.findViewById(R.id.dialog_add_item_textview_warning);
 
+            warning.setText(name);
             DatabaseLocalEntities localEntity = new DatabaseLocalEntities();
             localEntity.isFirstLine = 0;
             localEntity.DatabaseName = name;
 
-            setItemDialogRecycler(view1, mainEntity, localEntity);
-
-
             final AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+
+            setItemDialogRecycler(view1, mainEntity, localEntity);
 
             itemBack.setOnClickListener(view2 -> alertDialog.dismiss());
 
             itemAdd.setOnClickListener(view22 -> {
-                try {
-                    List<String> names = itemAddAdapter.entityList;
-                    int kol = 1;
-                    boolean isKolBigger = false;
-                    localEntity.column1 = names.get(0);
-                    if (kol + 1 > numberOfColumns) {
-                        isKolBigger = true;
-                    }
-                    kol++;
-                    localEntity.column1 = names.get(1);
-                    if (kol + 1 > numberOfColumns && !isKolBigger) {
-                        isKolBigger = true;
-                    }
-                    kol++;
-                    localEntity.column1 = names.get(2);
-                    if (kol + 1 > numberOfColumns && !isKolBigger) {
-                        isKolBigger = true;
-                    }
-                    kol++;
-                    localEntity.column1 = names.get(3);
-                    if (kol + 1 > numberOfColumns && !isKolBigger) {
-                        isKolBigger = true;
-                    }
-                    kol++;
-                    localEntity.column1 = names.get(4);
-                    if (kol + 1 > numberOfColumns && !isKolBigger) {
-                        isKolBigger = true;
-                    }
-                    kol++;
-                    localEntity.column1 = names.get(5);
-                    if (kol + 1 > numberOfColumns && !isKolBigger) {
-                        isKolBigger = true;
-                    }
-                    kol++;
-                    localEntity.column1 = names.get(6);
-                    if (kol + 1 > numberOfColumns && !isKolBigger) {
-                        isKolBigger = true;
-                    }
-                    kol++;
-                    localEntity.column1 = names.get(7);
-                    if (kol + 1 > numberOfColumns && !isKolBigger) {
-                        isKolBigger = true;
-                    }
-                    kol++;
-                    localEntity.column1 = names.get(8);
-                    if (kol + 1 > numberOfColumns && !isKolBigger) {
-                        isKolBigger = true;
-                    }
-                    kol++;
-                    localEntity.column1 = names.get(9);
-                    if (kol + 1 > numberOfColumns && !isKolBigger) {
-                        isKolBigger = true;
-                    }
-                    kol++;
-                    localEntity.column1 = names.get(10);
-                    if (kol + 1 > numberOfColumns && !isKolBigger) {
-                        isKolBigger = true;
-                    }
-                    if (!isKolBigger) {
-                        localEntity.column1 = names.get(11);
-                    }
-                }catch (Exception E){
-                    warning.setText("Все поля должны быть заполнены");
-                }
+                localDatabase.dao().insert(getEntityFromAdapter(localEntity));
+                alertDialog.dismiss();
+                collectionEntities = localDatabase.dao().getAllByNameByColumn1(name);
+                collectionEntities.add(0, mainEntity);
+                setItemRecycler(collectionEntities, numberOfColumns, viewGroup, mainEntity);
+
             });
-            alertDialog.show();
         });
 
         diff.setOnClickListener(view -> {
@@ -168,12 +108,37 @@ public class CollectionView extends AppCompatActivity {
 
             builder.setView(view1);
             AlertDialog alertDialog = builder.create();
+            alertDialog.show();
 
             Button download = view1.findViewById(R.id.view_diff_button_download);
             Button sort = view1.findViewById(R.id.view_diff_button_sort);
+            Button showStats = view1.findViewById(R.id.view_diff_button_showstats);
 
             download.setOnClickListener(view23 -> {
 
+            });
+
+            showStats.setOnClickListener(view25 -> {
+                alertDialog.dismiss();
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                View view2 = LayoutInflater.from(view25.getContext()).inflate(R.layout.dialog_view_diff_stats, viewGroup, false);
+
+                builder1.setView(view2);
+                final AlertDialog alertDialog1 = builder1.show();
+
+                TextView dataNameEdit = view2.findViewById(R.id.dialog_view_showstats_name_edit);
+                TextView dataSizeEdit = view2.findViewById(R.id.dialog_view_showstats_size_edit);
+                TextView dataDataEdit = view2.findViewById(R.id.dialog_view_showstats_createdate_edit);
+                TextView dataChangeEdit = view2.findViewById(R.id.dialog_view_showstats_change_edit);
+                Button dialogBack = view2.findViewById(R.id.dialog_view_showstats_back);
+
+                dataNameEdit.setText(name);
+                dataSizeEdit.setText(String.valueOf(collectionEntities.size()-1));
+                dataDataEdit.setText(globalDatabase.dao_global().getDataCreatedByName(name));
+                dataChangeEdit.setText(globalDatabase.dao_global().getDataChangedByName(name));
+
+                dialogBack.setOnClickListener(view3 -> alertDialog1.dismiss());
+                alertDialog1.show();
             });
 
             sort.setOnClickListener(view24 -> {
@@ -181,26 +146,24 @@ public class CollectionView extends AppCompatActivity {
                 View view2 = LayoutInflater.from(view24.getContext()).inflate(R.layout.dialog_view_diff_sort, viewGroup, false);
 
                 builder1.setView(view2);
+                alertDialog.dismiss();
                 AlertDialog alertDialog1 = builder1.create();
 
                 setItemDialogSortRecycler(view2, ConverterToList(mainEntity, numberOfColumns));
 
 
-                builder1.show();
+                alertDialog1.show();
             });
 
-            builder.show();
         });
-
-
     }
 
-    public void setItemRecycler(List<DatabaseLocalEntities> listOfItems, int numberOfColumns, ViewGroup viewGroup) {
+    public void setItemRecycler(List<DatabaseLocalEntities> listOfItems, int numberOfColumns, ViewGroup viewGroup, DatabaseLocalEntities mainEntity) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         mainRecycler = findViewById(R.id.View_RecyclerView);
         mainRecycler.setLayoutManager(layoutManager);
-        itemViewAdapter = new ItemViewAdapter(listOfItems, numberOfColumns, this, viewGroup);
-        mainRecycler.setHasFixedSize(true);
+        itemViewAdapter = new ItemViewAdapter(listOfItems, numberOfColumns, this, viewGroup, mainEntity, name);
+        itemViewAdapter.notifyDataSetChanged();
         mainRecycler.setAdapter(itemViewAdapter);
     }
 
@@ -208,7 +171,7 @@ public class CollectionView extends AppCompatActivity {
         itemRecycler = view.findViewById(R.id.dialog_add_item_recyclerview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         itemRecycler.setLayoutManager(layoutManager);
-        ItemAddAdapter itemAddAdapter = new ItemAddAdapter(this, mainEntity, localEntity, numberOfColumns);
+        itemAddAdapter = new ItemAddAdapter(this, mainEntity, localEntity, numberOfColumns);
         itemRecycler.setAdapter(itemAddAdapter);
     }
 
@@ -220,6 +183,68 @@ public class CollectionView extends AppCompatActivity {
         sortRecycler.setAdapter(itemSortAdapter);
 
     }
+
+    public DatabaseLocalEntities getEntityFromAdapter(DatabaseLocalEntities localEntity){
+        List<String> names = itemAddAdapter.entityList;
+        int kol = 1;
+        localEntity.column1 = names.get(0);
+        if (kol + 1 > numberOfColumns) {
+            return localEntity;
+        }
+        kol++;
+        localEntity.column2 = names.get(1);
+        if (kol + 1 > numberOfColumns) {
+            return localEntity;
+        }
+        kol++;
+        localEntity.column3 = names.get(2);
+        if (kol + 1 > numberOfColumns) {
+            return localEntity;
+        }
+        kol++;
+        localEntity.column4 = names.get(3);
+        if (kol + 1 > numberOfColumns) {
+            return localEntity;
+        }
+        kol++;
+        localEntity.column5 = names.get(4);
+        if (kol + 1 > numberOfColumns) {
+            return localEntity;
+        }
+        kol++;
+        localEntity.column6 = names.get(5);
+        if (kol + 1 > numberOfColumns) {
+            return localEntity;
+        }
+        kol++;
+        localEntity.column7 = names.get(6);
+        if (kol + 1 > numberOfColumns) {
+            return localEntity;
+        }
+        kol++;
+        localEntity.column8 = names.get(7);
+        if (kol + 1 > numberOfColumns) {
+            return localEntity;
+        }
+        kol++;
+        localEntity.column9 = names.get(8);
+        if (kol + 1 > numberOfColumns) {
+            return localEntity;
+        }
+        kol++;
+        localEntity.column10 = names.get(9);
+        if (kol + 1 > numberOfColumns) {
+            return localEntity;
+        }
+        kol++;
+        localEntity.column11 = names.get(10);
+        if (kol + 1 > numberOfColumns) {
+            return localEntity;
+        }
+        localEntity.column12 = names.get(11);
+        return localEntity;
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -336,7 +361,6 @@ public class CollectionView extends AppCompatActivity {
         if(kol + 1 > numberOfColumns) {
             return  returnList;
         }
-        kol++;
 
         if(entity.column12 == null) {
             returnList.add("");

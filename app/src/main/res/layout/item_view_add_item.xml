@@ -15,7 +15,6 @@
         android:textAlignment="center"
         android:textColor="@color/buttons"
         android:textSize="30sp"
-
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,6 +28,5 @@
         android:importantForAutofill="no"
         android:inputType="textNoSuggestions|text|textEmailAddress"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Item_add_to_collection_textView"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/Item_add_to_collection_textView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

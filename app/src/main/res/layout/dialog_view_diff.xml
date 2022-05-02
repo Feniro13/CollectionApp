@@ -11,7 +11,7 @@
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Скачать коллекцию"
+        android:text="@string/dialog_item_view_button_download"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -20,7 +20,16 @@
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
-        android:text="Сортировать"
+        android:text="@string/dialog_item_view_button_sort"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/view_diff_button_showstats"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="126dp"
+        android:text="@string/dialog_item_view_button_statistics"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 

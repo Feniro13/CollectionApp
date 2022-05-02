@@ -36,14 +36,14 @@ public class ItemAddAdapter extends RecyclerView.Adapter<ItemAddAdapter.ItemAddV
     @NonNull
     @Override
     public ItemAddViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View Items = LayoutInflater.from(context).inflate(R.layout.itemv_view_add_item, parent, false);
+        View Items = LayoutInflater.from(context).inflate(R.layout.item_view_add_item, parent, false);
         return new ItemAddViewHolder(Items);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ItemAddAdapter.ItemAddViewHolder holder, int position) {
         holder.title.setText(namesOfColumnsList.get(position));
-        if(!entityList.equals("")) {
+        if(!entityList.get(position).equals("")) {
             holder.editText.setText(entityList.get(position));
         }
         else {
@@ -58,7 +58,7 @@ public class ItemAddAdapter extends RecyclerView.Adapter<ItemAddAdapter.ItemAddV
 
     public final class ItemAddViewHolder extends RecyclerView.ViewHolder {
 
-        EditText editText;
+        TextView editText;
         TextView title;
 
         public ItemAddViewHolder(@NonNull View itemView) {
