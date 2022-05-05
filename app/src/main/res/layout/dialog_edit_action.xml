@@ -2,68 +2,134 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="200dp"
-    android:layout_height="wrap_content"
-    android:background="@color/main">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/dialog_button_back"
-        android:layout_width="200dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="150dp"
-        android:background="@color/buttons"
-        android:text="@string/back"
+    <ImageView
+        android:id="@+id/dialog_imageview_lol"
+        android:layout_width="267dp"
+        android:layout_height="362dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_textView_choose"
-        tools:ignore="TextContrastCheck" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_dialog" />
 
     <TextView
-        android:id="@+id/dialog_textView_choose"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:background="@color/main"
+        android:id="@+id/dialog_textView_colname"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
         android:text="@string/dialog_edit_textView_choose"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/dialog_imageview_lol"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="@+id/dialog_imageview_lol"
+        app:layout_constraintTop_toTopOf="@+id/dialog_imageview_lol" />
+
+    <Button
+        android:id="@+id/dialog_button_back"
+        android:layout_width="190dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        android:text="@string/back"
+        app:layout_constraintEnd_toEndOf="@+id/dialog_imageview_lol"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/dialog_imageview_lol"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_button_deletecol"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/dialog_button_renamecol"
-        android:layout_width="200dp"
+        android:layout_width="190dp"
         android:layout_height="48dp"
-        android:background="@color/buttons"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
         android:shadowColor="@color/main"
         android:text="@string/dialog_edit_button_rename"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_textView_choose"
+        app:layout_constraintEnd_toEndOf="@+id/dialog_imageview_lol"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/dialog_imageview_lol"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_button_editcol"
         tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/dialog_button_deletecol"
-        android:layout_width="200dp"
+        android:layout_width="190dp"
         android:layout_height="48dp"
-        android:layout_marginTop="100dp"
-        android:background="@color/buttons"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
         android:text="@string/delete"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_textView_choose" />
+        app:layout_constraintEnd_toEndOf="@+id/dialog_imageview_lol"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/dialog_imageview_lol"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_button_renamecol" />
 
     <Button
         android:id="@+id/dialog_button_editcol"
-        android:layout_width="200dp"
+        android:layout_width="190dp"
         android:layout_height="48dp"
-        android:layout_marginTop="50dp"
-        android:background="@color/buttons"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
         android:text="@string/edit"
+        app:layout_constraintEnd_toEndOf="@+id/dialog_imageview_lol"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/dialog_imageview_lol"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_textView_colname" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="7dp"
+        app:layout_constraintBottom_toTopOf="@+id/dialog_button_editcol"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_textView_choose" />
+        app:layout_constraintTop_toBottomOf="@+id/dialog_textView_colname"
+        app:srcCompat="@drawable/ic_line_main_long" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/dialog_button_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_button_deletecol"
+        app:srcCompat="@drawable/ic_line_main_long" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/dialog_button_deletecol"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_button_renamecol"
+        app:srcCompat="@drawable/ic_line_main_long" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/dialog_button_renamecol"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_button_editcol"
+        app:srcCompat="@drawable/ic_line_main_long" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

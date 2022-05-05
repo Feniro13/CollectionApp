@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/holderLayout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/main">
@@ -17,161 +18,173 @@
 
     <TextView
         android:id="@+id/item_View_1"
-        android:layout_width="70dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_weight="1"
         android:clickable="true"
         android:textAlignment="center"
-        android:textSize="17sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
+        tools:textAlignment="center" />
 
     <TextView
         android:id="@+id/item_View_2"
-        android:layout_width="70dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_weight="1"
         android:clickable="true"
         android:textAlignment="center"
-        android:textSize="17sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintStart_toEndOf="@id/item_View_1"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
+        tools:textAlignment="center" />
 
     <TextView
         android:id="@+id/item_View_3"
-        android:layout_width="70dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_weight="1"
         android:clickable="true"
         android:textAlignment="center"
-        android:textSize="17sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintStart_toEndOf="@id/item_View_2"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
+        tools:textAlignment="center" />
 
     <TextView
         android:id="@+id/item_View_4"
-        android:layout_width="70dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:clickable="true"
         android:textAlignment="center"
-        android:textSize="17sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintStart_toEndOf="@id/item_View_3"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
+        tools:textAlignment="center" />
 
     <TextView
         android:id="@+id/item_View_5"
-        android:layout_width="70dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:textAlignment="center"
-        android:textSize="17sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintStart_toEndOf="@id/item_View_4"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
+        tools:textAlignment="center" />
 
     <TextView
         android:id="@+id/item_View_6"
-        android:layout_width="70dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:textAlignment="center"
-        android:textSize="17sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintStart_toEndOf="@id/item_View_5"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
+        tools:textAlignment="center" />
 
     <TextView
         android:id="@+id/item_View_7"
-        android:layout_width="70dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:textAlignment="center"
-        android:textSize="17sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintStart_toEndOf="@id/item_View_6"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:textAlignment="center" />
 
     <TextView
         android:id="@+id/item_View_8"
-        android:layout_width="70dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:textAlignment="center"
-        android:textSize="17sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintStart_toEndOf="@id/item_View_7"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:textAlignment="center" />
 
     <TextView
         android:id="@+id/item_View_9"
-        android:layout_width="70dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:textAlignment="center"
-        android:textSize="17sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintStart_toEndOf="@id/item_View_8"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:textAlignment="center" />
 
     <TextView
         android:id="@+id/item_View_10"
-        android:layout_width="70dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:textAlignment="center"
-        android:textSize="17sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintStart_toEndOf="@id/item_View_9"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:textAlignment="center" />
 
     <TextView
         android:id="@+id/item_View_11"
-        android:layout_width="70dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:textAlignment="center"
-        android:textSize="17sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintStart_toEndOf="@id/item_View_10"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:textAlignment="center" />
 
     <TextView
         android:id="@+id/item_View_12"
-        android:layout_width="70dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:clickable="true"
         android:textAlignment="center"
-        android:textSize="17sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintStart_toEndOf="@id/item_View_11"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:textAlignment="center" />
 
 
     <ImageView
@@ -182,6 +195,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
-        app:srcCompat="@drawable/ic_line_collection" />
+        app:srcCompat="@drawable/ic_line_horizontal_black" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

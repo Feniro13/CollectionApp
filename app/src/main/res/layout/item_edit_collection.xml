@@ -15,7 +15,7 @@
         android:contentDescription="@string/todo1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_ellipse_collection"
+        app:srcCompat="@drawable/ic_circle_collection"
         tools:ignore="ImageContrastCheck,ImageContrastCheck" />
 
     <ImageView
@@ -27,7 +27,7 @@
         android:contentDescription="@string/todo1"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_line_collection" />
+        app:srcCompat="@drawable/ic_line_horizontal_black" />
 
     <TextView
         android:id="@+id/TextCollection"
@@ -37,7 +37,7 @@
         android:clickable="true"
         android:minHeight="48dp"
         android:text="@string/example"
-        android:textColor="@color/buttons"
+        android:textColor="@color/second_main"
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"

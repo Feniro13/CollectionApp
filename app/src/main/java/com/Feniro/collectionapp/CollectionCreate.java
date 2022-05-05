@@ -3,12 +3,14 @@ package com.Feniro.collectionapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.Feniro.collectionapp.adapter.ColumnAdapter;
@@ -30,7 +32,8 @@ public class CollectionCreate extends AppCompatActivity {
     String name;
     int kol = 3;
 
-    Button addColumn, delColumn, create;
+    Button addColumn, delColumn;
+    ImageView create, doublebutton;
     TextView warning;
     EditText editText;
 
@@ -49,7 +52,7 @@ public class CollectionCreate extends AppCompatActivity {
         setContentView(R.layout.activity_create_collections);
 
         try {
-            editText = findViewById(R.id.Create_EditText_Name);
+            editText = findViewById(R.id.create_EditText_Name);
             Bundle args = getIntent().getExtras();
             editText.setText(args.get("check").toString());
 
@@ -64,15 +67,16 @@ public class CollectionCreate extends AppCompatActivity {
 
         setColumnRecycler(list, names);
 
-        addColumn = findViewById(R.id.Create_Button_Add);
-        delColumn = findViewById(R.id.Create_Button_Delete);
-        create = findViewById(R.id.Create_Button_Create);
-
+        addColumn = findViewById(R.id.create_Button_Add);
+        delColumn = findViewById(R.id.create_Button_Delete);
+        create = findViewById(R.id.create_imageview_button_create);
+        doublebutton = findViewById(R.id.create_imageview_doublebutton);
         warning = findViewById(R.id.Create_TextView_Warner);
 
 
         // Кнопка "добавить столбик"
         addColumn.setOnClickListener(view -> {
+            doublebutton.setRotationX(5);
             if(kol == 12) {
                 warning.setText(R.string.maxColumns);
             }
@@ -88,6 +92,7 @@ public class CollectionCreate extends AppCompatActivity {
 
         // Кнопка "убрать столбик"
         delColumn.setOnClickListener(view -> {
+            doublebutton.setRotationX(-5);
             if(kol == 1) {
                 warning.setText(R.string.minColumns);
             }
@@ -106,7 +111,7 @@ public class CollectionCreate extends AppCompatActivity {
             warning = findViewById(R.id.Create_TextView_Warner);
 
             names = columnAdapter.names;
-            editText = findViewById(R.id.Create_EditText_Name);
+            editText = findViewById(R.id.create_EditText_Name);
             name = editText.getText().toString();
 
             localDatabase = LocalDatabase.getDatabase(this);
@@ -243,7 +248,7 @@ public class CollectionCreate extends AppCompatActivity {
     public void onBackPressed() {
 
         Intent intent = new Intent(CollectionCreate.this, ActivityStart.class);
-        EditText editText = findViewById(R.id.Create_EditText_Name);
+        EditText editText = findViewById(R.id.create_EditText_Name);
         String arg = editText.getText().toString();
         intent.putExtra("check", arg);
         startActivity(intent);

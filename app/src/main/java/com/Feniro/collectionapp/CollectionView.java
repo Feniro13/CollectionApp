@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.Feniro.collectionapp.adapter.ItemAddAdapter;
@@ -42,7 +43,7 @@ public class CollectionView extends AppCompatActivity {
     ItemAddAdapter itemAddAdapter;
     ItemSortAdapter itemSortAdapter;
 
-    Button add, diff;
+    ImageView add, diff;
     TextView title;
 
     @Override
@@ -109,6 +110,7 @@ public class CollectionView extends AppCompatActivity {
             builder.setView(view1);
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
+            alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
             Button download = view1.findViewById(R.id.view_diff_button_download);
             Button sort = view1.findViewById(R.id.view_diff_button_sort);

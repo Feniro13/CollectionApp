@@ -13,7 +13,7 @@
         android:layout_marginStart="20dp"
         android:text="@string/example"
         android:textAlignment="center"
-        android:textColor="@color/buttons"
+        android:textColor="@color/second_main"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"

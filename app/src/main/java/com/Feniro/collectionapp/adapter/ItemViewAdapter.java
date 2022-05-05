@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,9 +57,13 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
     public void onBindViewHolder(@NonNull ItemViewAdapter.ItemViewHolder holder, int position) {
         int kol = 0;
         holder.textView1.setText(listOfItems.get(position).column1);
+        holder.constraintLayout.setBackgroundColor(context.getResources().getColor(R.color.second_main));
         holder.textView1.setOnClickListener(view -> {
             clickItemListener(position, view, listOfItems.get(position).column1);
         });
+        if(position == 0) {
+            holder.textView1.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+        }
         kol++;
         if (kol == numberOfColumns) {
 //            holder.textView2.setVisibility(View.GONE);
@@ -72,12 +77,15 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
 //            holder.textView10.setVisibility(View.GONE);
 //            holder.textView11.setVisibility(View.GONE);
 //            holder.textView12.setVisibility(View.GONE);
-//            return;
+              return;
         }
         holder.textView2.setText(listOfItems.get(position).column2);
         holder.textView2.setOnClickListener(view -> {
             clickItemListener(position, view, listOfItems.get(position).column2);
         });
+        if(position == 0) {
+            holder.textView2.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+        }
         kol++;
         if (kol == numberOfColumns) {
         //          holder.textView3.set;
@@ -96,6 +104,9 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
         holder.textView3.setOnClickListener(view -> {
             clickItemListener(position, view, listOfItems.get(position).column3);
         });
+        if(position == 0) {
+            holder.textView3.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+        }
         kol++;
 //            if (kol == numberOfColumns) {
 //                holder.textView4.setVisibility(View.GONE);
@@ -206,6 +217,7 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
         TextView textView10;
         TextView textView11;
         TextView textView12;
+        ConstraintLayout constraintLayout;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -217,9 +229,11 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
             textView6 = itemView.findViewById(R.id.item_View_6);
             textView7 = itemView.findViewById(R.id.item_View_7);
             textView8 = itemView.findViewById(R.id.item_View_8);
-            textView9 = itemView.findViewById(R.id.item_View_10);
+            textView9 = itemView.findViewById(R.id.item_View_9);
+            textView10 = itemView.findViewById(R.id.item_View_10);
             textView11 = itemView.findViewById(R.id.item_View_11);
             textView12 = itemView.findViewById(R.id.item_View_12);
+            constraintLayout = itemView.findViewById(R.id.holderLayout);
         }
 
     }

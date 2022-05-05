@@ -7,29 +7,24 @@
     android:background="@color/main"
     tools:context=".CollectionCreate">
 
-    <Button
-        android:id="@+id/Create_Button_Delete"
-        android:layout_width="166dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="224dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/create_Button_OutColumn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <Button
-        android:id="@+id/Create_Button_Create"
-        android:layout_width="166dp"
-        android:layout_height="90dp"
-        android:layout_marginTop="484dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/create_Button_Create"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/create_Button_Delete"
+        android:layout_width="130dp"
+        android:layout_height="52dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@android:color/transparent"
+        android:text="@string/create_Button_OutColumn"
+        android:textColor="@color/main"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="@+id/create_imageview_doublebutton"
+        app:layout_constraintStart_toStartOf="@+id/create_imageview_doublebutton"
+        app:layout_constraintTop_toTopOf="@id/view_imageview_doublebutton_line"
+        app:layout_constraintBottom_toBottomOf="@id/create_imageview_doublebutton"/>
 
     <EditText
-        android:id="@+id/Create_EditText_Name"
+        android:id="@+id/create_EditText_Name"
         android:layout_width="300dp"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
@@ -46,14 +41,19 @@
         tools:ignore="TextContrastCheck" />
 
     <Button
-        android:id="@+id/Create_Button_Add"
+        android:id="@+id/create_Button_Add"
         android:layout_width="166dp"
-        android:layout_height="48dp"
+        android:layout_height="52dp"
         android:layout_marginTop="148dp"
-        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@android:color/transparent"
         android:text="@string/create_Button_NewColumn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@color/main"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="@+id/create_imageview_doublebutton"
+        app:layout_constraintStart_toStartOf="@+id/create_imageview_doublebutton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/view_imageview_doublebutton_line"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Create_RView_Columns"
@@ -80,6 +80,60 @@
         android:textColor="#DF2424"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Create_Button_Delete" />
+        app:layout_constraintTop_toBottomOf="@+id/create_Button_Delete" />
+
+    <ImageView
+        android:id="@+id/create_imageview_button_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="444dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_button_circle_big"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/create_textView_create"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/create_Button_Create"
+        android:textAlignment="center"
+        android:textColor="@color/main"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/create_imageview_button_create"
+        app:layout_constraintEnd_toEndOf="@+id/create_imageview_button_create"
+        app:layout_constraintStart_toStartOf="@+id/create_imageview_button_create"
+        app:layout_constraintTop_toTopOf="@+id/create_imageview_button_create"
+        app:layout_constraintVertical_bias="0.505" />
+
+
+    <ImageView
+        android:id="@+id/create_imageview_doublebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/create_imageview_button_create"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.49"
+        app:srcCompat="@drawable/ic_button_double" />
+
+    <ImageView
+        android:id="@+id/view_imageview_doublebutton_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/create_imageview_doublebutton"
+        app:layout_constraintEnd_toEndOf="@+id/create_imageview_doublebutton"
+        app:layout_constraintStart_toStartOf="@+id/create_imageview_doublebutton"
+        app:layout_constraintTop_toTopOf="@+id/create_imageview_doublebutton"
+        app:srcCompat="@drawable/ic_line_horizontal_main" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

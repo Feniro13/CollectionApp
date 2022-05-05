@@ -22,7 +22,7 @@
     <string name="create_Button_NewColumn"> Добавить столбец </string>
     <string name="create_Button_OutColumn"> Убрать столбец </string>
     <string name="create_EditText_Name">Придумайте название коллекции</string>
-    <string name="create_Button_Create"> CОЗДАТЬ КОЛЛЕКЦИЮ</string>
+    <string name="create_Button_Create"> СОЗДАТЬ КОЛЛЕКЦИЮ</string>
 
     <string name="view_Button_Add"> Добавить</string>
     <string name="view_Button_Diff"> Разное</string>

@@ -3,7 +3,6 @@ package com.Feniro.collectionapp.adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +19,6 @@ import com.Feniro.collectionapp.database.GlobalDatabase;
 import com.Feniro.collectionapp.database.LocalDatabase;
 import com.Feniro.collectionapp.database.entities.DatabaseGlobalEntities;
 import com.Feniro.collectionapp.database.entities.DatabaseLocalEntities;
-
-import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -62,16 +59,18 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Co
             View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_edit_action, viewGroup, false);
             builder.setView(dialogView);
             final AlertDialog alertDialog = builder.show();
-            alertDialog.getWindow().setLayout((int) (232 * Resources.getSystem().getDisplayMetrics().density),
-                    (int) (270 * Resources.getSystem().getDisplayMetrics().density));
+            String name = collections.get(position);
 
+            alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            alertDialog.getWindow().setDimAmount(0.2f);
             Button delete = dialogView.findViewById(R.id.dialog_button_deletecol);
             Button rename = dialogView.findViewById(R.id.dialog_button_renamecol);
             Button back = dialogView.findViewById(R.id.dialog_button_back);
             Button open = dialogView.findViewById(R.id.dialog_button_editcol);
+            TextView nameShow = dialogView.findViewById(R.id.dialog_textView_colname);
+            nameShow.setText(name);
 
             delete.setOnClickListener(view1 -> {
-                String name = collections.get(position);
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
                 alertDialog.dismiss();
                 builder1.setTitle("Вы уверены? Это действие необратимо");
@@ -94,6 +93,8 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Co
                 builder1.setView(view2);
                 final AlertDialog alertDialog1 = builder1.show();
                 alertDialog1.show();
+                alertDialog1.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                alertDialog1.getWindow().setDimAmount(0.2f);
 
                 Button renameCollections = view2.findViewById(R.id.dialog_edit_rename_done);
                 renameCollections.setOnClickListener(view3 -> {

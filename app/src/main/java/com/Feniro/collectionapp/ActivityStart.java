@@ -5,10 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class ActivityStart extends AppCompatActivity {
 
-    Button create, edit;
+    ImageView create, edit;
     String name;
     Boolean isNameGiven;
 
@@ -23,8 +24,8 @@ public class ActivityStart extends AppCompatActivity {
             isNameGiven = true;
         } catch (Exception E){isNameGiven = false;}
 
-        create = findViewById(R.id.start_Button_Create);
-        edit = findViewById(R.id.start_Button_Edit);
+        create = findViewById(R.id.activity_start_imagebutton_create);
+        edit = findViewById(R.id.activity_start_imagebutton_edit);
 
         create.setOnClickListener(view -> { // Создать коллекцию
             Intent intent = new Intent(ActivityStart.this, CollectionCreate.class);
