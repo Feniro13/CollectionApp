@@ -42,6 +42,8 @@
     <string name="dialog_item_view_button_download"> Скачать коллекцию </string>
     <string name="dialog_item_view_button_search"> Поиск в браузере </string>
     <string name="dialog_item_view_button_sort"> Сортировать </string>
+    <string name="dialog_item_view_button_search_item"> Найти </string>
+    <string name="dialog_item_view_button_selectionMode"> Режим выделения </string>
     <string name="dialog_item_view_button_statistics"> Показать статистику </string>
 
     <string name="dialog_item_add_button_add">Готово</string>

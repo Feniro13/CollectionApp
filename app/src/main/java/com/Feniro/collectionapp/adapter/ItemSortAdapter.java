@@ -34,9 +34,7 @@ public class ItemSortAdapter extends RecyclerView.Adapter<ItemSortAdapter.ItemSo
     @Override
     public void onBindViewHolder(@NonNull ItemSortViewHolder holder, int position) {
         holder.textView.setText(items.get(position));
-        holder.textView.setOnClickListener(view -> {
 
-        });
     }
 
     @Override

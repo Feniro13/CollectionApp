@@ -30,11 +30,11 @@ public class CollectionView extends AppCompatActivity {
     int numberOfColumns;
     String name;
 
+    Boolean selectionMode;
     LocalDatabase localDatabase;
     GlobalDatabase globalDatabase;
 
     File file;
-
 
     List<DatabaseLocalEntities> collectionEntities;
 
@@ -53,16 +53,15 @@ public class CollectionView extends AppCompatActivity {
 
         DatabaseLocalEntities mainEntity;
         name = getIntent().getStringExtra("check");
+        selectionMode = false;
 
         title = findViewById(R.id.view_textview_title);
-        title.setText(name);
-
         add = findViewById(R.id.view_button_add);
         diff = findViewById(R.id.view_button_diff);
+        title.setText(name);
 
         globalDatabase = GlobalDatabase.getDatabase(this);
         localDatabase = LocalDatabase.getDatabase(this);
-
         numberOfColumns = globalDatabase.dao_global().getNumberOfColumnsByName(name);
         collectionEntities = localDatabase.dao().getAllByNameByColumn1(name);
         mainEntity = localDatabase.dao().getNamesOfColumnsByName(name);
@@ -70,7 +69,7 @@ public class CollectionView extends AppCompatActivity {
         ViewGroup viewGroup = findViewById(android.R.id.content);
 
         collectionEntities.add(0, mainEntity);
-        setItemRecycler(collectionEntities, numberOfColumns, viewGroup, mainEntity);
+        setItemRecycler(collectionEntities, numberOfColumns, viewGroup, mainEntity, selectionMode);
 
         add.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -98,7 +97,7 @@ public class CollectionView extends AppCompatActivity {
                 alertDialog.dismiss();
                 collectionEntities = localDatabase.dao().getAllByNameByColumn1(name);
                 collectionEntities.add(0, mainEntity);
-                setItemRecycler(collectionEntities, numberOfColumns, viewGroup, mainEntity);
+                setItemRecycler(collectionEntities, numberOfColumns, viewGroup, mainEntity, selectionMode);
 
             });
         });
@@ -112,13 +111,10 @@ public class CollectionView extends AppCompatActivity {
             alertDialog.show();
             alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
-            Button download = view1.findViewById(R.id.view_diff_button_download);
+            Button selectionModeOn = view1.findViewById(R.id.view_diff_button_selectionMode);
             Button sort = view1.findViewById(R.id.view_diff_button_sort);
             Button showStats = view1.findViewById(R.id.view_diff_button_showstats);
-
-            download.setOnClickListener(view23 -> {
-
-            });
+            Button find = view1.findViewById(R.id.view_diff_button_find);
 
             showStats.setOnClickListener(view25 -> {
                 alertDialog.dismiss();
@@ -157,14 +153,32 @@ public class CollectionView extends AppCompatActivity {
                 alertDialog1.show();
             });
 
+            find.setOnClickListener(view26 -> {
+            });
+            if(selectionMode){
+                selectionModeOn.setTextColor(this.getResources().getColor(R.color.purple_500));
+            }
+            selectionModeOn.setOnClickListener(view27 -> {
+                if(selectionMode) {
+                    selectionModeOn.setTextColor(this.getResources().getColor(R.color.black));
+                    selectionMode = false;
+                }
+                else {
+                    selectionMode = true;
+                    selectionModeOn.setTextColor(this.getResources().getColor(R.color.purple_500));
+                }
+                setItemRecycler(collectionEntities, numberOfColumns, viewGroup, mainEntity, selectionMode);
+            });
+
+
         });
     }
 
-    public void setItemRecycler(List<DatabaseLocalEntities> listOfItems, int numberOfColumns, ViewGroup viewGroup, DatabaseLocalEntities mainEntity) {
+    public void setItemRecycler(List<DatabaseLocalEntities> listOfItems, int numberOfColumns, ViewGroup viewGroup, DatabaseLocalEntities mainEntity, boolean selectionMode) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         mainRecycler = findViewById(R.id.View_RecyclerView);
         mainRecycler.setLayoutManager(layoutManager);
-        itemViewAdapter = new ItemViewAdapter(listOfItems, numberOfColumns, this, viewGroup, mainEntity, name);
+        itemViewAdapter = new ItemViewAdapter(listOfItems, numberOfColumns, this, viewGroup, mainEntity, name, selectionMode);
         itemViewAdapter.notifyDataSetChanged();
         mainRecycler.setAdapter(itemViewAdapter);
     }

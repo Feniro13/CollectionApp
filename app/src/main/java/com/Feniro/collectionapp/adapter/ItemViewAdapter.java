@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import com.Feniro.collectionapp.R;
 import com.Feniro.collectionapp.database.LocalDatabase;
 import com.Feniro.collectionapp.database.entities.DatabaseLocalEntities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemViewHolder> {
@@ -28,22 +30,26 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
     Context context;
     ViewGroup viewGroup;
     LocalDatabase localDatabase;
+    boolean selectionMode;
 
     RecyclerView itemRecycler;
     DatabaseLocalEntities mainEntity;
     String name;
 
+    List<Integer> globalPositions;
+
     ItemAddAdapter itemAddAdapter;
 
-    public ItemViewAdapter(List<DatabaseLocalEntities> listOfItems, int numberOfColumns, Context context, ViewGroup viewGroup, DatabaseLocalEntities mainEntity, String name) {
+    public ItemViewAdapter(List<DatabaseLocalEntities> listOfItems, int numberOfColumns, Context context, ViewGroup viewGroup, DatabaseLocalEntities mainEntity, String name, boolean selectionMode) {
         this.listOfItems = listOfItems;
         this.numberOfColumns = numberOfColumns;
         this.context = context;
         this.viewGroup = viewGroup;
         this.mainEntity = mainEntity;
         this.name = name;
-
+        this.selectionMode = selectionMode;
         this.localDatabase = LocalDatabase.getDatabase(context);
+        this.globalPositions = new ArrayList<>();
     }
 
     @NonNull
@@ -55,9 +61,15 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewAdapter.ItemViewHolder holder, int position) {
-        int kol = 0;
-        holder.textView1.setText(listOfItems.get(position).column1);
         holder.constraintLayout.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+        if(selectionMode){
+            if(globalPositions.contains(position)){
+                holder.constraintLayout.setBackgroundColor(context.getResources().getColor(R.color.purple_500));
+            }
+        }
+        int kol = 0;
+
+        holder.textView1.setText(listOfItems.get(position).column1);
         holder.textView1.setOnClickListener(view -> {
             clickItemListener(position, view, listOfItems.get(position).column1);
         });
@@ -66,19 +78,9 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
         }
         kol++;
         if (kol == numberOfColumns) {
-//            holder.textView2.setVisibility(View.GONE);
-//            holder.textView3.setVisibility(View.GONE);
-//            holder.textView4.setVisibility(View.GONE);
-//            holder.textView5.setVisibility(View.GONE);
-//            holder.textView6.setVisibility(View.GONE);
-//            holder.textView7.setVisibility(View.GONE);
-//            holder.textView8.setVisibility(View.GONE);
-//            holder.textView9.setVisibility(View.GONE);
-//            holder.textView10.setVisibility(View.GONE);
-//            holder.textView11.setVisibility(View.GONE);
-//            holder.textView12.setVisibility(View.GONE);
               return;
         }
+
         holder.textView2.setText(listOfItems.get(position).column2);
         holder.textView2.setOnClickListener(view -> {
             clickItemListener(position, view, listOfItems.get(position).column2);
@@ -88,18 +90,8 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
         }
         kol++;
         if (kol == numberOfColumns) {
-        //          holder.textView3.set;
-//                holder.textView4.setVisibility(View.GONE);
-//                holder.textView5.setVisibility(View.GONE);
-//                holder.textView6.setVisibility(View.GONE);
-//                holder.textView7.setVisibility(View.GONE);
-//                holder.textView8.setVisibility(View.GONE);
-//                holder.textView9.setVisibility(View.GONE);
-//                holder.textView10.setVisibility(View.GONE);
-//                holder.textView11.setVisibility(View.GONE);
-//                holder.textView12.setVisibility(View.GONE);
-//                return;
         }
+
         holder.textView3.setText(listOfItems.get(position).column3);
         holder.textView3.setOnClickListener(view -> {
             clickItemListener(position, view, listOfItems.get(position).column3);
@@ -108,96 +100,114 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
             holder.textView3.setBackgroundColor(context.getResources().getColor(R.color.second_main));
         }
         kol++;
-//            if (kol == numberOfColumns) {
-//                holder.textView4.setVisibility(View.GONE);
-//                holder.textView5.setVisibility(View.GONE);
-//                holder.textView6.setVisibility(View.GONE);
-//                holder.textView7.setVisibility(View.GONE);
-//                holder.textView8.setVisibility(View.GONE);
-//                holder.textView9.setVisibility(View.GONE);
-//                holder.textView10.setVisibility(View.GONE);
-//                holder.textView11.setVisibility(View.GONE);
-//                holder.textView12.setVisibility(View.GONE);
-//                return;
-//            }
-//            holder.textView4.setText(listOfItems.get(position).column4);
-//            kol++;
-//            if (kol == numberOfColumns) {
-//                holder.textView5.setWidth(0);
-//                holder.textView6.setWidth(0);
-//                holder.textView7.setWidth(0);
-//                holder.textView8.setWidth(0);
-//                holder.textView9.setWidth(0);
-//                holder.textView10.setWidth(0);
-//                holder.textView11.setWidth(0);
-//                holder.textView12.setWidth(0);
-//                return;
-//            }
-//            holder.textView5.setText(listOfItems.get(position).column5);
-//            kol++;
-//            if (kol == numberOfColumns) {
-//                holder.textView6.setWidth(0);
-//                holder.textView7.setWidth(0);
-//                holder.textView8.setWidth(0);
-//                holder.textView9.setWidth(0);
-//                holder.textView10.setWidth(0);
-//                holder.textView11.setWidth(0);
-//                holder.textView12.setWidth(0);
-//                return;
-//            }
-//            holder.textView6.setText(listOfItems.get(position).column6);
-//            kol++;
-//            if (kol == numberOfColumns) {
-//                holder.textView7.setWidth(0);
-//                holder.textView8.setWidth(0);
-//                holder.textView9.setWidth(0);
-//                holder.textView10.setWidth(0);
-//                holder.textView11.setWidth(0);
-//                holder.textView12.setWidth(0);
-//                return;
-//            }
-//            holder.textView7.setText(listOfItems.get(position).column7);
-//            kol++;
-//            if (kol == numberOfColumns) {
-//                holder.textView8.setWidth(0);
-//                holder.textView9.setWidth(0);
-//                holder.textView10.setWidth(0);
-//                holder.textView11.setWidth(0);
-//                holder.textView12.setWidth(0);
-//                return;
-//            }
-//            holder.textView8.setText(listOfItems.get(position).column8);
-//            kol++;
-//            if (kol == numberOfColumns) {
-//                holder.textView9.setWidth(0);
-//                holder.textView10.setWidth(0);
-//                holder.textView11.setWidth(0);
-//                holder.textView12.setWidth(0);
-//                return;
-//            }
-//            holder.textView9.setText(listOfItems.get(position).column9);
-//            kol++;
-//            if (kol == numberOfColumns) {
-//                holder.textView10.setWidth(0);
-//                holder.textView11.setWidth(0);
-//                holder.textView12.setWidth(0);
-//                return;
-//            }
-//            holder.textView10.setText(listOfItems.get(position).column10);
-//            kol++;
-//            if (kol == numberOfColumns) {
-//                holder.textView11.setWidth(0);
-//                holder.textView12.setWidth(0);
-//                return;
-//            }
-//            holder.textView11.setText(listOfItems.get(position).column11);
-//            kol++;
-//            if (kol == numberOfColumns) {
-//                holder.textView12.setWidth(0);
-//                return;
-//            }
-//            holder.textView12.setText(listOfItems.get(position).column12);
+        if (kol == numberOfColumns) {
+            return;
         }
+
+        holder.textView4.setText(listOfItems.get(position).column4);
+        holder.textView4.setOnClickListener(view -> {
+            clickItemListener(position, view, listOfItems.get(position).column4);
+        });
+        if(position == 0) {
+            holder.textView4.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+        }
+        kol++;
+        if (kol == numberOfColumns) {
+            return;
+        }
+
+        holder.textView5.setText(listOfItems.get(position).column5);
+        holder.textView5.setOnClickListener(view -> {
+            clickItemListener(position, view, listOfItems.get(position).column5);
+        });
+        if(position == 0) {
+            holder.textView5.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+        }
+        kol++;
+        if (kol == numberOfColumns) {
+            return;
+        }
+
+        holder.textView6.setText(listOfItems.get(position).column6);
+        holder.textView6.setOnClickListener(view -> {
+            clickItemListener(position, view, listOfItems.get(position).column6);
+        });
+        if(position == 0) {
+            holder.textView6.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+        }
+        kol++;
+        if (kol == numberOfColumns) {
+            return;
+        }
+
+        holder.textView7.setText(listOfItems.get(position).column7);
+        holder.textView7.setOnClickListener(view -> {
+            clickItemListener(position, view, listOfItems.get(position).column7);
+        });
+        if(position == 0) {
+            holder.textView7.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+        }
+        kol++;
+        if (kol == numberOfColumns) {
+            return;
+        }
+
+        holder.textView8.setText(listOfItems.get(position).column8);
+        holder.textView8.setOnClickListener(view -> {
+            clickItemListener(position, view, listOfItems.get(position).column8);
+        });
+        if(position == 0) {
+            holder.textView8.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+        }
+        kol++;
+        if (kol == numberOfColumns) {
+            return;
+        }
+
+        holder.textView9.setText(listOfItems.get(position).column9);
+        holder.textView9.setOnClickListener(view -> {
+            clickItemListener(position, view, listOfItems.get(position).column9);
+        });
+        if(position == 0) {
+            holder.textView9.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+        }
+        kol++;
+        if (kol == numberOfColumns) {
+            return;
+        }
+
+        holder.textView10.setText(listOfItems.get(position).column10);
+        holder.textView10.setOnClickListener(view -> {
+            clickItemListener(position, view, listOfItems.get(position).column10);
+        });
+        if(position == 0) {
+            holder.textView10.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+        }
+        kol++;
+        if (kol == numberOfColumns) {
+            return;
+        }
+
+        holder.textView11.setText(listOfItems.get(position).column11);
+        holder.textView11.setOnClickListener(view -> {
+            clickItemListener(position, view, listOfItems.get(position).column11);
+        });
+        if(position == 0) {
+            holder.textView11.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+        }
+        kol++;
+        if (kol == numberOfColumns) {
+            return;
+        }
+
+        holder.textView12.setText(listOfItems.get(position).column12);
+        holder.textView12.setOnClickListener(view -> {
+            clickItemListener(position, view, listOfItems.get(position).column12);
+        });
+        if(position == 0) {
+            holder.textView12.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+        }
+    }
 
     @Override
     public int getItemCount() {
@@ -234,6 +244,94 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
             textView11 = itemView.findViewById(R.id.item_View_11);
             textView12 = itemView.findViewById(R.id.item_View_12);
             constraintLayout = itemView.findViewById(R.id.holderLayout);
+            if(numberOfColumns == 1) {
+                textView2.setVisibility(View.GONE);
+                textView3.setVisibility(View.GONE);
+                textView4.setVisibility(View.GONE);
+                textView5.setVisibility(View.GONE);
+                textView6.setVisibility(View.GONE);
+                textView7.setVisibility(View.GONE);
+                textView8.setVisibility(View.GONE);
+                textView9.setVisibility(View.GONE);
+                textView10.setVisibility(View.GONE);
+                textView11.setVisibility(View.GONE);
+                textView12.setVisibility(View.GONE);
+            }
+            if(numberOfColumns == 2) {
+                textView3.setVisibility(View.GONE);
+                textView4.setVisibility(View.GONE);
+                textView5.setVisibility(View.GONE);
+                textView6.setVisibility(View.GONE);
+                textView7.setVisibility(View.GONE);
+                textView8.setVisibility(View.GONE);
+                textView9.setVisibility(View.GONE);
+                textView10.setVisibility(View.GONE);
+                textView11.setVisibility(View.GONE);
+                textView12.setVisibility(View.GONE);
+            }
+            if(numberOfColumns == 3) {
+                textView4.setVisibility(View.GONE);
+                textView5.setVisibility(View.GONE);
+                textView6.setVisibility(View.GONE);
+                textView7.setVisibility(View.GONE);
+                textView8.setVisibility(View.GONE);
+                textView9.setVisibility(View.GONE);
+                textView10.setVisibility(View.GONE);
+                textView11.setVisibility(View.GONE);
+                textView12.setVisibility(View.GONE);
+            }
+            if(numberOfColumns == 4) {
+                textView5.setVisibility(View.GONE);
+                textView6.setVisibility(View.GONE);
+                textView7.setVisibility(View.GONE);
+                textView8.setVisibility(View.GONE);
+                textView9.setVisibility(View.GONE);
+                textView10.setVisibility(View.GONE);
+                textView11.setVisibility(View.GONE);
+                textView12.setVisibility(View.GONE);
+            }
+            if(numberOfColumns == 5) {
+                textView6.setVisibility(View.GONE);
+                textView7.setVisibility(View.GONE);
+                textView8.setVisibility(View.GONE);
+                textView9.setVisibility(View.GONE);
+                textView10.setVisibility(View.GONE);
+                textView11.setVisibility(View.GONE);
+                textView12.setVisibility(View.GONE);
+            }
+            if(numberOfColumns == 6) {
+                textView7.setVisibility(View.GONE);
+                textView8.setVisibility(View.GONE);
+                textView9.setVisibility(View.GONE);
+                textView10.setVisibility(View.GONE);
+                textView11.setVisibility(View.GONE);
+                textView12.setVisibility(View.GONE);
+            }
+            if(numberOfColumns == 7) {
+                textView8.setVisibility(View.GONE);
+                textView9.setVisibility(View.GONE);
+                textView10.setVisibility(View.GONE);
+                textView11.setVisibility(View.GONE);
+                textView12.setVisibility(View.GONE);
+            }
+            if(numberOfColumns == 8) {
+                textView9.setVisibility(View.GONE);
+                textView10.setVisibility(View.GONE);
+                textView11.setVisibility(View.GONE);
+                textView12.setVisibility(View.GONE);
+            }
+            if(numberOfColumns == 9) {
+                textView10.setVisibility(View.GONE);
+                textView11.setVisibility(View.GONE);
+                textView12.setVisibility(View.GONE);
+            }
+            if(numberOfColumns == 10) {
+                textView11.setVisibility(View.GONE);
+                textView12.setVisibility(View.GONE);
+            }
+            if(numberOfColumns == 11) {
+                textView12.setVisibility(View.GONE);
+            }
         }
 
     }
@@ -308,80 +406,85 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
     }
 
     public void clickItemListener(int position, View view, String item) {
-            if(position == 0) {
-                return;
-            }
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_view_action, viewGroup, false);
-            builder.setView(dialogView);
+        if(position == 0) {
+            return;
+        }
+        if(selectionMode) {
+            globalPositions.add(position);
+            notifyItemChanged(position);
+            return;
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_view_action, viewGroup, false);
+        builder.setView(dialogView);
 
-            final AlertDialog alertDialog = builder.show();
+        final AlertDialog alertDialog = builder.show();
 
-            alertDialog.getWindow().setLayout((int) (180 * Resources.getSystem().getDisplayMetrics().density),
-                    (int) (290 * Resources.getSystem().getDisplayMetrics().density));
-            alertDialog.show();
+        alertDialog.getWindow().setLayout((int) (180 * Resources.getSystem().getDisplayMetrics().density),
+                (int) (290 * Resources.getSystem().getDisplayMetrics().density));
+        alertDialog.show();
 
-            int id = listOfItems.get(position).id;
-            Button edit = dialogView.findViewById(R.id.dialog_item_view_button_edit);
-            Button back = dialogView.findViewById(R.id.dialog_item_view_button_back);
-            Button delete = dialogView.findViewById(R.id.dialog_item_view_button_delete);
-            Button search = dialogView.findViewById(R.id.dialog_item_view_search);
+        int id = listOfItems.get(position).id;
+        Button edit = dialogView.findViewById(R.id.dialog_item_view_button_edit);
+        Button back = dialogView.findViewById(R.id.dialog_item_view_button_back);
+        Button delete = dialogView.findViewById(R.id.dialog_item_view_button_delete);
+        Button search = dialogView.findViewById(R.id.dialog_item_view_search);
 
-            search.setOnClickListener(view12 -> {
-                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-                intent.putExtra(SearchManager.QUERY, item);
-                context.startActivity(intent);
+        search.setOnClickListener(view12 -> {
+            Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+            intent.putExtra(SearchManager.QUERY, item);
+            context.startActivity(intent);
+        });
+
+        edit.setOnClickListener(view1 -> {
+            View view11 = LayoutInflater.from(view1.getContext()).inflate(R.layout.dialog_view_add, viewGroup, false);
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+            builder1.setView(view11);
+
+            alertDialog.dismiss();
+
+            final AlertDialog alertDialog1 = builder1.show();
+
+
+            Button itemAdd = view11.findViewById(R.id.dialog_add_item_button_add);
+            itemAdd.setText("Сохранить");
+            Button itemBack = view11.findViewById(R.id.dialog_add_item_button_back);
+            TextView warning = view11.findViewById(R.id.dialog_add_item_textview_warning);
+            warning.setText(name);
+
+            DatabaseLocalEntities localEntity = new DatabaseLocalEntities();
+            localEntity.isFirstLine = 0;
+            localEntity.DatabaseName = name;
+
+            DatabaseLocalEntities thisEntity = listOfItems.get(position);
+
+            setItemDialogRecycler(view11, mainEntity, thisEntity);
+
+            itemBack.setOnClickListener(view2 -> alertDialog1.dismiss());
+
+            itemAdd.setOnClickListener(view22 -> {
+                localDatabase.dao().insert(getEntityFromAdapter(localEntity));
+                localDatabase.dao().delete(thisEntity);
+                notifyItemChanged(position);
+                alertDialog1.dismiss();
             });
 
-            edit.setOnClickListener(view1 -> {
-                View view11 = LayoutInflater.from(view1.getContext()).inflate(R.layout.dialog_view_add, viewGroup, false);
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-                builder1.setView(view11);
+            alertDialog1.show();
+        });
 
+        back.setOnClickListener(view1 -> alertDialog.dismiss());
+
+        delete.setOnClickListener(view1 -> {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+            builder1.show();
+            builder1.setTitle("Вы уверены?");
+            builder1.setPositiveButton("Да", (dialogInterface, i) -> {
+                localDatabase.dao().deleteEntityById(id);
+                listOfItems.remove(position);
+                notifyItemRemoved(position);
                 alertDialog.dismiss();
-
-                final AlertDialog alertDialog1 = builder1.show();
-
-
-                Button itemAdd = view11.findViewById(R.id.dialog_add_item_button_add);
-                itemAdd.setText("Сохранить");
-                Button itemBack = view11.findViewById(R.id.dialog_add_item_button_back);
-                TextView warning = view11.findViewById(R.id.dialog_add_item_textview_warning);
-                warning.setText(name);
-
-                DatabaseLocalEntities localEntity = new DatabaseLocalEntities();
-                localEntity.isFirstLine = 0;
-                localEntity.DatabaseName = name;
-
-                DatabaseLocalEntities thisEntity = listOfItems.get(position);
-
-                setItemDialogRecycler(view11, mainEntity, thisEntity);
-
-                itemBack.setOnClickListener(view2 -> alertDialog1.dismiss());
-
-                itemAdd.setOnClickListener(view22 -> {
-                    localDatabase.dao().insert(getEntityFromAdapter(localEntity));
-                    localDatabase.dao().delete(thisEntity);
-                    notifyItemChanged(position);
-                    alertDialog1.dismiss();
-                });
-
-                alertDialog1.show();
             });
-
-            back.setOnClickListener(view1 -> alertDialog.dismiss());
-
-            delete.setOnClickListener(view1 -> {
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-                builder1.show();
-                builder1.setTitle("Вы уверены?");
-                builder1.setPositiveButton("Да", (dialogInterface, i) -> {
-                    localDatabase.dao().deleteEntityById(id);
-                    listOfItems.remove(position);
-                    notifyItemRemoved(position);
-                    alertDialog.dismiss();
-                });
-                builder1.setNegativeButton("Назад", (dialogInterface, i) -> {
-                }); });
+            builder1.setNegativeButton("Назад", (dialogInterface, i) -> {
+            }); });
     }
 }
