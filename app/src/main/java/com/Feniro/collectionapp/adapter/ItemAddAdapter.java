@@ -43,7 +43,7 @@ public class ItemAddAdapter extends RecyclerView.Adapter<ItemAddAdapter.ItemAddV
     @Override
     public void onBindViewHolder(@NonNull ItemAddAdapter.ItemAddViewHolder holder, int position) {
         holder.title.setText(namesOfColumnsList.get(position));
-        if(!entityList.get(position).equals("")) {
+        if(!entityList.get(position).equals(null)) {
             holder.editText.setText(entityList.get(position));
         }
         else {

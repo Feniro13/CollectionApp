@@ -19,7 +19,7 @@
         <TextView
             android:id="@+id/view_textview_title"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:text="@string/example"
             android:textAlignment="center"
             android:textColor="@color/main"
@@ -33,49 +33,39 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="1dp"
-        android:orientation="horizontal"
-        android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="1.0"
-        tools:ignore="SpeakableTextPresentCheck">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/View_RecyclerView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:scrollbars="vertical"
-            tools:listitem="@layout/item_view_item">
-
-        </androidx.recyclerview.widget.RecyclerView>
-    </HorizontalScrollView>
-
-    <ImageView
-        android:id="@+id/view_button_add"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_circle_add"
-        tools:ignore="SpeakableTextPresentCheck" />
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/view_imageview_diff_buttons"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:scrollbars="none"
+            tools:ignore="SpeakableTextPresentCheck">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/View_RecyclerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:scrollbars="vertical"
+                tools:listitem="@layout/item_view_item">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </HorizontalScrollView>
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/view_button_diff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
         android:layout_marginBottom="20dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -84,7 +74,19 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
-        android:id="@+id/imageView12"
+        android:id="@+id/view_button_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_circle_add"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/different_stuff"
         android:layout_width="30dp"
         android:layout_height="30dp"
         app:layout_constraintBottom_toBottomOf="@+id/view_button_diff"
@@ -92,5 +94,47 @@
         app:layout_constraintStart_toStartOf="@+id/view_button_diff"
         app:layout_constraintTop_toTopOf="@+id/view_button_diff"
         app:srcCompat="@drawable/ic_icon_edit" />
+
+    <ImageView
+        android:id="@+id/view_imageview_diff_buttons"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_group" />
+
+    <Button
+        android:id="@+id/view_diff_button_sort"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="@string/sort"
+        app:layout_constraintBottom_toTopOf="@+id/view_diff_button_showStats"
+        app:layout_constraintEnd_toEndOf="@+id/view_imageview_diff_buttons"
+        app:layout_constraintStart_toStartOf="@+id/view_imageview_diff_buttons"
+        app:layout_constraintTop_toBottomOf="@+id/view_diff_button_selectionMode" />
+
+    <Button
+        android:id="@+id/view_diff_button_selectionMode"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:background="@android:color/transparent"
+        android:text="@string/selectionMode"
+        app:layout_constraintEnd_toEndOf="@+id/view_imageview_diff_buttons"
+        app:layout_constraintStart_toStartOf="@+id/view_imageview_diff_buttons"
+        app:layout_constraintTop_toTopOf="@+id/view_imageview_diff_buttons" />
+
+    <Button
+        android:id="@+id/view_diff_button_showStats"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/transparent"
+        android:text="@string/statsShow"
+        app:layout_constraintBottom_toBottomOf="@id/view_imageview_diff_buttons"
+        app:layout_constraintEnd_toEndOf="@+id/view_imageview_diff_buttons"
+        app:layout_constraintStart_toStartOf="@+id/view_imageview_diff_buttons" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

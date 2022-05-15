@@ -13,7 +13,7 @@
         android:layout_width="300dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
-        android:text="@string/edit_TextView_Welcome"
+        android:text="@string/editCollections"
         android:textAlignment="center"
         android:textColor="@color/second_main"
         android:textSize="40sp"

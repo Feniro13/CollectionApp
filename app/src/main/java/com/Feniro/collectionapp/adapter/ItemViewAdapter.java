@@ -1,55 +1,49 @@
 package com.Feniro.collectionapp.adapter;
 
-import android.app.AlertDialog;
-import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.Feniro.collectionapp.R;
 import com.Feniro.collectionapp.database.LocalDatabase;
 import com.Feniro.collectionapp.database.entities.DatabaseLocalEntities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemViewHolder> {
+    public interface onItemClickListener{
+        void ItemClickListener(int position, View view, String item, int column);
+    }
+    public interface onItemSortClickListener{
+        void ItemSortClickListener(int columnNumber);
+    }
+    private final onItemClickListener onItemClickListener;
+    private final onItemSortClickListener onItemSortClickListener;
+
     List<DatabaseLocalEntities> listOfItems;
     int numberOfColumns;
     Context context;
     ViewGroup viewGroup;
     LocalDatabase localDatabase;
-    boolean selectionMode;
-
-    RecyclerView itemRecycler;
-    DatabaseLocalEntities mainEntity;
     String name;
+    public List<Integer> globalPositions;
 
-    List<Integer> globalPositions;
-
-    ItemAddAdapter itemAddAdapter;
-
-    public ItemViewAdapter(List<DatabaseLocalEntities> listOfItems, int numberOfColumns, Context context, ViewGroup viewGroup, DatabaseLocalEntities mainEntity, String name, boolean selectionMode) {
+    public ItemViewAdapter(List<DatabaseLocalEntities> listOfItems, int numberOfColumns, Context context, ViewGroup viewGroup, String name, onItemClickListener onItemClickListener, onItemSortClickListener onItemSortClickListener, List<Integer> globalPositions) {
         this.listOfItems = listOfItems;
         this.numberOfColumns = numberOfColumns;
         this.context = context;
         this.viewGroup = viewGroup;
-        this.mainEntity = mainEntity;
         this.name = name;
-        this.selectionMode = selectionMode;
         this.localDatabase = LocalDatabase.getDatabase(context);
-        this.globalPositions = new ArrayList<>();
+        this.globalPositions = globalPositions;
+        this.onItemClickListener = onItemClickListener;
+        this.onItemSortClickListener = onItemSortClickListener;
     }
 
     @NonNull
@@ -61,21 +55,59 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewAdapter.ItemViewHolder holder, int position) {
-        holder.constraintLayout.setBackgroundColor(context.getResources().getColor(R.color.second_main));
-        if(selectionMode){
-            if(globalPositions.contains(position)){
-                holder.constraintLayout.setBackgroundColor(context.getResources().getColor(R.color.purple_500));
-            }
+        if(globalPositions.get(position) == 1){
+            holder.textView1.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView2.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView3.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView4.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView5.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView6.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView7.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView8.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView9.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView10.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView11.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView12.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+        }
+        if(globalPositions.get(position) == 0){
+            holder.constraintLayout.setBackgroundColor(context.getResources().getColor(R.color.black));
+            holder.textView1.setBackgroundColor(context.getResources().getColor(R.color.main));
+            holder.textView2.setBackgroundColor(context.getResources().getColor(R.color.main));
+            holder.textView3.setBackgroundColor(context.getResources().getColor(R.color.main));
+            holder.textView4.setBackgroundColor(context.getResources().getColor(R.color.main));
+            holder.textView5.setBackgroundColor(context.getResources().getColor(R.color.main));
+            holder.textView6.setBackgroundColor(context.getResources().getColor(R.color.main));
+            holder.textView7.setBackgroundColor(context.getResources().getColor(R.color.main));
+            holder.textView8.setBackgroundColor(context.getResources().getColor(R.color.main));
+            holder.textView9.setBackgroundColor(context.getResources().getColor(R.color.main));
+            holder.textView10.setBackgroundColor(context.getResources().getColor(R.color.main));
+            holder.textView11.setBackgroundColor(context.getResources().getColor(R.color.main));
+            holder.textView12.setBackgroundColor(context.getResources().getColor(R.color.main));
+        }
+        if(position == 0) {
+            holder.textView1.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView2.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView3.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView4.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView5.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView6.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView7.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView8.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView9.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView10.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView11.setBackgroundColor(context.getResources().getColor(R.color.second_main));
+            holder.textView12.setBackgroundColor(context.getResources().getColor(R.color.second_main));
         }
         int kol = 0;
 
         holder.textView1.setText(listOfItems.get(position).column1);
         holder.textView1.setOnClickListener(view -> {
-            clickItemListener(position, view, listOfItems.get(position).column1);
+            if(position == 0){
+                onItemSortClickListener.ItemSortClickListener(0);
+            } else {
+                onItemClickListener.ItemClickListener(position, view, listOfItems.get(position).column1, 0);
+            }
         });
-        if(position == 0) {
-            holder.textView1.setBackgroundColor(context.getResources().getColor(R.color.second_main));
-        }
         kol++;
         if (kol == numberOfColumns) {
               return;
@@ -83,22 +115,24 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
 
         holder.textView2.setText(listOfItems.get(position).column2);
         holder.textView2.setOnClickListener(view -> {
-            clickItemListener(position, view, listOfItems.get(position).column2);
+            if(position == 0){
+                onItemSortClickListener.ItemSortClickListener(1);
+            } else {
+                onItemClickListener.ItemClickListener(position, view, listOfItems.get(position).column2, 1);
+            }
         });
-        if(position == 0) {
-            holder.textView2.setBackgroundColor(context.getResources().getColor(R.color.second_main));
-        }
         kol++;
-        if (kol == numberOfColumns) {
+        if (kol == numberOfColumns) { return;
         }
 
         holder.textView3.setText(listOfItems.get(position).column3);
         holder.textView3.setOnClickListener(view -> {
-            clickItemListener(position, view, listOfItems.get(position).column3);
+            if(position == 0){
+                onItemSortClickListener.ItemSortClickListener(2);
+            } else {
+                onItemClickListener.ItemClickListener(position, view, listOfItems.get(position).column3, 2);
+            }
         });
-        if(position == 0) {
-            holder.textView3.setBackgroundColor(context.getResources().getColor(R.color.second_main));
-        }
         kol++;
         if (kol == numberOfColumns) {
             return;
@@ -106,11 +140,12 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
 
         holder.textView4.setText(listOfItems.get(position).column4);
         holder.textView4.setOnClickListener(view -> {
-            clickItemListener(position, view, listOfItems.get(position).column4);
+            if(position == 0){
+                onItemSortClickListener.ItemSortClickListener(3);
+            } else {
+                onItemClickListener.ItemClickListener(position, view, listOfItems.get(position).column4, 3);
+            }
         });
-        if(position == 0) {
-            holder.textView4.setBackgroundColor(context.getResources().getColor(R.color.second_main));
-        }
         kol++;
         if (kol == numberOfColumns) {
             return;
@@ -118,11 +153,11 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
 
         holder.textView5.setText(listOfItems.get(position).column5);
         holder.textView5.setOnClickListener(view -> {
-            clickItemListener(position, view, listOfItems.get(position).column5);
-        });
-        if(position == 0) {
-            holder.textView5.setBackgroundColor(context.getResources().getColor(R.color.second_main));
-        }
+            if(position == 0){
+                onItemSortClickListener.ItemSortClickListener(4);
+            } else {
+                onItemClickListener.ItemClickListener(position, view, listOfItems.get(position).column5, 4);
+            }        });
         kol++;
         if (kol == numberOfColumns) {
             return;
@@ -130,11 +165,11 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
 
         holder.textView6.setText(listOfItems.get(position).column6);
         holder.textView6.setOnClickListener(view -> {
-            clickItemListener(position, view, listOfItems.get(position).column6);
-        });
-        if(position == 0) {
-            holder.textView6.setBackgroundColor(context.getResources().getColor(R.color.second_main));
-        }
+            if(position == 0){
+                onItemSortClickListener.ItemSortClickListener(5);
+            } else {
+                onItemClickListener.ItemClickListener(position, view, listOfItems.get(position).column6, 5);
+            }        });
         kol++;
         if (kol == numberOfColumns) {
             return;
@@ -142,11 +177,11 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
 
         holder.textView7.setText(listOfItems.get(position).column7);
         holder.textView7.setOnClickListener(view -> {
-            clickItemListener(position, view, listOfItems.get(position).column7);
-        });
-        if(position == 0) {
-            holder.textView7.setBackgroundColor(context.getResources().getColor(R.color.second_main));
-        }
+            if(position == 0){
+                onItemSortClickListener.ItemSortClickListener(6);
+            } else {
+                onItemClickListener.ItemClickListener(position, view, listOfItems.get(position).column7, 6);
+            }        });
         kol++;
         if (kol == numberOfColumns) {
             return;
@@ -154,11 +189,11 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
 
         holder.textView8.setText(listOfItems.get(position).column8);
         holder.textView8.setOnClickListener(view -> {
-            clickItemListener(position, view, listOfItems.get(position).column8);
-        });
-        if(position == 0) {
-            holder.textView8.setBackgroundColor(context.getResources().getColor(R.color.second_main));
-        }
+            if(position == 0){
+                onItemSortClickListener.ItemSortClickListener(7);
+            } else {
+                onItemClickListener.ItemClickListener(position, view, listOfItems.get(position).column8, 7);
+            }        });
         kol++;
         if (kol == numberOfColumns) {
             return;
@@ -166,11 +201,11 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
 
         holder.textView9.setText(listOfItems.get(position).column9);
         holder.textView9.setOnClickListener(view -> {
-            clickItemListener(position, view, listOfItems.get(position).column9);
-        });
-        if(position == 0) {
-            holder.textView9.setBackgroundColor(context.getResources().getColor(R.color.second_main));
-        }
+            if(position == 0){
+                onItemSortClickListener.ItemSortClickListener(8);
+            } else {
+                onItemClickListener.ItemClickListener(position, view, listOfItems.get(position).column9, 8);
+            }        });
         kol++;
         if (kol == numberOfColumns) {
             return;
@@ -178,11 +213,11 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
 
         holder.textView10.setText(listOfItems.get(position).column10);
         holder.textView10.setOnClickListener(view -> {
-            clickItemListener(position, view, listOfItems.get(position).column10);
-        });
-        if(position == 0) {
-            holder.textView10.setBackgroundColor(context.getResources().getColor(R.color.second_main));
-        }
+            if(position == 0){
+                onItemSortClickListener.ItemSortClickListener(9);
+            } else {
+                onItemClickListener.ItemClickListener(position, view, listOfItems.get(position).column10, 9);
+            }        });
         kol++;
         if (kol == numberOfColumns) {
             return;
@@ -190,11 +225,11 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
 
         holder.textView11.setText(listOfItems.get(position).column11);
         holder.textView11.setOnClickListener(view -> {
-            clickItemListener(position, view, listOfItems.get(position).column11);
-        });
-        if(position == 0) {
-            holder.textView11.setBackgroundColor(context.getResources().getColor(R.color.second_main));
-        }
+            if(position == 0){
+                onItemSortClickListener.ItemSortClickListener(10);
+            } else {
+                onItemClickListener.ItemClickListener(position, view, listOfItems.get(position).column11, 10);
+            }        });
         kol++;
         if (kol == numberOfColumns) {
             return;
@@ -202,8 +237,11 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
 
         holder.textView12.setText(listOfItems.get(position).column12);
         holder.textView12.setOnClickListener(view -> {
-            clickItemListener(position, view, listOfItems.get(position).column12);
-        });
+            if(position == 0){
+                onItemSortClickListener.ItemSortClickListener(11);
+            } else {
+                onItemClickListener.ItemClickListener(position, view, listOfItems.get(position).column12, 11);
+            }        });
         if(position == 0) {
             holder.textView12.setBackgroundColor(context.getResources().getColor(R.color.second_main));
         }
@@ -245,6 +283,7 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
             textView12 = itemView.findViewById(R.id.item_View_12);
             constraintLayout = itemView.findViewById(R.id.holderLayout);
             if(numberOfColumns == 1) {
+                constraintLayout.setMaxWidth(330);
                 textView2.setVisibility(View.GONE);
                 textView3.setVisibility(View.GONE);
                 textView4.setVisibility(View.GONE);
@@ -333,158 +372,5 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
                 textView12.setVisibility(View.GONE);
             }
         }
-
-    }
-
-    public DatabaseLocalEntities getEntityFromAdapter(DatabaseLocalEntities localEntity){
-        List<String> names = itemAddAdapter.entityList;
-        int kol = 1;
-        localEntity.column1 = names.get(0);
-        if (kol + 1 > numberOfColumns) {
-            return localEntity;
-        }
-        kol++;
-        localEntity.column2 = names.get(1);
-        if (kol + 1 > numberOfColumns) {
-            return localEntity;
-        }
-        kol++;
-        localEntity.column3 = names.get(2);
-        if (kol + 1 > numberOfColumns) {
-            return localEntity;
-        }
-        kol++;
-        localEntity.column4 = names.get(3);
-        if (kol + 1 > numberOfColumns) {
-            return localEntity;
-        }
-        kol++;
-        localEntity.column5 = names.get(4);
-        if (kol + 1 > numberOfColumns) {
-            return localEntity;
-        }
-        kol++;
-        localEntity.column6 = names.get(5);
-        if (kol + 1 > numberOfColumns) {
-            return localEntity;
-        }
-        kol++;
-        localEntity.column7 = names.get(6);
-        if (kol + 1 > numberOfColumns) {
-            return localEntity;
-        }
-        kol++;
-        localEntity.column8 = names.get(7);
-        if (kol + 1 > numberOfColumns) {
-            return localEntity;
-        }
-        kol++;
-        localEntity.column9 = names.get(8);
-        if (kol + 1 > numberOfColumns) {
-            return localEntity;
-        }
-        kol++;
-        localEntity.column10 = names.get(9);
-        if (kol + 1 > numberOfColumns) {
-            return localEntity;
-        }
-        kol++;
-        localEntity.column11 = names.get(10);
-        if (kol + 1 > numberOfColumns) {
-            return localEntity;
-        }
-        localEntity.column12 = names.get(11);
-        return localEntity;
-    }
-
-    public void setItemDialogRecycler(View view, DatabaseLocalEntities mainEntity, DatabaseLocalEntities localEntity) {
-        itemRecycler = view.findViewById(R.id.dialog_add_item_recyclerview);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
-        itemRecycler.setLayoutManager(layoutManager);
-        itemAddAdapter = new ItemAddAdapter(context, mainEntity, localEntity, numberOfColumns);
-        itemRecycler.setAdapter(itemAddAdapter);
-    }
-
-    public void clickItemListener(int position, View view, String item) {
-        if(position == 0) {
-            return;
-        }
-        if(selectionMode) {
-            globalPositions.add(position);
-            notifyItemChanged(position);
-            return;
-        }
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_view_action, viewGroup, false);
-        builder.setView(dialogView);
-
-        final AlertDialog alertDialog = builder.show();
-
-        alertDialog.getWindow().setLayout((int) (180 * Resources.getSystem().getDisplayMetrics().density),
-                (int) (290 * Resources.getSystem().getDisplayMetrics().density));
-        alertDialog.show();
-
-        int id = listOfItems.get(position).id;
-        Button edit = dialogView.findViewById(R.id.dialog_item_view_button_edit);
-        Button back = dialogView.findViewById(R.id.dialog_item_view_button_back);
-        Button delete = dialogView.findViewById(R.id.dialog_item_view_button_delete);
-        Button search = dialogView.findViewById(R.id.dialog_item_view_search);
-
-        search.setOnClickListener(view12 -> {
-            Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-            intent.putExtra(SearchManager.QUERY, item);
-            context.startActivity(intent);
-        });
-
-        edit.setOnClickListener(view1 -> {
-            View view11 = LayoutInflater.from(view1.getContext()).inflate(R.layout.dialog_view_add, viewGroup, false);
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-            builder1.setView(view11);
-
-            alertDialog.dismiss();
-
-            final AlertDialog alertDialog1 = builder1.show();
-
-
-            Button itemAdd = view11.findViewById(R.id.dialog_add_item_button_add);
-            itemAdd.setText("Сохранить");
-            Button itemBack = view11.findViewById(R.id.dialog_add_item_button_back);
-            TextView warning = view11.findViewById(R.id.dialog_add_item_textview_warning);
-            warning.setText(name);
-
-            DatabaseLocalEntities localEntity = new DatabaseLocalEntities();
-            localEntity.isFirstLine = 0;
-            localEntity.DatabaseName = name;
-
-            DatabaseLocalEntities thisEntity = listOfItems.get(position);
-
-            setItemDialogRecycler(view11, mainEntity, thisEntity);
-
-            itemBack.setOnClickListener(view2 -> alertDialog1.dismiss());
-
-            itemAdd.setOnClickListener(view22 -> {
-                localDatabase.dao().insert(getEntityFromAdapter(localEntity));
-                localDatabase.dao().delete(thisEntity);
-                notifyItemChanged(position);
-                alertDialog1.dismiss();
-            });
-
-            alertDialog1.show();
-        });
-
-        back.setOnClickListener(view1 -> alertDialog.dismiss());
-
-        delete.setOnClickListener(view1 -> {
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-            builder1.show();
-            builder1.setTitle("Вы уверены?");
-            builder1.setPositiveButton("Да", (dialogInterface, i) -> {
-                localDatabase.dao().deleteEntityById(id);
-                listOfItems.remove(position);
-                notifyItemRemoved(position);
-                alertDialog.dismiss();
-            });
-            builder1.setNegativeButton("Назад", (dialogInterface, i) -> {
-            }); });
     }
 }

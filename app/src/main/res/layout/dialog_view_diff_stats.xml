@@ -12,7 +12,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:text="@string/dialog_view_showstats_size"
+        android:text="@string/statsCollectionSize"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dialog_view_showstats_name" />
@@ -23,7 +23,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:text="@string/dialog_view_showstats_name"
+        android:text="@string/statsCollectionName"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
-        android:text="@string/dialog_view_showstats_created"
+        android:text="@string/statsCollectionDateCreation"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dialog_view_showstats_size" />
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:text="@string/dialog_view_showstats_changed"
+        android:text="@string/statsCollectionDateChanged"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dialog_view_showstats_createdate" />
@@ -96,13 +96,30 @@
 
     <Button
         android:id="@+id/dialog_view_showstats_back"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="160dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="25dp"
+        android:background="@android:color/transparent"
         android:text="@string/back"
-        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="@+id/imageView4"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/imageView4"
+        app:layout_constraintVertical_bias="0.315" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_view_showstats_change_edit" />
+        app:layout_constraintTop_toBottomOf="@+id/dialog_view_showstats_change_edit"
+        app:srcCompat="@drawable/ic_button_circle_big" />
 </androidx.constraintlayout.widget.ConstraintLayout>

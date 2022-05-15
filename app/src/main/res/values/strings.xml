@@ -2,51 +2,40 @@
     <string name="app_name">Collection</string>
 
     <string name="empty"> </string>
-    <string name="maxColumns"> Максимум 12 столбец</string>
-    <string name="minColumns"> Минимум 1 столбец</string>
+    <string name="example"> example </string>
 
     <string name="delete">Удалить</string>
     <string name="back">Назад</string>
     <string name="edit"> Редактировать</string>
+    <string name="add"> Добавить</string>
+    <string name="rename">Переименовать</string>
+    <string name="find"> Найти </string>
+    <string name="browse"> Поиск в браузере </string>
+    <string name="sort"> Сортировать </string>
+    <string name="download"> Скачать </string>
+    <string name="changeLocation"> Переместить </string>
+    <string name="done">Готово</string>
+    <string name="welcome"> Добро пожаловать </string>
+    <string name="selectionMode"> Режим выделения </string>
 
-    <string name="example"> example </string>
+    <string name="editCollections"> Управление коллекциями </string>
+    <string name="createCollections"> Создать коллекцию </string>
+    <string name="enterCollectionName">Придумайте название коллекции</string>
+    <string name="createCollection"> Создать коллекцию </string>
 
-    <string name="start_Button_Create"> Создать новую коллекцию </string>
-    <string name="start_Button_Rule"> Управление коллекциями </string>
-    <string name="start_TextView_Welcome"> Добро пожаловать </string>
+    <string name="column_num"> Столбец № </string>
+    <string name="newColumn"> Добавить столбец </string>
+    <string name="deleteColumn"> Убрать столбец </string>
+    <string name="maxColumns"> Максимум 12 столбец</string>
+    <string name="minColumns"> Минимум 1 столбец</string>
 
-    <string name="edit_TextView_Welcome"> Управление коллекциями </string>
+    <string name="statsShow"> Показать статистику </string>
+    <string name="statsCollectionName"> Название коллекции</string>
+    <string name="statsCollectionSize">Размер коллекции</string>
+    <string name="statsCollectionDateCreation">Дата создания</string>
+    <string name="statsCollectionDateChanged">Последнее изменение</string>
 
-    <string name="create_TextView_Welcome"> Создание коллекции </string>
-    <string name="create_PlainText_Column"> Столбец № </string>
-    <string name="create_Button_NewColumn"> Добавить столбец </string>
-    <string name="create_Button_OutColumn"> Убрать столбец </string>
-    <string name="create_EditText_Name">Придумайте название коллекции</string>
-    <string name="create_Button_Create"> СОЗДАТЬ КОЛЛЕКЦИЮ</string>
-
-    <string name="view_Button_Add"> Добавить</string>
-    <string name="view_Button_Diff"> Разное</string>
-
-    <string name="addItem_textView_name"></string>
-
-    <string name="item_Column_EditText">Название</string>
-
-    <string name="dialog_edit_textView_choose">Выберите действие</string>
-    <string name="dialog_edit_button_rename">Переименовать</string>
-
-    <string name="dialog_item_view_textView_choose">Выберите действие</string>
-    <string name="dialog_view_showstats_name"> Название коллекции</string>
-    <string name="dialog_view_showstats_size">Размер коллекции</string>
-    <string name="dialog_view_showstats_created">Дата создание</string>
-    <string name="dialog_view_showstats_changed">Последнее изменение</string>
-    <string name="dialog_item_view_button_download"> Скачать коллекцию </string>
-    <string name="dialog_item_view_button_search"> Поиск в браузере </string>
-    <string name="dialog_item_view_button_sort"> Сортировать </string>
-    <string name="dialog_item_view_button_search_item"> Найти </string>
-    <string name="dialog_item_view_button_selectionMode"> Режим выделения </string>
-    <string name="dialog_item_view_button_statistics"> Показать статистику </string>
-
-    <string name="dialog_item_add_button_add">Готово</string>
+    <string name="createGroup"> Создать группу </string>
 
     <string name="todo">TODO</string>
     <string name="todo1">TODO</string>

@@ -5,15 +5,24 @@
       <map>
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2265" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable/ic__icon_add.xml" value="0.2595" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable/ic_button_circle.xml" value="0.2595" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable/ic_button_circle_big.xml" value="0.2595" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable/ic_button_double.xml" value="0.2595" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable/ic_circle_add.xml" value="0.2595" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable/ic_circle_big.xml" value="0.2595" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable/ic_circle_collection.xml" value="0.2595" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable/ic_circle_sfsf.xml" value="0.2595" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable/ic_dialog.xml" value="0.2595" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable/ic_ellipse_collection.xml" value="0.2595" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable/ic_group.xml" value="0.2595" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable/ic_icon_add.xml" value="0.2595" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable/ic_icon_edit.xml" value="0.2595" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2025" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable/ic_line_12.xml" value="0.2595" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable/ic_line_collection.xml" value="0.2595" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable/ic_line_horizontal_black.xml" value="0.2595" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable/ic_line_horizontal_main.xml" value="0.2595" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable/ic_line_main_long.xml" value="0.2595" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/drawable/line_collection.xml" value="0.2265" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/activity_collection_view.xml" value="0.264" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/activity_collections.xml" value="0.22826086956521738" />
@@ -33,14 +42,14 @@
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_item_view_action.xml" value="0.4" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_rule_collections_action.xml" value="0.4" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_action.xml" value="0.6" />
-        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_add.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_add.xml" value="0.264" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_add_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_add_to_collection.xml" value="0.264" />
-        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_diff.xml" value="0.6" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_diff.xml" value="0.536" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_diff_action.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_diff_download.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_diff_sort.xml" value="0.536" />
-        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_diff_stats.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_diff_sort.xml" value="0.2" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_diff_stats.xml" value="0.4" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/dialog_view_item_action.xml" value="0.6" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/fragment_add_to_collection.xml" value="0.264" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/fragment_rule_collections.xml" value="0.24547101449275363" />
@@ -53,8 +62,10 @@
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/item_edit_collection.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/item_item_view.xml" value="0.5136842105263157" />
         <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/item_view_add_item.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/item_view_diff_sort.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/item_view_item.xml" value="0.4930434782608696" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/item_view_diff_sort.xml" value="0.4" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/layout/item_view_item.xml" value="0.36344969199178645" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.124" />
+        <entry key="..\:/Users/Feniro/AndroidStudioProjects/CollectionApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.124" />
       </map>
     </option>
   </component>

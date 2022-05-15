@@ -29,13 +29,15 @@ public class CollectionEdit extends AppCompatActivity {
         setContentView(R.layout.activity_edit_collections);
 
         list = new ArrayList<>();
-        globalDatabase = GlobalDatabase.getDatabase(getApplicationContext()); // Глобальная база данных
-        listGlobal = globalDatabase.dao_global().getAll();          // Записи в виде малых баз данных
-        for(int i = 0; i < listGlobal.size(); i++) {                // получение названий
-            list.add(listGlobal.get(i).name);
+        globalDatabase = GlobalDatabase.getDatabase(this); // Глобальная база данных
+        listGlobal = globalDatabase.dao_global().getAll();// Записи в виде малых баз данных
+        if(listGlobal.size() > 0) {
+            for (int i = 0; i < listGlobal.size(); i++) {                // получение названий
+                list.add(listGlobal.get(i).name);
+            }
+            setCollectionRecycler(list);
         }
 
-        setCollectionRecycler(list);
     }
     public void setCollectionRecycler(List<String> list) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
