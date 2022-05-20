@@ -399,13 +399,11 @@ public class CollectionView extends AppCompatActivity {
                 }
                 if(filterMode){
                     button_1.setTextColor(getResources().getColor(R.color.selection));
-                    setFilterField();
                 }
                 else {
                     // вкл выкл фильтр
                     button_1.setOnClickListener(view27 -> {
-                        if(!filterMode) {
-                            setFilterField();
+                        if(!filterMode) {                          
                             button_1.setTextColor(getResources().getColor(R.color.selection));
                         }
                         if(filterMode) {
@@ -420,12 +418,8 @@ public class CollectionView extends AppCompatActivity {
                         filterMode = !filterMode;
                     });
 
-                    // надо придумац
-                    button_2.setOnClickListener(view24 -> {
-                        
-                    });
                     // статистика
-                    button_3.setOnClickListener(view25 -> {
+                    button_2.setOnClickListener(view24 -> {
                         AlertDialog.Builder builder = new AlertDialog.Builder(this);
                         View view2 = LayoutInflater.from(view25.getContext()).inflate(R.layout.dialog_view_diff_stats, viewGroup, false);
                         builder.setView(view2);
@@ -441,6 +435,11 @@ public class CollectionView extends AppCompatActivity {
                         dataChangeEdit.setText(globalDatabase.dao_global().getDataChangedByName(name));
                         dialogBack.setOnClickListener(view3 -> alertDialog.dismiss());
                         alertDialog.show();
+                    });
+                    
+                    
+                    button_3.setOnClickListener(view25 -> {
+                        
                     });
                 }
             }
@@ -506,18 +505,9 @@ public class CollectionView extends AppCompatActivity {
     public void setViewField(){
         button_1.setText("Фильтр");
         button_1.setTextColor(this.getResources().getColor(R.color.main));
-        button_2.setText("Что-то");
+        button_2.setText("Статистика");
         button_2.setTextColor(this.getResources().getColor(R.color.main));
-        button_3.setText("Статистика");
-        button_3.setTextColor(this.getResources().getColor(R.color.main));
-    }
-
-    public void setFilterField(){
-        button_1.setText("Фильтр");
-        button_1.setTextColor(this.getResources().getColor(R.color.main));
-        button_2.setText("");
-        button_2.setTextColor(this.getResources().getColor(R.color.main));
-        button_3.setText("Статистика");
+        button_3.setText("Скрыть интерфейс");
         button_3.setTextColor(this.getResources().getColor(R.color.main));
     }
 
