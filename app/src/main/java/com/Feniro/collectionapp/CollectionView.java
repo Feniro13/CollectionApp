@@ -38,18 +38,15 @@ public class CollectionView extends AppCompatActivity {
     int numberOfColumns, sortingMode;
     String name;
     Boolean selectionMode, wantingMode, filterMode, reversedSorting;
-
     LocalDatabase localDatabase;
     GlobalDatabase globalDatabase;
     DatabaseLocalEntities mainEntity;
     List<DatabaseLocalEntities> collectionEntities;
     List<Integer> globalPositions;
     List<String> filterPositions;
-
     RecyclerView mainRecycler, itemRecycler;
     ItemViewAdapter itemViewAdapter;
     ItemAddAdapter itemAddAdapter;
-
     ImageView add, diff, dialogDiff;
     Button button_1, button_2, button_3;
     TextView title;
@@ -68,6 +65,7 @@ public class CollectionView extends AppCompatActivity {
         button_2 = findViewById(R.id.view_diff_button_sort);
         button_3 = findViewById(R.id.view_diff_button_showStats);
         viewGroup = findViewById(android.R.id.content);
+        title.setText(name);
         selectionMode = false;
         wantingMode = false;
         filterMode = false;
@@ -92,7 +90,6 @@ public class CollectionView extends AppCompatActivity {
         // нажатие на итем
         ItemViewAdapter.onItemClickListener itemClickListener = (position, view, item, column) -> {
             setVisibleField();
-
             if(filterMode){
                 for(int i = 0; i < filterPositions.size(); i++){
                     if(filterPositions.get(i) == null){
@@ -106,53 +103,41 @@ public class CollectionView extends AppCompatActivity {
                         }
                     }
                 }
-                getCollectionFiltered();
-                itemViewAdapter.notifyDataSetChanged();
+                getCollectionSortedAndFiltered();
                 return;
-            }
-            if(globalPositions.get(position) == 1) {
-                globalPositions.set(position, 0); // если итем уже выделен
-                itemViewAdapter.notifyItemChanged(position);
-            }
-            else {
-                globalPositions.set(position, 1); // если итем не выделен
-            }
-            itemViewAdapter.notifyItemChanged(position);
-            if(Collections.frequency(globalPositions, 1) == 0) {
-                setGoneField();
-                selectionMode = false; //отмена выделения
-                return;
-            }
-            else if(Collections.frequency(globalPositions, 1) == 1){ // если выделен 1 элемент
-                setItemField();                                         // выкл режим выделения
-                selectionMode = false;
-            }
-            else {
-                selectionMode = true; // если выделено >= 2 итемов (вкл режим выделения)
             }
 
+            if(globalPositions.get(position) == 1) {
+                globalPositions.set(position, 0);
+            }
+            else {
+                globalPositions.set(position, 1);
+            }
+            itemViewAdapter.notifyItemChanged(position);
+            selectionMode = false;
+            if(Collections.frequency(globalPositions, 1) == 0) {
+                setGoneField();
+                return;
+            }
+            else if(Collections.frequency(globalPositions, 1) == 1){
+                setItemField();
+            }
+            else {
+                selectionMode = true;
+            }
+
+            itemViewAdapter.notifyItemChanged(position);
             if(selectionMode) { // режим выделения (несколько итемов)
-                itemViewAdapter.notifyItemChanged(position);
                 setSelectionField();
 
                 if(wantingMode) {
-                    button_1.setText("Добавить");
+                    button_1.setText("Отмена");
+                    button_3.setText("Добавить");
                 }
-                // объединить WORKS
+
                 button_1.setOnClickListener(view17 -> {
                     if(wantingMode){
-                        for(int i = 0; i < globalPositions.size(); i++){
-                            localDatabase.dao().insert(collectionEntities.get(i));
-                        }
-                        collectionEntities = localDatabase.dao().getWantingListByName(name);
-                        collectionEntities.add(0, mainEntity);
-                        globalPositions = new ArrayList<>();
-                        for(int i = 0; i < collectionEntities.size(); i++){
-                            globalPositions.add(0);
-                        }
-                        getCollectionSorted(sortingMode);
-                        getCollectionFiltered();
-                        itemViewAdapter.notifyDataSetChanged();
+                        getCollectionSortedAndFiltered();
                     }
                     else {
                         DatabaseLocalEntities entity = new DatabaseLocalEntities();
@@ -252,21 +237,7 @@ public class CollectionView extends AppCompatActivity {
                             }
                         }
                         localDatabase.dao().insert(entity);
-                        List<DatabaseLocalEntities> newEntities = localDatabase.dao().getAllByNameByColumn1(name);
-                        newEntities.add(0, mainEntity);
-                        while (collectionEntities.size() > newEntities.size()) {
-                            collectionEntities.remove(0);
-                        }
-                        for (int i = 0; i < newEntities.size(); i++) {
-                            collectionEntities.set(i, newEntities.get(i));
-                        }
-                        for (int i = 0; i < collectionEntities.size(); i++) {
-                            if (i >= globalPositions.size()) {
-                                globalPositions.add(i, 0);
-                            } else {
-                                globalPositions.set(i, 0);
-                            }
-                        }
+                        getCollectionSortedAndFiltered();
                     }
                 });
 
@@ -275,42 +246,30 @@ public class CollectionView extends AppCompatActivity {
                     for(int i = 0; i < globalPositions.size(); i++) {
                         if(globalPositions.get(i) == 1) {
                             localDatabase.dao().deleteEntityById(collectionEntities.get(i).id);
-                            globalPositions.set(i, 0);
                         }
                     }
-                    List<DatabaseLocalEntities> newCollectionEntities = localDatabase.dao().getAllByNameByColumn1(name);
-                    if(wantingMode){
-                        newCollectionEntities = localDatabase.dao().getWantingListByName(name);
-                    }
-                    newCollectionEntities.add(0, mainEntity);
-                    collectionEntities.remove(0);
-                    for(int i = 0; i < newCollectionEntities.size(); i++){
-                        collectionEntities.set(i, newCollectionEntities.get(i));
-                    }
-                    for(int i = 0; i < collectionEntities.size(); i++){
-                        if(i >= globalPositions.size()){
-                            globalPositions.add(i, 0);
-                        } else {
-                            globalPositions.set(i, 0);
-                        }
-                    }
-                    itemViewAdapter.notifyDataSetChanged();
+                    getCollectionSortedAndFiltered();
                     setGoneField();
                     selectionMode = false;
                 });
 
-                // Отменить выделение WORKS
                 button_3.setOnClickListener(view15 -> {
-                    setGoneField();
-                    selectionMode = false;
-                    for(int i = 0; i < collectionEntities.size(); i++) {
-                        globalPositions.set(i, 0);
+                    if(wantingMode){
+                        for(int i = 0; i < globalPositions.size(); i++){
+                            localDatabase.dao().insert(collectionEntities.get(i));
+                        }
+                        getCollectionSortedAndFiltered();
+                    }else {
+                        setGoneField();
+                        selectionMode = false;
+                        for (int i = 0; i < collectionEntities.size(); i++) {
+                            globalPositions.set(i, 0);
+                        }
+                        itemViewAdapter.notifyDataSetChanged();
                     }
-                    itemViewAdapter.notifyDataSetChanged();
 
                 });
             }
-
             // выделен один итем
             else {
                 setItemField();
@@ -320,27 +279,25 @@ public class CollectionView extends AppCompatActivity {
                     View view11 = LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_view_add, viewGroup, false);
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
                     builder1.setView(view11);
-
                     final AlertDialog alertDialog1 = builder1.show();
                     alertDialog1.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
                     ImageView itemAdd = view11.findViewById(R.id.dialog_add_item_button_add);
                     ImageView itemBack = view11.findViewById(R.id.dialog_add_item_button_back);
                     DatabaseLocalEntities localEntity = new DatabaseLocalEntities();
                     localEntity.isFirstLine = 0;
+                    if(wantingMode){
+                        localEntity.isFirstLine = 2;
+                    }
                     localEntity.DatabaseName = name;
                     DatabaseLocalEntities thisEntity = collectionEntities.get(position);
-
                     setItemDialogRecycler(view11, thisEntity);
 
                     itemBack.setOnClickListener(view2 -> alertDialog1.dismiss());
-
                     itemAdd.setOnClickListener(view22 -> {
                         localDatabase.dao().insert(getEntityFromAdapter(localEntity));
                         localDatabase.dao().delete(thisEntity);
-                        getCollectionSorted(sortingMode);
-                        getCollectionFiltered();
+                        getCollectionSortedAndFiltered();
                         setGoneField();
-                        itemViewAdapter.notifyDataSetChanged();
                         alertDialog1.dismiss();
                         setGoneField();
                         setNewDateChanged();
@@ -354,10 +311,8 @@ public class CollectionView extends AppCompatActivity {
                     builder1.setTitle("Вы уверены?");
                     builder1.setPositiveButton("Да", (dialogInterface, i) -> {
                         localDatabase.dao().deleteEntityById(collectionEntities.get(position).id);
-                        getCollectionSorted(sortingMode);
-                        getCollectionFiltered();
+                        getCollectionSortedAndFiltered();
                         setGoneField();
-                        itemViewAdapter.notifyDataSetChanged();
                         setNewDateChanged();
                     });
                     builder1.setNegativeButton("Назад", (dialogInterface, i) -> {
@@ -391,210 +346,23 @@ public class CollectionView extends AppCompatActivity {
             }
         };
 
-        // сортировать WORKS
+        // сортировать
         ItemViewAdapter.onItemSortClickListener itemSortListener = (item) -> {
             item++;
-            List<DatabaseLocalEntities> newEntities;
-            if(item == 1){
-                if(sortingMode == 1){
-                    collectionEntities.remove(0);
-                    Collections.reverse(collectionEntities);
-                    reversedSorting = true;
-                }else {
-                    newEntities = localDatabase.dao().getAllByNameByColumn1(name);
-                    sortingMode = 1;
-                    reversedSorting = false;
-                    collectionEntities.remove(0);
-                    for(int i = 0; i < collectionEntities.size(); i++){
-                        collectionEntities.set(i, newEntities.get(i));
-                    }
-                }
+            if(item == sortingMode){
+                reversedSorting = !reversedSorting;
             }
-            if(item == 2){
-                if(sortingMode == 2){
-                    collectionEntities.remove(0);
-                    Collections.reverse(collectionEntities);
-                    reversedSorting = true;
-                }else {
-                    sortingMode = 2;
-                    newEntities = localDatabase.dao().getAllByNameByColumn2(name);
-                    reversedSorting = false;
-                    collectionEntities.remove(0);
-                    for(int i = 0; i < collectionEntities.size(); i++){
-                        collectionEntities.set(i, newEntities.get(i));
-                    }
-                }
+            else {
+                reversedSorting = false;
             }
-            if(item == 3){
-                if(sortingMode == 3){
-                    collectionEntities.remove(0);
-                    Collections.reverse(collectionEntities);
-                    reversedSorting = true;
-                }
-                else {
-                    sortingMode = 3;
-                    newEntities = localDatabase.dao().getAllByNameByColumn3(name);
-                    reversedSorting = false;
-                    collectionEntities.remove(0);
-                    for(int i = 0; i < collectionEntities.size(); i++){
-                        collectionEntities.set(i, newEntities.get(i));
-                    }
-                }
-            }
-            if(item == 4){
-                if(sortingMode == 4){
-                    collectionEntities.remove(0);
-                    Collections.reverse(collectionEntities);
-                    reversedSorting = true;
-                }
-                else {
-                    sortingMode = 4;
-                    newEntities = localDatabase.dao().getAllByNameByColumn4(name);
-                    reversedSorting = false;
-                    collectionEntities.remove(0);
-                    for(int i = 0; i < collectionEntities.size(); i++){
-                        collectionEntities.set(i, newEntities.get(i));
-                    }
-                }
-            }
-            if(item == 5){
-                if(sortingMode == 5){
-                    collectionEntities.remove(0);
-                    Collections.reverse(collectionEntities);
-                    reversedSorting = true;
-                }
-                else {
-                    sortingMode = 5;
-                    newEntities = localDatabase.dao().getAllByNameByColumn5(name);
-                    reversedSorting = false;
-                    collectionEntities.remove(0);
-                    for(int i = 0; i < collectionEntities.size(); i++){
-                        collectionEntities.set(i, newEntities.get(i));
-                    }
-                }
-            }
-            if(item == 6){
-                if(sortingMode == 6){
-                    collectionEntities.remove(0);
-                    Collections.reverse(collectionEntities);
-                    reversedSorting = true;
-
-                }
-                else {
-                    sortingMode = 6;
-                    newEntities = localDatabase.dao().getAllByNameByColumn6(name);
-                    reversedSorting = false;
-                    collectionEntities.remove(0);
-                    for(int i = 0; i < collectionEntities.size(); i++){
-                        collectionEntities.set(i, newEntities.get(i));
-                    }
-                }
-            }
-            if(item == 7) {
-                if(sortingMode == 7){
-                    collectionEntities.remove(0);
-                    Collections.reverse(collectionEntities);
-                    reversedSorting = true;
-                }
-                else {
-                    sortingMode = 7;
-                    newEntities = localDatabase.dao().getAllByNameByColumn7(name);
-                    reversedSorting = false;
-                    collectionEntities.remove(0);
-                    for(int i = 0; i < collectionEntities.size(); i++){
-                        collectionEntities.set(i, newEntities.get(i));
-                    }
-                }
-            }
-            if(item == 8){
-                if(sortingMode == 8){
-                    collectionEntities.remove(0);
-                    Collections.reverse(collectionEntities);
-                    reversedSorting = true;
-                }
-                else {
-                    sortingMode = 8;
-                    newEntities = localDatabase.dao().getAllByNameByColumn8(name);
-                    reversedSorting = false;
-                    collectionEntities.remove(0);
-                    for(int i = 0; i < collectionEntities.size(); i++){
-                        collectionEntities.set(i, newEntities.get(i));
-                    }
-                }
-            }
-            if(item == 9){
-                if(sortingMode == 9){
-                    collectionEntities.remove(0);
-                    Collections.reverse(collectionEntities);
-                    reversedSorting = true;
-                }
-                else {
-                    sortingMode = 9;
-                    newEntities = localDatabase.dao().getAllByNameByColumn9(name);
-                    reversedSorting = false;
-                    collectionEntities.remove(0);
-                    for(int i = 0; i < collectionEntities.size(); i++){
-                        collectionEntities.set(i, newEntities.get(i));
-                    }
-                }
-            }
-            if(item == 10){
-                if(sortingMode == 10){
-                    collectionEntities.remove(0);
-                    Collections.reverse(collectionEntities);
-                    reversedSorting = true;
-                }
-                else {
-                    sortingMode = 10;
-                    newEntities = localDatabase.dao().getAllByNameByColumn10(name);
-                    reversedSorting = false;
-                    collectionEntities.remove(0);
-                    for(int i = 0; i < collectionEntities.size(); i++){
-                        collectionEntities.set(i, newEntities.get(i));
-                    }
-                }
-            }
-            if(item == 11){
-                if(sortingMode == 11){
-                    collectionEntities.remove(0);
-                    Collections.reverse(collectionEntities);
-                    reversedSorting = true;
-                }
-                else {
-                    sortingMode = 11;
-                    newEntities = localDatabase.dao().getAllByNameByColumn11(name);
-                    reversedSorting = false;
-                    collectionEntities.remove(0);
-                    for(int i = 0; i < collectionEntities.size(); i++){
-                        collectionEntities.set(i, newEntities.get(i));
-                    }
-                }
-            }
-            if(item == 12){
-                if(sortingMode == 12){
-                    collectionEntities.remove(0);
-                    Collections.reverse(collectionEntities);
-                    reversedSorting = true;
-                }
-                else {
-                    sortingMode = 12;
-                    newEntities = localDatabase.dao().getAllByNameByColumn12(name);
-                    reversedSorting = false;
-                    collectionEntities.remove(0);
-                    for(int i = 0; i < collectionEntities.size(); i++){
-                        collectionEntities.set(i, newEntities.get(i));
-                    }
-                }
-            }
-            getCollectionFiltered();
-            collectionEntities.add(0, mainEntity);
-            itemViewAdapter.notifyDataSetChanged();
+            sortingMode = item;
+            getCollectionSortedAndFiltered();
         };
 
         setItemRecycler(collectionEntities, viewGroup, itemClickListener, itemSortListener);
 
-        // добавить WORKS
-        add.setOnClickListener(view ->  {
+        // добавить
+        add.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             View view1 = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_view_add, viewGroup, false);
             builder.setView(view1);
@@ -616,16 +384,7 @@ public class CollectionView extends AppCompatActivity {
             itemAdd.setOnClickListener(view22 -> {
                 alertDialog.dismiss();
                 localDatabase.dao().insert(getEntityFromAdapter(localEntity));
-                getCollectionSorted(sortingMode);
-                getCollectionFiltered();
-                for(int i = 0; i < collectionEntities.size(); i++){
-                    if(i >= globalPositions.size()){
-                        globalPositions.add(i, 0);
-                    } else {
-                        globalPositions.set(i, 0);
-                    }
-                }
-                itemViewAdapter.notifyDataSetChanged();
+                getCollectionSortedAndFiltered();
                 setNewDateChanged();
             });
         });
@@ -633,42 +392,39 @@ public class CollectionView extends AppCompatActivity {
         // разное
         diff.setOnClickListener(view -> {
             setViewField();
-            if(button_1.getVisibility() == View.GONE) { // если окно закрыто
+            if(button_1.getVisibility() == View.GONE) {
                 setVisibleField();
-                // режим выделения
                 if(selectionMode){
                     setSelectionField();
                 }
-                // режим фильтра
                 if(filterMode){
+                    button_1.setTextColor(getResources().getColor(R.color.selection));
                     setFilterField();
                 }
-                else { // По умолчанию
-                    // Фильтр WORKS
+                else {
+                    // вкл выкл фильтр
                     button_1.setOnClickListener(view27 -> {
                         if(!filterMode) {
                             setFilterField();
                             button_1.setTextColor(getResources().getColor(R.color.selection));
-                            filterMode = true;
                         }
-                    });
-
-                    button_2.setOnClickListener(view24 -> {
                         if(filterMode) {
-                            filterMode = false;
                             filterPositions = new ArrayList<>();
+                            button_1.setTextColor(getResources().getColor(R.color.second_main));
                             for(int i = 0; i < numberOfColumns; i++){
                                 filterPositions.add(null);
                             }
-                            getCollectionSorted(sortingMode);
+                            getCollectionSortedAndFiltered();
                             setViewField();
-                            itemViewAdapter.notifyDataSetChanged();
                         }
-                        else {
-
-                        }
+                        filterMode = !filterMode;
                     });
-                    // Показать статистику WORKS
+
+                    // надо придумац
+                    button_2.setOnClickListener(view24 -> {
+                        
+                    });
+                    // статистика
                     button_3.setOnClickListener(view25 -> {
                         AlertDialog.Builder builder = new AlertDialog.Builder(this);
                         View view2 = LayoutInflater.from(view25.getContext()).inflate(R.layout.dialog_view_diff_stats, viewGroup, false);
@@ -678,7 +434,7 @@ public class CollectionView extends AppCompatActivity {
                         TextView dataSizeEdit = view2.findViewById(R.id.dialog_view_showstats_size_edit);
                         TextView dataDataEdit = view2.findViewById(R.id.dialog_view_showstats_createdate_edit);
                         TextView dataChangeEdit = view2.findViewById(R.id.dialog_view_showstats_change_edit);
-                        Button dialogBack = view2.findViewById(R.id.dialog_view_showstats_back);
+                        ImageView dialogBack = view2.findViewById(R.id.dialog_view_showstats_back);
                         dataNameEdit.setText(name);
                         dataSizeEdit.setText(String.valueOf(collectionEntities.size() - 1));
                         dataDataEdit.setText(globalDatabase.dao_global().getDataCreatedByName(name));
@@ -688,43 +444,23 @@ public class CollectionView extends AppCompatActivity {
                     });
                 }
             }
-            // если окно открыто (закрывает) WORKS
             else {
-                globalPositions = new ArrayList<>();
-                for(int i = 0; i < collectionEntities.size(); i++) {
-                    globalPositions.add(i, 0);
-                }
-                getCollectionFiltered();
-                setItemRecycler(collectionEntities, viewGroup, itemClickListener, itemSortListener);
+                getCollectionSortedAndFiltered();
                 selectionMode = false;
                 setGoneField();
             }
         });
 
         // Вкл/Выкл список желаемого
-        title.setText(name);
         title.setOnClickListener(view -> {
             if(!wantingMode){
-                wantingMode = true;
-                collectionEntities = localDatabase.dao().getWantingListByName(name);
-                globalPositions = new ArrayList<>();
-                collectionEntities.add(0, mainEntity);
-                for(int i = 0; i < collectionEntities.size(); i++){
-                    globalPositions.add(0);
-                }
-                title.setText("Ваш список желаемого");
-            }else {
-                title.setText(name);
-                wantingMode = false;
-                collectionEntities = localDatabase.dao().getAllByNameByColumn1(name);
-                collectionEntities.add(0, mainEntity);
-                globalPositions = new ArrayList<>();
-                for(int i = 0; i < collectionEntities.size(); i++){
-                    globalPositions.add(0);
-                }
+                title.setText(getResources().getText(R.string.yourWantingList));
             }
-            getCollectionFiltered();
-            setItemRecycler(collectionEntities, viewGroup, itemClickListener, itemSortListener);
+            else {
+                title.setText(name);
+            }
+            wantingMode = !wantingMode;
+            getCollectionSortedAndFiltered();
         });
     }
 
@@ -779,7 +515,7 @@ public class CollectionView extends AppCompatActivity {
     public void setFilterField(){
         button_1.setText("Фильтр");
         button_1.setTextColor(this.getResources().getColor(R.color.main));
-        button_2.setText("Очистить фильтр");
+        button_2.setText("");
         button_2.setTextColor(this.getResources().getColor(R.color.main));
         button_3.setText("Статистика");
         button_3.setTextColor(this.getResources().getColor(R.color.main));
@@ -788,7 +524,7 @@ public class CollectionView extends AppCompatActivity {
     public void setSelectionField(){
         button_1.setText("Объединить");
         button_1.setTextColor(this.getResources().getColor(R.color.main));
-        button_2.setText("Удалить все");
+        button_2.setText("Удалить");
         button_2.setTextColor(this.getResources().getColor(R.color.main));
         button_3.setText("Очистить выбор");
         button_3.setTextColor(this.getResources().getColor(R.color.main));
@@ -874,184 +610,210 @@ public class CollectionView extends AppCompatActivity {
         return localEntity;
     }
 
-    public void getCollectionSorted(int sortingMode){
-        List<DatabaseLocalEntities> newEntities = new ArrayList<>();
+    public void getCollectionSortedAndFiltered(){
+        List<DatabaseLocalEntities> sortedEntities = new ArrayList<>();
         if(sortingMode == 1){
-            newEntities = localDatabase.dao().getAllByNameByColumn1(name);
+            sortedEntities = localDatabase.dao().getAllByNameByColumn1(name);
+            if(wantingMode){
+                sortedEntities = localDatabase.dao().getWantingListByNameByColumn1(name);
+            }
         }
         if(sortingMode == 2){
-            newEntities = localDatabase.dao().getAllByNameByColumn2(name);
+            sortedEntities = localDatabase.dao().getAllByNameByColumn2(name);
+            if(wantingMode){
+                sortedEntities = localDatabase.dao().getWantingListByNameByColumn2(name);
+            }
         }
         if(sortingMode == 3){
-            newEntities = localDatabase.dao().getAllByNameByColumn3(name);
+            sortedEntities = localDatabase.dao().getAllByNameByColumn3(name);
+            if(wantingMode){
+                sortedEntities = localDatabase.dao().getWantingListByNameByColumn3(name);
+            }
         }
         if(sortingMode == 4){
-            newEntities = localDatabase.dao().getAllByNameByColumn4(name);
+            sortedEntities = localDatabase.dao().getAllByNameByColumn4(name);
+            if(wantingMode){
+                sortedEntities = localDatabase.dao().getWantingListByNameByColumn4(name);
+            }
         }
         if(sortingMode == 5){
-            newEntities = localDatabase.dao().getAllByNameByColumn5(name);
+            sortedEntities = localDatabase.dao().getAllByNameByColumn5(name);
+            if(wantingMode){
+                sortedEntities = localDatabase.dao().getWantingListByNameByColumn5(name);
+            }
         }
         if(sortingMode == 6){
-            newEntities = localDatabase.dao().getAllByNameByColumn6(name);
+            sortedEntities = localDatabase.dao().getAllByNameByColumn6(name);
+            if(wantingMode){
+                sortedEntities = localDatabase.dao().getWantingListByNameByColumn6(name);
+            }
         }
         if(sortingMode == 7){
-            newEntities = localDatabase.dao().getAllByNameByColumn7(name);
+            sortedEntities = localDatabase.dao().getAllByNameByColumn7(name);
+            if(wantingMode){
+                sortedEntities = localDatabase.dao().getWantingListByNameByColumn7(name);
+            }
         }
         if(sortingMode == 8){
-            newEntities = localDatabase.dao().getAllByNameByColumn8(name);
+            sortedEntities = localDatabase.dao().getAllByNameByColumn8(name);
+            if(wantingMode){
+                sortedEntities = localDatabase.dao().getWantingListByNameByColumn8(name);
+            }
         }
         if(sortingMode == 9){
-            newEntities = localDatabase.dao().getAllByNameByColumn9(name);
+            sortedEntities = localDatabase.dao().getAllByNameByColumn9(name);
+            if(wantingMode){
+                sortedEntities = localDatabase.dao().getWantingListByNameByColumn9(name);
+            }
         }
         if(sortingMode == 10){
-            newEntities = localDatabase.dao().getAllByNameByColumn10(name);
+            sortedEntities = localDatabase.dao().getAllByNameByColumn10(name);
+            if(wantingMode){
+                sortedEntities = localDatabase.dao().getWantingListByNameByColumn10(name);
+            }
         }
         if(sortingMode == 11){
-            newEntities = localDatabase.dao().getAllByNameByColumn11(name);
+            sortedEntities = localDatabase.dao().getAllByNameByColumn11(name);
+            if(wantingMode){
+                sortedEntities = localDatabase.dao().getWantingListByNameByColumn11(name);
+            }
         }
         if(sortingMode == 12){
-            newEntities = localDatabase.dao().getAllByNameByColumn12(name);
+            sortedEntities = localDatabase.dao().getAllByNameByColumn12(name);
+            if(wantingMode){
+                sortedEntities = localDatabase.dao().getWantingListByNameByColumn12(name);
+            }
         }
         if(reversedSorting) {
-            Collections.reverse(newEntities);
+            Collections.reverse(sortedEntities);
         }
-        newEntities.add(0, mainEntity);
-        for(int i = 0; i < newEntities.size(); i++){
-            if(i >= collectionEntities.size()){
-                collectionEntities.add(newEntities.get(i));
-            } else{
-                collectionEntities.set(i, newEntities.get(i));
-            }
-        }
-        for(int i = 0; i < newEntities.size(); i++){
-            if(i >= globalPositions.size()){
-                globalPositions.add(0);
-            } else{
-                globalPositions.set(i, 0);
-            }
-        }
-    }
+        sortedEntities.add(0, mainEntity);
 
-    // WORKS
-    public void getCollectionFiltered(){
-        List<DatabaseLocalEntities> newEntities = new ArrayList<>();
-        newEntities.add(0, mainEntity);
-        for(int i = 1; i < collectionEntities.size(); i++){
+        List<DatabaseLocalEntities> filteredEntities = new ArrayList<>();
+        for(int i = 1; i < sortedEntities.size(); i++){
             if(filterPositions.get(0) != null){
-                if(!collectionEntities.get(i).column1.equals(filterPositions.get(0))){
+                if(!sortedEntities.get(i).column1.equals(filterPositions.get(0))){
                     continue;
                 }
             }
             if(numberOfColumns == 1){
-                newEntities.add(collectionEntities.get(i));
+                filteredEntities.add(sortedEntities.get(i));
                 continue;
             }
             if(filterPositions.get(1) != null){
-                if(!collectionEntities.get(i).column2.equals(filterPositions.get(1))){
+                if(!sortedEntities.get(i).column2.equals(filterPositions.get(1))){
                     continue;
                 }
             }
             if(numberOfColumns == 2){
-                newEntities.add(collectionEntities.get(i));
+                filteredEntities.add(sortedEntities.get(i));
                 continue;
             }
             if(filterPositions.get(2) != null){
-                if(!collectionEntities.get(i).column3.equals(filterPositions.get(2))){
+                if(!sortedEntities.get(i).column3.equals(filterPositions.get(2))){
                     continue;
                 }
             }
             if(numberOfColumns == 3){
-                newEntities.add(collectionEntities.get(i));
+                filteredEntities.add(sortedEntities.get(i));
                 continue;
             }
             if(filterPositions.get(3) != null){
-                if(!collectionEntities.get(i).column4.equals(filterPositions.get(3))){
+                if(!sortedEntities.get(i).column4.equals(filterPositions.get(3))){
                     continue;
                 }
             }
             if(numberOfColumns == 4){
-                newEntities.add(collectionEntities.get(i));
+                filteredEntities.add(sortedEntities.get(i));
                 continue;
             }
             if(filterPositions.get(4) != null){
-                if(!collectionEntities.get(i).column5.equals(filterPositions.get(4))){
+                if(!sortedEntities.get(i).column5.equals(filterPositions.get(4))){
                     continue;
                 }
             }
             if(numberOfColumns == 5){
-                newEntities.add(collectionEntities.get(i));
+                filteredEntities.add(collectionEntities.get(i));
                 continue;
             }
             if(filterPositions.get(5) != null){
-                if(!collectionEntities.get(i).column6.equals(filterPositions.get(5))){
+                if(!sortedEntities.get(i).column6.equals(filterPositions.get(5))){
                     continue;
                 }
             }
             if(numberOfColumns == 6){
-                newEntities.add(collectionEntities.get(i));
+                filteredEntities.add(sortedEntities.get(i));
                 continue;
             }
             if(filterPositions.get(6) != null){
-                if(!collectionEntities.get(i).column7.equals(filterPositions.get(6))){
+                if(!sortedEntities.get(i).column7.equals(filterPositions.get(6))){
                     continue;
                 }
             }
             if(numberOfColumns == 7){
-                newEntities.add(collectionEntities.get(i));
+                filteredEntities.add(sortedEntities.get(i));
                 continue;
             }
             if(filterPositions.get(7) != null){
-                if(!collectionEntities.get(i).column8.equals(filterPositions.get(7))){
+                if(!sortedEntities.get(i).column8.equals(filterPositions.get(7))){
                     continue;
                 }
             }
             if(numberOfColumns == 8){
-                newEntities.add(collectionEntities.get(i));
+                filteredEntities.add(sortedEntities.get(i));
                 continue;
             }
             if(filterPositions.get(8) != null){
-                if(!collectionEntities.get(i).column9.equals(filterPositions.get(8))){
+                if(!sortedEntities.get(i).column9.equals(filterPositions.get(8))){
                     continue;
                 }
             }
             if(numberOfColumns == 9){
-                newEntities.add(collectionEntities.get(i));
+                filteredEntities.add(sortedEntities.get(i));
                 continue;
             }
             if(filterPositions.get(9) != null){
-                if(!collectionEntities.get(i).column10.equals(filterPositions.get(9))){
+                if(!sortedEntities.get(i).column10.equals(filterPositions.get(9))){
                     continue;
                 }
             }
             if(numberOfColumns == 10){
-                newEntities.add(collectionEntities.get(i));
+                filteredEntities.add(sortedEntities.get(i));
                 continue;
             }
             if(filterPositions.get(10) != null){
-                if(!collectionEntities.get(i).column11.equals(filterPositions.get(10))){
+                if(!sortedEntities.get(i).column11.equals(filterPositions.get(10))){
                     continue;
                 }
             }
             if(numberOfColumns == 11){
-                newEntities.add(collectionEntities.get(i));
+                filteredEntities.add(sortedEntities.get(i));
                 continue;
             }
             if(filterPositions.get(11) != null){
-                if(!collectionEntities.get(i).column12.equals(filterPositions.get(11))){
+                if(!sortedEntities.get(i).column12.equals(filterPositions.get(11))){
                     continue;
                 }
             }
-            newEntities.add(collectionEntities.get(i));
+            filteredEntities.add(collectionEntities.get(i));
         }
-        for(int i = 0; i < newEntities.size(); i++){
-            collectionEntities.set(i, newEntities.get(i));
-            globalPositions.set(i, 0);
-        }
-        while(collectionEntities.size() > newEntities.size()){
+        filteredEntities.add(0, mainEntity);
+        while(collectionEntities.size() > filteredEntities.size()){
             collectionEntities.remove(collectionEntities.size() - 1);
         }
-        while(globalPositions.size() > newEntities.size()){
+        while(globalPositions.size() > filteredEntities.size()){
             globalPositions.remove(globalPositions.size() - 1);
         }
+        for(int i = 0; i < filteredEntities.size(); i++){
+            if(collectionEntities.size() <= i){
+                collectionEntities.add(filteredEntities.get(i));
+            }
+            collectionEntities.set(i, filteredEntities.get(i));
+            if(globalPositions.size() <= i){
+                globalPositions.add(0);
+            }
+            globalPositions.set(i, 0);
+        }
+        itemViewAdapter.notifyDataSetChanged();
     }
 }

@@ -17,8 +17,9 @@
     <string name="done">Готово</string>
     <string name="welcome"> Добро пожаловать </string>
     <string name="selectionMode"> Режим выделения </string>
+    <string name="yourWantingList"> Список желаемого</string>
 
-    <string name="editCollections"> Управление коллекциями </string>
+    <string name="editCollections"> Редактировать коллекциями </string>
     <string name="createCollections"> Создать коллекцию </string>
     <string name="enterCollectionName">Придумайте название коллекции</string>
     <string name="createCollection"> Создать коллекцию </string>
@@ -34,8 +35,6 @@
     <string name="statsCollectionSize">Размер коллекции</string>
     <string name="statsCollectionDateCreation">Дата создания</string>
     <string name="statsCollectionDateChanged">Последнее изменение</string>
-
-    <string name="createGroup"> Создать группу </string>
 
     <string name="todo">TODO</string>
     <string name="todo1">TODO</string>
