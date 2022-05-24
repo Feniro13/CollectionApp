@@ -45,7 +45,6 @@ public class CollectionEdit extends AppCompatActivity {
         collectionRecycler.setLayoutManager(layoutManager);
         ViewGroup viewGroup = findViewById(android.R.id.content);
         collectionAdapter = new CollectionAdapter(this, list, viewGroup);
-        collectionAdapter.notifyDataSetChanged();
         collectionRecycler.setAdapter(collectionAdapter);
     }
     @Override

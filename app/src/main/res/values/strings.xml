@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Collection</string>
+    <string name="app_name">EasyCollect</string>
 
     <string name="empty"> </string>
     <string name="example"> example </string>
@@ -7,29 +7,26 @@
     <string name="delete">Удалить</string>
     <string name="back">Назад</string>
     <string name="edit"> Редактировать</string>
+    <string name="open"> Открыть</string>
     <string name="add"> Добавить</string>
     <string name="rename">Переименовать</string>
     <string name="find"> Найти </string>
-    <string name="browse"> Поиск в браузере </string>
+    <string name="browse"> Дополнительно </string>
     <string name="sort"> Сортировать </string>
     <string name="download"> Скачать </string>
     <string name="changeLocation"> Переместить </string>
     <string name="done">Готово</string>
     <string name="welcome"> Добро пожаловать </string>
-    <string name="selectionMode"> Режим выделения </string>
     <string name="yourWantingList"> Список желаемого</string>
-
-    <string name="editCollections"> Редактировать коллекциями </string>
+    <string name="editCollections"> Редактировать коллекции </string>
     <string name="createCollections"> Создать коллекцию </string>
     <string name="enterCollectionName">Придумайте название коллекции</string>
     <string name="createCollection"> Создать коллекцию </string>
-
     <string name="column_num"> Столбец № </string>
     <string name="newColumn"> Добавить столбец </string>
     <string name="deleteColumn"> Убрать столбец </string>
     <string name="maxColumns"> Максимум 12 столбец</string>
     <string name="minColumns"> Минимум 1 столбец</string>
-
     <string name="statsShow"> Показать статистику </string>
     <string name="statsCollectionName"> Название коллекции</string>
     <string name="statsCollectionSize">Размер коллекции</string>

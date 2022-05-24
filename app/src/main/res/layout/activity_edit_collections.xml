@@ -10,9 +10,10 @@
 
     <TextView
         android:id="@+id/Edit_TextView_Welcome"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
+        android:autoText="true"
         android:text="@string/editCollections"
         android:textAlignment="center"
         android:textColor="@color/second_main"
@@ -34,5 +35,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Edit_TextView_Welcome"
         tools:layout_marginStart="20dp"
-        tools:listitem="@layout/item_edit_collection" />
+        tools:listitem="@layout/item_collection" />
 </androidx.constraintlayout.widget.ConstraintLayout>

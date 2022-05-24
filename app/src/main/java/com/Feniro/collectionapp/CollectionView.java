@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.Feniro.collectionapp.adapter.ItemAddAdapter;
 import com.Feniro.collectionapp.adapter.ItemViewAdapter;
@@ -47,7 +48,7 @@ public class CollectionView extends AppCompatActivity {
     RecyclerView mainRecycler, itemRecycler;
     ItemViewAdapter itemViewAdapter;
     ItemAddAdapter itemAddAdapter;
-    ImageView add, diff, dialogDiff;
+    ImageView add, diff, dialogDiff, iconDiff;
     Button button_1, button_2, button_3;
     TextView title;
     ViewGroup viewGroup;
@@ -61,6 +62,7 @@ public class CollectionView extends AppCompatActivity {
         add = findViewById(R.id.view_button_add);
         diff = findViewById(R.id.view_button_diff);
         dialogDiff = findViewById(R.id.view_imageview_diff_buttons);
+        iconDiff = findViewById(R.id.different_stuff);
         button_1 = findViewById(R.id.view_diff_button_selectionMode);
         button_2 = findViewById(R.id.view_diff_button_sort);
         button_3 = findViewById(R.id.view_diff_button_showStats);
@@ -94,11 +96,13 @@ public class CollectionView extends AppCompatActivity {
                 for(int i = 0; i < filterPositions.size(); i++){
                     if(filterPositions.get(i) == null){
                         if(i == column){
+                            Toast.makeText(view.getContext(), "Добавлено в фильтр",Toast.LENGTH_SHORT).show();
                             filterPositions.set(column, item);
                         }
                     }
                     else {
                         if(i == column){
+                            Toast.makeText(view.getContext(), "Убрано из фильтра",Toast.LENGTH_SHORT).show();
                             filterPositions.set(column, null);
                         }
                     }
@@ -135,11 +139,9 @@ public class CollectionView extends AppCompatActivity {
                     button_3.setText("Добавить");
                 }
 
-                button_1.setOnClickListener(view17 -> {
-                    if(wantingMode){
-                        getCollectionSortedAndFiltered();
-                    }
-                    else {
+                button_1.setOnClickListener(viewUnite -> {
+                    Toast.makeText(viewUnite.getContext(), "Объекты были изменены",Toast.LENGTH_SHORT).show();
+                    if(!wantingMode){
                         DatabaseLocalEntities entity = new DatabaseLocalEntities();
                         entity.DatabaseName = name;
                         entity.isFirstLine = 0;
@@ -237,12 +239,15 @@ public class CollectionView extends AppCompatActivity {
                             }
                         }
                         localDatabase.dao().insert(entity);
-                        getCollectionSortedAndFiltered();
                     }
+                    getCollectionSortedAndFiltered();
+                    setItemField();
+                    setGoneField();
                 });
 
-                // удалить всё WORKS
-                button_2.setOnClickListener(view16 -> {
+
+                button_2.setOnClickListener(viewDeleteAll -> {
+                    Toast.makeText(viewDeleteAll.getContext(), "Объекты были удалены",Toast.LENGTH_SHORT).show();
                     for(int i = 0; i < globalPositions.size(); i++) {
                         if(globalPositions.get(i) == 1) {
                             localDatabase.dao().deleteEntityById(collectionEntities.get(i).id);
@@ -253,7 +258,7 @@ public class CollectionView extends AppCompatActivity {
                     selectionMode = false;
                 });
 
-                button_3.setOnClickListener(view15 -> {
+                button_3.setOnClickListener(viewSearch -> {
                     if(wantingMode){
                         for(int i = 0; i < globalPositions.size(); i++){
                             localDatabase.dao().insert(collectionEntities.get(i));
@@ -275,14 +280,17 @@ public class CollectionView extends AppCompatActivity {
                 setItemField();
 
                 // Изменить WORKS
-                button_1.setOnClickListener(view13 -> {
-                    View view11 = LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_view_add, viewGroup, false);
+                button_1.setOnClickListener(viewChange -> {
+                    View view11 = LayoutInflater.from(viewChange.getContext()).inflate(R.layout.dialog_add, viewGroup, false);
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
                     builder1.setView(view11);
                     final AlertDialog alertDialog1 = builder1.show();
-                    alertDialog1.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
                     ImageView itemAdd = view11.findViewById(R.id.dialog_add_item_button_add);
                     ImageView itemBack = view11.findViewById(R.id.dialog_add_item_button_back);
+                    alertDialog1.show();
+                    alertDialog1.getWindow().setDimAmount(0.5f);
+                    alertDialog1.getWindow().setGravity(Gravity.CENTER);
+                    alertDialog1.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
                     DatabaseLocalEntities localEntity = new DatabaseLocalEntities();
                     localEntity.isFirstLine = 0;
                     if(wantingMode){
@@ -291,9 +299,9 @@ public class CollectionView extends AppCompatActivity {
                     localEntity.DatabaseName = name;
                     DatabaseLocalEntities thisEntity = collectionEntities.get(position);
                     setItemDialogRecycler(view11, thisEntity);
-
                     itemBack.setOnClickListener(view2 -> alertDialog1.dismiss());
                     itemAdd.setOnClickListener(view22 -> {
+                        Toast.makeText(viewChange.getContext(), "Объект был изменен",Toast.LENGTH_SHORT).show();
                         localDatabase.dao().insert(getEntityFromAdapter(localEntity));
                         localDatabase.dao().delete(thisEntity);
                         getCollectionSortedAndFiltered();
@@ -302,14 +310,15 @@ public class CollectionView extends AppCompatActivity {
                         setGoneField();
                         setNewDateChanged();
                     });
-                    alertDialog1.show();
+
                 });
 
                 // удалить WORKS
-                button_2.setOnClickListener(view14 -> {
+                button_2.setOnClickListener(viewDelete -> {
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(view.getContext());
                     builder1.setTitle("Вы уверены?");
                     builder1.setPositiveButton("Да", (dialogInterface, i) -> {
+                        Toast.makeText(viewDelete.getContext(), "Объект был удален",Toast.LENGTH_SHORT).show();
                         localDatabase.dao().deleteEntityById(collectionEntities.get(position).id);
                         getCollectionSortedAndFiltered();
                         setGoneField();
@@ -342,6 +351,7 @@ public class CollectionView extends AppCompatActivity {
                         setGoneField();
                         this.startActivity(intent);
                     }
+                    globalPositions.set(position, 0);
                 });
             }
         };
@@ -360,11 +370,33 @@ public class CollectionView extends AppCompatActivity {
         };
 
         setItemRecycler(collectionEntities, viewGroup, itemClickListener, itemSortListener);
+        if(savedInstanceState != null){
+            wantingMode = savedInstanceState.getBoolean("WantingMode");
+            reversedSorting = savedInstanceState.getBoolean("ReversedSorting");
+            sortingMode = savedInstanceState.getInt("SortingMode");
+            boolean idk = false;
+            if(wantingMode){
+                getCollectionSortedAndFiltered();
+            }
+            for(int i = 0; i < globalPositions.size(); i++){
+                globalPositions.set(i, savedInstanceState.getInt(Integer.toString(i)));
+                if(savedInstanceState.getInt(Integer.toString(i)) == 1){
+                    if(idk){
+                        selectionMode = true;
+                        setVisibleField();
+                        setSelectionField();
+                    } else{
+                        idk = true;
+                    }
+                }
+            }
+            itemViewAdapter.notifyDataSetChanged();
+        }
 
         // добавить
-        add.setOnClickListener(view -> {
+        add.setOnClickListener(viewAdd -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            View view1 = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_view_add, viewGroup, false);
+            View view1 = LayoutInflater.from(viewAdd.getContext()).inflate(R.layout.dialog_add, viewGroup, false);
             builder.setView(view1);
             ImageView itemAdd = view1.findViewById(R.id.dialog_add_item_button_add);
             ImageView itemBack = view1.findViewById(R.id.dialog_add_item_button_back);
@@ -382,6 +414,7 @@ public class CollectionView extends AppCompatActivity {
             setItemDialogRecycler(view1, localEntity);
             itemBack.setOnClickListener(view2 -> alertDialog.dismiss());
             itemAdd.setOnClickListener(view22 -> {
+                Toast.makeText(viewAdd.getContext(), "Объект был добавлен",Toast.LENGTH_SHORT).show();
                 alertDialog.dismiss();
                 localDatabase.dao().insert(getEntityFromAdapter(localEntity));
                 getCollectionSortedAndFiltered();
@@ -399,13 +432,11 @@ public class CollectionView extends AppCompatActivity {
                 }
                 if(filterMode){
                     button_1.setTextColor(getResources().getColor(R.color.selection));
-                    setFilterField();
                 }
                 else {
                     // вкл выкл фильтр
                     button_1.setOnClickListener(view27 -> {
-                        if(!filterMode) {
-                            setFilterField();
+                        if(!filterMode) {                          
                             button_1.setTextColor(getResources().getColor(R.color.selection));
                         }
                         if(filterMode) {
@@ -420,14 +451,10 @@ public class CollectionView extends AppCompatActivity {
                         filterMode = !filterMode;
                     });
 
-                    // надо придумац
-                    button_2.setOnClickListener(view24 -> {
-                        
-                    });
                     // статистика
-                    button_3.setOnClickListener(view25 -> {
+                    button_2.setOnClickListener(view24 -> {
                         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                        View view2 = LayoutInflater.from(view25.getContext()).inflate(R.layout.dialog_view_diff_stats, viewGroup, false);
+                        View view2 = LayoutInflater.from(view24.getContext()).inflate(R.layout.dialog_statistics, viewGroup, false);
                         builder.setView(view2);
                         final AlertDialog alertDialog = builder.show();
                         TextView dataNameEdit = view2.findViewById(R.id.dialog_view_showstats_name_edit);
@@ -441,6 +468,15 @@ public class CollectionView extends AppCompatActivity {
                         dataChangeEdit.setText(globalDatabase.dao_global().getDataChangedByName(name));
                         dialogBack.setOnClickListener(view3 -> alertDialog.dismiss());
                         alertDialog.show();
+                    });
+
+                    // Скрыть интерфейс
+                    button_3.setOnClickListener(view25 -> {
+                        setGoneField();
+                        Toast.makeText(view.getContext(), "Интерфейс скрыт",Toast.LENGTH_SHORT).show();
+                        add.setVisibility(View.GONE);
+                        diff.setVisibility(View.GONE);
+                        iconDiff.setVisibility(View.GONE);
                     });
                 }
             }
@@ -459,6 +495,7 @@ public class CollectionView extends AppCompatActivity {
             else {
                 title.setText(name);
             }
+            setGoneField();
             wantingMode = !wantingMode;
             getCollectionSortedAndFiltered();
         });
@@ -481,6 +518,9 @@ public class CollectionView extends AppCompatActivity {
     }
 
     public void setVisibleField(){
+        add.setVisibility(View.VISIBLE);
+        diff.setVisibility(View.VISIBLE);
+        iconDiff.setVisibility(View.VISIBLE);
         button_3.setVisibility(View.VISIBLE);
         button_1.setVisibility(View.VISIBLE);
         button_2.setVisibility(View.VISIBLE);
@@ -497,7 +537,7 @@ public class CollectionView extends AppCompatActivity {
     public void setItemField(){
         button_1.setText("Изменить");
         button_2.setText("Удалить");
-        button_3.setText("Поиск в интернете");
+        button_3.setText("Поиск");
         button_1.setTextColor(this.getResources().getColor(R.color.main));
         button_2.setTextColor(this.getResources().getColor(R.color.main));
         button_3.setTextColor(this.getResources().getColor(R.color.main));
@@ -506,18 +546,9 @@ public class CollectionView extends AppCompatActivity {
     public void setViewField(){
         button_1.setText("Фильтр");
         button_1.setTextColor(this.getResources().getColor(R.color.main));
-        button_2.setText("Что-то");
+        button_2.setText("Статистика");
         button_2.setTextColor(this.getResources().getColor(R.color.main));
-        button_3.setText("Статистика");
-        button_3.setTextColor(this.getResources().getColor(R.color.main));
-    }
-
-    public void setFilterField(){
-        button_1.setText("Фильтр");
-        button_1.setTextColor(this.getResources().getColor(R.color.main));
-        button_2.setText("");
-        button_2.setTextColor(this.getResources().getColor(R.color.main));
-        button_3.setText("Статистика");
+        button_3.setText("Скрыть");
         button_3.setTextColor(this.getResources().getColor(R.color.main));
     }
 
@@ -547,6 +578,17 @@ public class CollectionView extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(CollectionView.this, ActivityStart.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putBoolean("WantingMode", wantingMode);
+        savedInstanceState.putBoolean("ReversedSorting", reversedSorting);
+        savedInstanceState.putInt("SortingMode", sortingMode);
+        for(int i = 0; i < globalPositions.size(); i++){
+            savedInstanceState.putInt(Integer.toString(i), globalPositions.get(i));
+        }
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     public DatabaseLocalEntities getEntityFromAdapter(DatabaseLocalEntities localEntity) {

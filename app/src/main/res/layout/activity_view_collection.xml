@@ -34,7 +34,8 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/view_imageview_diff_buttons"
@@ -43,15 +44,16 @@
 
         <HorizontalScrollView
             android:id="@+id/horizontalScrollView"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fillViewport="true"
             android:orientation="horizontal"
             android:scrollbars="none"
             tools:ignore="SpeakableTextPresentCheck">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/View_RecyclerView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:scrollbars="vertical"
@@ -65,7 +67,6 @@
         android:id="@+id/view_button_diff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginBottom="20dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -77,7 +78,6 @@
         android:id="@+id/view_button_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
         android:layout_marginBottom="20dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -97,44 +97,53 @@
 
     <ImageView
         android:id="@+id/view_imageview_diff_buttons"
-        android:layout_width="180dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/view_button_add"
+        app:layout_constraintStart_toEndOf="@id/view_button_diff"
         app:srcCompat="@drawable/ic_group" />
 
-    <Button
-        android:id="@+id/view_diff_button_sort"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:text="@string/sort"
-        app:layout_constraintBottom_toTopOf="@+id/view_diff_button_showStats"
-        app:layout_constraintEnd_toEndOf="@+id/view_imageview_diff_buttons"
-        app:layout_constraintStart_toStartOf="@+id/view_imageview_diff_buttons"
-        app:layout_constraintTop_toBottomOf="@+id/view_diff_button_selectionMode" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/view_imageview_diff_buttons"
+        app:layout_constraintEnd_toEndOf="@id/view_imageview_diff_buttons"
+        app:layout_constraintStart_toStartOf="@id/view_imageview_diff_buttons"
+        app:layout_constraintTop_toTopOf="@+id/view_imageview_diff_buttons">
 
-    <Button
-        android:id="@+id/view_diff_button_selectionMode"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:background="@android:color/transparent"
-        android:text="@string/selectionMode"
-        app:layout_constraintEnd_toEndOf="@+id/view_imageview_diff_buttons"
-        app:layout_constraintStart_toStartOf="@+id/view_imageview_diff_buttons"
-        app:layout_constraintTop_toTopOf="@+id/view_imageview_diff_buttons" />
+        <Button
+            android:id="@+id/view_diff_button_selectionMode"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="@string/example"
+            android:textAllCaps="false"
+            android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/view_diff_button_showStats"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:background="@android:color/transparent"
-        android:text="@string/statsShow"
-        app:layout_constraintBottom_toBottomOf="@id/view_imageview_diff_buttons"
-        app:layout_constraintEnd_toEndOf="@+id/view_imageview_diff_buttons"
-        app:layout_constraintStart_toStartOf="@+id/view_imageview_diff_buttons" />
+        <Button
+            android:id="@+id/view_diff_button_sort"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="@string/example"
+            android:textAllCaps="false"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/view_diff_button_showStats"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="@string/example"
+            android:textAllCaps="false"
+            android:textSize="18sp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

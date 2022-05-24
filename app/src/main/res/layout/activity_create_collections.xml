@@ -53,8 +53,9 @@
 
     <EditText
         android:id="@+id/create_EditText_Name"
-        android:layout_width="300dp"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:layout_weight="300"
@@ -70,7 +71,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Create_RView_Columns"
-        android:layout_width="160dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="100dp"
@@ -81,7 +82,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        tools:listitem="@layout/item_create_column" />
+        tools:listitem="@layout/item_column" />
 
     <TextView
         android:id="@+id/Create_TextView_Warner"

@@ -22,6 +22,7 @@ import com.Feniro.collectionapp.database.entities.DatabaseLocalEntities;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -47,7 +48,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Co
     @NonNull
     @Override
     public CollectionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View Items = LayoutInflater.from(context).inflate(R.layout.item_edit_collection, parent, false);
+        View Items = LayoutInflater.from(context).inflate(R.layout.item_collection, parent, false);
         return new CollectionViewHolder(Items);
     }
 
@@ -56,7 +57,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Co
         holder.textView.setText(collections.get(position));
         holder.textView.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_edit_action, viewGroup, false);
+            View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_edit, viewGroup, false);
             builder.setView(dialogView);
             final AlertDialog alertDialog = builder.show();
             String name = collections.get(position);
@@ -79,17 +80,16 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Co
                     localDatabase.dao().deleteEntitiesByName(name);
                     collections.remove(position);
                     notifyItemRemoved(position);
+                    alertDialog.dismiss();
                 });
                 builder1.setNegativeButton("Назад", (dialogInterface, i) -> {
                     alertDialog.show();
                 });
                 builder1.show();});
 
-
-
             rename.setOnClickListener(view1 -> {
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-                View view2 = LayoutInflater.from(view1.getContext()).inflate(R.layout.dialog_edit_rename, viewGroup, false);
+                View view2 = LayoutInflater.from(view1.getContext()).inflate(R.layout.dialog_rename, viewGroup, false);
                 builder1.setView(view2);
                 final AlertDialog alertDialog1 = builder1.show();
                 alertDialog1.show();
@@ -97,47 +97,52 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Co
                 alertDialog1.getWindow().setDimAmount(0.2f);
 
                 Button renameCollections = view2.findViewById(R.id.dialog_edit_rename_done);
+                Button backRename = view2.findViewById(R.id.dialog_edit_rename_back);
+                backRename.setOnClickListener(view32 -> {
+                    alertDialog1.dismiss();
+                });
                 renameCollections.setOnClickListener(view3 -> {
                     EditText editText = view2.findViewById(R.id.dialog_edit_rename_edittext);
                     String newName = editText.getText().toString();
-                    editText.setText("");
-                    TextView warning = view2.findViewById(R.id.dialog_edit_rename_warner);
-                    List<DatabaseGlobalEntities> databases = globalDatabase.dao_global().getAll();
-                    for(int i = 0; i < databases.size(); i++) {
-                        if(databases.get(i).name.equals(newName)) {
-                            warning.setText("Вы уже создали коллекцию с таким названием");
+                    for(int i = 0; i < collections.size(); i++) {
+                        if(collections.get(i).equals(newName)) {
                             return;
                         }
                     }
+
                     DatabaseGlobalEntities entityNew = globalDatabase.dao_global().getByName(collections.get(position));
                     entityNew.name = newName;
-
+                    globalDatabase.dao_global().deleteCollectionByName(collections.get(position));
                     Date currDate = new Date();
                     DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
                     String dateText = dateFormat.format(currDate);
-
                     entityNew.dataChanged = dateText;
-
-                    globalDatabase.dao_global().deleteCollectionByName(collections.get(position));
                     globalDatabase.dao_global().insert(entityNew);
 
                     DatabaseLocalEntities entity1 = localDatabase.dao().getNamesOfColumnsByName(collections.get(position));
                     DatabaseLocalEntities entityNew1 = entity1;
                     entityNew1.DatabaseName = newName;
-                    localDatabase.dao().delete(entity1);
                     localDatabase.dao().insert(entityNew1);
 
                     List<DatabaseLocalEntities> listLocal = localDatabase.dao().getAllByNameByColumn1(collections.get(position));
                     for(int i = 0; i < listLocal.size(); i++) {
-                        entity1 = listLocal.get(1);
-                        entity1.DatabaseName = newName;
-                        localDatabase.dao().insert(entity1);
-                        localDatabase.dao().delete(listLocal.get(i));
+                        entity1 = listLocal.get(i);
+                        DatabaseLocalEntities entities = entity1;
+                        entities.DatabaseName = newName;
+                        localDatabase.dao().insert(entities);
                     }
-                    collections.remove(position);
-                    notifyItemRemoved(position);
-                    collections.add(newName);
-                    notifyItemChanged(position);
+                    localDatabase.dao().deleteEntitiesByName(collections.get(position));
+                    List<DatabaseGlobalEntities> listGlobal = globalDatabase.dao_global().getAll();
+                    List<String> list = new ArrayList<>();
+                    if(listGlobal.size() > 0) {
+                        for (int i = 0; i < listGlobal.size(); i++) {
+                            list.add(listGlobal.get(i).name);
+                        }
+                    }
+                    for(int i = 0; i < collections.size(); i++){
+                        collections.set(i, list.get(i));
+                    }
+                    notifyDataSetChanged();
                     alertDialog1.dismiss();
                 });
                 alertDialog.dismiss();

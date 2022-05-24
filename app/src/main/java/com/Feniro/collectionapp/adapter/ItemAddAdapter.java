@@ -6,7 +6,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,7 +35,7 @@ public class ItemAddAdapter extends RecyclerView.Adapter<ItemAddAdapter.ItemAddV
     @NonNull
     @Override
     public ItemAddViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View Items = LayoutInflater.from(context).inflate(R.layout.item_view_add_item, parent, false);
+        View Items = LayoutInflater.from(context).inflate(R.layout.item_add_item, parent, false);
         return new ItemAddViewHolder(Items);
     }
 

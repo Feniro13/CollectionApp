@@ -283,7 +283,6 @@ public class ItemViewAdapter extends RecyclerView.Adapter<ItemViewAdapter.ItemVi
             textView12 = itemView.findViewById(R.id.item_View_12);
             constraintLayout = itemView.findViewById(R.id.holderLayout);
             if(numberOfColumns == 1) {
-                constraintLayout.setMaxWidth(330);
                 textView2.setVisibility(View.GONE);
                 textView3.setVisibility(View.GONE);
                 textView4.setVisibility(View.GONE);

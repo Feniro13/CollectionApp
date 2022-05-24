@@ -11,39 +11,47 @@
 
     <ImageView
         android:id="@+id/activity_start_imagebutton_edit"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.35"
         app:srcCompat="@drawable/ic_button_circle"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:autoText="true"
         android:text="@string/welcome"
         android:textAlignment="center"
         android:textColor="@color/second_main"
-        android:textSize="37sp"
+        android:textSize="40sp"
         android:textStyle="bold"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.12"
+        app:layout_constraintVertical_bias="0.1"
         tools:layout_constraintVertical_bias="0.2" />
 
     <ImageView
         android:id="@+id/activity_start_imagebutton_create"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         android:clickable="true"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,32 +61,33 @@
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="40dp"
+        android:maxWidth="200dp"
         android:text="@string/createCollections"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/activity_start_imagebutton_create"
         app:layout_constraintEnd_toEndOf="@+id/activity_start_imagebutton_create"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/activity_start_imagebutton_create"
         app:layout_constraintTop_toTopOf="@+id/activity_start_imagebutton_create"
-        app:layout_constraintVertical_bias="0.475" />
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="40dp"
+        android:maxWidth="200dp"
+        android:minLines="2"
         android:text="@string/editCollections"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/activity_start_imagebutton_edit"
         app:layout_constraintEnd_toEndOf="@+id/activity_start_imagebutton_edit"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/activity_start_imagebutton_edit"
         app:layout_constraintTop_toTopOf="@+id/activity_start_imagebutton_edit" />
 
@@ -86,10 +95,8 @@
         android:id="@+id/imageView6"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/activity_start_imagebutton_create"
         app:layout_constraintEnd_toStartOf="@+id/textView5"
-        app:layout_constraintStart_toStartOf="@+id/activity_start_imagebutton_create"
         app:layout_constraintTop_toTopOf="@+id/activity_start_imagebutton_create"
         app:srcCompat="@drawable/ic_icon_add" />
 
@@ -97,10 +104,8 @@
         android:id="@+id/imageView7"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/activity_start_imagebutton_edit"
         app:layout_constraintEnd_toStartOf="@+id/textView4"
-        app:layout_constraintStart_toStartOf="@+id/activity_start_imagebutton_edit"
         app:layout_constraintTop_toTopOf="@+id/activity_start_imagebutton_edit"
         app:srcCompat="@drawable/ic_icon_edit" />
 </androidx.constraintlayout.widget.ConstraintLayout>
