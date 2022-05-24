@@ -8,15 +8,16 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="main">#A9DCE3</color>
-    <color name="second_main">#7689DE</color>
+    <color name="main">#C5E3EA</color>
+    <color name="second_main">#587BD3</color>
     <color name="selection">#4D3E9E</color>
 
-    <color name="main_1">#c0d6df</color>
-    <color name="second_main_1">#4f6d7a</color> // NOT COOL
 
     <color name="main_2">#A9DCE3</color>
     <color name="second_main_2">#7689DE</color>
+
+    <color name="main_123">#C28766</color>
+    <color name="second_main_123">#82210C</color>
 
     <color name="main_3">#26648E</color>
     <color name="second_main_3">#4F8FC0</color> // NOT COOL
@@ -26,6 +27,9 @@
 
     <color name="main_5">#53D2DC</color>
     <color name="second_main_5">#26648E</color>
+
+    <color name="main_6">#FF9900</color>
+    <color name="second_main_6">#146EB4</color>
 
     <color name="danger_red">#E43223</color>
 </resources>

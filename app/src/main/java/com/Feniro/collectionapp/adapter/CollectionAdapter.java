@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -76,6 +77,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Co
                 alertDialog.dismiss();
                 builder1.setTitle("Вы уверены? Это действие необратимо");
                 builder1.setPositiveButton("Да [удалить]", (dialogInterface, i) -> {
+                    Toast.makeText(view1.getContext(), "Коллекция была удалена", Toast.LENGTH_SHORT).show();
                     globalDatabase.dao_global().deleteCollectionByName(name);
                     localDatabase.dao().deleteEntitiesByName(name);
                     collections.remove(position);
@@ -102,6 +104,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Co
                     alertDialog1.dismiss();
                 });
                 renameCollections.setOnClickListener(view3 -> {
+                    Toast.makeText(view3.getContext(), "Коллекция была переименована", Toast.LENGTH_SHORT).show();
                     EditText editText = view2.findViewById(R.id.dialog_edit_rename_edittext);
                     String newName = editText.getText().toString();
                     for(int i = 0; i < collections.size(); i++) {
