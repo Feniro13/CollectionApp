@@ -131,11 +131,11 @@ public class CollectionView extends AppCompatActivity {
             }
 
             itemViewAdapter.notifyItemChanged(position);
-            if(selectionMode) { // режим выделения (несколько итемов)
+            if(selectionMode) {
                 setSelectionField();
 
                 if(wantingMode) {
-                    button_1.setText("Отмена");
+                    button_1.setText("Очистить выбор");
                     button_3.setText("Добавить");
                 }
 
@@ -185,51 +185,90 @@ public class CollectionView extends AppCompatActivity {
 
                         for (int i = 0; i < globalPositions.size(); i++) {
                             if (globalPositions.get(i) == 1) {
-                                entity.column1 += collectionEntities.get(i).column1;
-                                entity.column1 += " ";
+                                if(!(entity.column1 + " ").contains(collectionEntities.get(i).column1)){
+                                    entity.column1 += collectionEntities.get(i).column1;
+                                    if(i + 1 != globalPositions.size()){
+                                        entity.column1 += " ";
+                                    }
+                                }
                                 if (numberOfColumns >= 2) {
-                                    entity.column2 += collectionEntities.get(i).column2;
-                                    entity.column2 += " ";
+                                    if(!(entity.column2 + " ").contains(collectionEntities.get(i).column2) ){
+                                        entity.column2 += collectionEntities.get(i).column2;
+                                        if(i + 1 != globalPositions.size()){
+                                            entity.column2 += " ";
+                                        }                                    }
                                 }
                                 if (numberOfColumns >= 3) {
-                                    entity.column3 += collectionEntities.get(i).column3;
-                                    entity.column3 += " ";
+                                    if(!(entity.column3 + " ").contains(collectionEntities.get(i).column3)){
+                                        entity.column3 += collectionEntities.get(i).column3;
+                                        if(i + 1 != globalPositions.size()){
+                                            entity.column3 += " ";
+                                        }                                    }
                                 }
                                 if (numberOfColumns >= 4) {
-                                    entity.column4 += collectionEntities.get(i).column4;
-                                    entity.column4 += " ";
+                                    if(!(entity.column4 + " ").contains(collectionEntities.get(i).column4)){
+                                        entity.column4 += collectionEntities.get(i).column4;
+                                        if(i + 1 != globalPositions.size()){
+                                            entity.column4 += " ";
+                                        }                                    }
                                 }
                                 if (numberOfColumns >= 5) {
-                                    entity.column5 += collectionEntities.get(i).column5;
-                                    entity.column5 += " ";
+                                    if(!(entity.column5 + " ").contains(collectionEntities.get(i).column5)){
+                                        entity.column5 += collectionEntities.get(i).column5;
+                                        if(i + 1 != globalPositions.size()){
+                                            entity.column5 += " ";
+                                        }                                    }
                                 }
                                 if (numberOfColumns >= 6) {
-                                    entity.column6 += collectionEntities.get(i).column6;
-                                    entity.column6 += " ";
+                                    if(!(entity.column6 + " ").contains(collectionEntities.get(i).column6)){
+                                        entity.column6 += collectionEntities.get(i).column6;
+                                        if(i + 1 != globalPositions.size()){
+                                            entity.column6 += " ";
+                                        }                                    }
                                 }
                                 if (numberOfColumns >= 7) {
-                                    entity.column7 += collectionEntities.get(i).column7;
-                                    entity.column7 += " ";
+                                    if(!(entity.column7 + " ").contains(collectionEntities.get(i).column7)){
+                                        entity.column7 += collectionEntities.get(i).column7;
+                                        if(i + 1 != globalPositions.size()){
+                                            entity.column7+= " ";
+                                        }                                    }
                                 }
                                 if (numberOfColumns >= 8) {
-                                    entity.column8 += collectionEntities.get(i).column8;
-                                    entity.column8 += " ";
+                                    if(!(entity.column8 + " ").contains(collectionEntities.get(i).column8)){
+                                        entity.column8 += collectionEntities.get(i).column8;
+                                        if(i + 1 != globalPositions.size()){
+                                            entity.column8 += " ";
+                                        }                                    }
                                 }
                                 if (numberOfColumns >= 9) {
-                                    entity.column9 += collectionEntities.get(i).column9;
-                                    entity.column9 += " ";
+                                    if(!(entity.column9 + " ").contains(collectionEntities.get(i).column9)){
+                                        entity.column9 += collectionEntities.get(i).column9;
+                                        if(i + 1 != globalPositions.size()){
+                                            entity.column9 += " ";
+                                        }                                    }
                                 }
                                 if (numberOfColumns >= 10) {
-                                    entity.column10 += collectionEntities.get(i).column10;
-                                    entity.column10 += " ";
+                                    if(!(entity.column10 + " ").contains(collectionEntities.get(i).column10)){
+                                        entity.column10 += collectionEntities.get(i).column10;
+                                        if(i + 1 != globalPositions.size()){
+                                            entity.column10 += " ";
+                                        }                                    }
                                 }
                                 if (numberOfColumns >= 11) {
-                                    entity.column11 += collectionEntities.get(i).column11;
-                                    entity.column11 += " ";
+                                    if(!(entity.column11 + " ").contains(collectionEntities.get(i).column11)){
+                                        entity.column11 += collectionEntities.get(i).column11;
+                                        if(i + 1 != globalPositions.size()){
+                                            entity.column11 += " ";
+                                        }
+                                    }
                                 }
                                 if (numberOfColumns == 12) {
-                                    entity.column12 += collectionEntities.get(i).column12;
-                                    entity.column12 += " ";
+                                    if(!(entity.column12 + " ").contains(collectionEntities.get(i).column11)){
+                                        entity.column12 += collectionEntities.get(i).column12;
+                                        if(i + 1 != globalPositions.size()){
+                                            entity.column12 += " ";
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -244,8 +283,6 @@ public class CollectionView extends AppCompatActivity {
                     setItemField();
                     setGoneField();
                 });
-
-
                 button_2.setOnClickListener(viewDeleteAll -> {
                     Toast.makeText(viewDeleteAll.getContext(), "Объекты были удалены",Toast.LENGTH_SHORT).show();
                     for(int i = 0; i < globalPositions.size(); i++) {
@@ -257,22 +294,26 @@ public class CollectionView extends AppCompatActivity {
                     setGoneField();
                     selectionMode = false;
                 });
-
                 button_3.setOnClickListener(viewSearch -> {
                     if(wantingMode){
                         for(int i = 0; i < globalPositions.size(); i++){
-                            localDatabase.dao().insert(collectionEntities.get(i));
+                            DatabaseLocalEntities newEntity;
+                            if(globalPositions.get(i) == 1) {
+                                newEntity = collectionEntities.get(i);
+                                newEntity.isFirstLine = 0;
+                                localDatabase.dao().deleteEntityById(collectionEntities.get(i).id);
+                                localDatabase.dao().insert(newEntity);
+                            }
                         }
                         getCollectionSortedAndFiltered();
                     }else {
-                        setGoneField();
                         selectionMode = false;
                         for (int i = 0; i < collectionEntities.size(); i++) {
                             globalPositions.set(i, 0);
                         }
                         itemViewAdapter.notifyDataSetChanged();
                     }
-
+                    setGoneField();
                 });
             }
             // выделен один итем
@@ -356,7 +397,6 @@ public class CollectionView extends AppCompatActivity {
             }
         };
 
-        // сортировать
         ItemViewAdapter.onItemSortClickListener itemSortListener = (item) -> {
             item++;
             if(item == sortingMode){
@@ -393,7 +433,6 @@ public class CollectionView extends AppCompatActivity {
             itemViewAdapter.notifyDataSetChanged();
         }
 
-        // добавить
         add.setOnClickListener(viewAdd -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             View view1 = LayoutInflater.from(viewAdd.getContext()).inflate(R.layout.dialog_add, viewGroup, false);
@@ -421,8 +460,6 @@ public class CollectionView extends AppCompatActivity {
                 setNewDateChanged();
             });
         });
-
-        // разное
         diff.setOnClickListener(view -> {
             setViewField();
             if(button_1.getVisibility() == View.GONE) {
@@ -486,8 +523,6 @@ public class CollectionView extends AppCompatActivity {
                 setGoneField();
             }
         });
-
-        // Вкл/Выкл список желаемого
         title.setOnClickListener(view -> {
             if(!wantingMode){
                 title.setText(getResources().getText(R.string.yourWantingList));
@@ -537,7 +572,7 @@ public class CollectionView extends AppCompatActivity {
     public void setItemField(){
         button_1.setText("Изменить");
         button_2.setText("Удалить");
-        button_3.setText("Поиск");
+        button_3.setText("Найти");
         button_1.setTextColor(this.getResources().getColor(R.color.main));
         button_2.setTextColor(this.getResources().getColor(R.color.main));
         button_3.setTextColor(this.getResources().getColor(R.color.main));

@@ -61,8 +61,10 @@
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="80dp"
         android:maxWidth="200dp"
         android:text="@string/createCollections"
         android:textAlignment="center"
@@ -72,14 +74,16 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/activity_start_imagebutton_create"
         app:layout_constraintTop_toTopOf="@+id/activity_start_imagebutton_create"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.5"
+        tools:maxWidth="250dp"
+        tools:textColor="@color/textColor" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="80dp"
         android:maxWidth="200dp"
         android:minLines="2"
         android:text="@string/editCollections"
@@ -89,7 +93,9 @@
         app:layout_constraintEnd_toEndOf="@+id/activity_start_imagebutton_edit"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/activity_start_imagebutton_edit"
-        app:layout_constraintTop_toTopOf="@+id/activity_start_imagebutton_edit" />
+        app:layout_constraintTop_toTopOf="@+id/activity_start_imagebutton_edit"
+        tools:maxWidth="300dp"
+        tools:textColor="@color/textColor" />
 
     <ImageView
         android:id="@+id/imageView6"
