@@ -393,6 +393,7 @@ public class CollectionView extends AppCompatActivity {
                         this.startActivity(intent);
                     }
                     globalPositions.set(position, 0);
+                    itemViewAdapter.notifyItemChanged(position);
                 });
             }
         };

@@ -83,6 +83,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Co
                     collections.remove(position);
                     notifyItemRemoved(position);
                     alertDialog.dismiss();
+                    return;
                 });
                 builder1.setNegativeButton("Назад", (dialogInterface, i) -> {
                     alertDialog.show();
