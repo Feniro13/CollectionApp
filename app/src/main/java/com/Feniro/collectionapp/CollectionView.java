@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,7 +33,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-@SuppressLint("NotifyDataSetChanged")
 public class CollectionView extends AppCompatActivity {
     int numberOfColumns, sortingMode;
     String name;
@@ -135,7 +133,7 @@ public class CollectionView extends AppCompatActivity {
                 setSelectionField();
 
                 if(wantingMode) {
-                    button_1.setText("Очистить выбор");
+                    button_1.setText("Отмена");
                     button_3.setText("Добавить");
                 }
 
@@ -593,7 +591,7 @@ public class CollectionView extends AppCompatActivity {
         button_1.setTextColor(this.getResources().getColor(R.color.main));
         button_2.setText("Удалить");
         button_2.setTextColor(this.getResources().getColor(R.color.main));
-        button_3.setText("Очистить выбор");
+        button_3.setText("Отмена");
         button_3.setTextColor(this.getResources().getColor(R.color.main));
     }
 

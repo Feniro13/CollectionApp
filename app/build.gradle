@@ -40,3 +40,11 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     annotationProcessor 'androidx.room:room-compiler:2.4.2'
 }
+
+configurations {
+    all {
+        exclude module: 'httpclient'
+        exclude group: 'org.apache.httpcomponents'
+        exclude module: 'commons-logging'
+    }
+}
